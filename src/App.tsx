@@ -3,6 +3,7 @@ import './App.css';
 import Home from './Home';
 import News from './News.tsx';
 import NotFound from './NotFound';
+import OnYourMark from './OnYourMark';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/news" element={<News />} />
+        <Route path="/onyourmark" element={<OnYourMark />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
