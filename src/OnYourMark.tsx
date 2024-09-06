@@ -19,8 +19,11 @@ function OnYourMark() {
         value={subject}
         onChange={handleSubjectChange}
         placeholder="Subject"
+        className="input input-bordered w-full max-w-xs mx-2"
       />
-      <button onClick={handleStartClick}>Start</button>
+      <button className="btn btn-primary mx-2" onClick={handleStartClick}>
+        Start
+      </button>
     </div>
   );
 }
