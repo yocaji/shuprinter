@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './Home';
-import News from './News.tsx';
-import NotFound from './NotFound';
-import OnYourMark from './OnYourMark';
+import Home from './pages/Home.tsx';
+import News from './pages/News.tsx';
+import NotFound from './pages/NotFound.tsx';
+import OnYourMark from './pages/OnYourMark.tsx';
 
 function App() {
   return (
