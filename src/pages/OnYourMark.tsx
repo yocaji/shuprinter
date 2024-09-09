@@ -1,30 +1,41 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar.tsx';
 
 function OnYourMark() {
   const [subject, setSubject] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleSubjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubject(e.target.value);
   };
 
   const handleStartClick = () => {
-    console.log(`Start ${subject}`);
+    console.log(`Create ${subject}`);
+    navigate('/notes');
   };
 
   return (
-    <div>
-      <h2 className="text-2xl">何についての草稿を書きますか？</h2>
-      <input
-        type="text"
-        value={subject}
-        onChange={handleSubjectChange}
-        placeholder="Subject"
-        className="input input-bordered w-full max-w-xs mx-2"
-      />
-      <button className="btn btn-primary mx-2" onClick={handleStartClick}>
-        Start
-      </button>
-    </div>
+    <>
+      <Navbar />
+      <div className="container mx-auto max-w-screen-lg px-4 py-8">
+        <h2 className="text-2xl text-center mb-8">何について書きますか？</h2>
+        <div className="flex justify-center mb-8">
+          <input
+            type="text"
+            value={subject}
+            onChange={handleSubjectChange}
+            placeholder="主題"
+            className="input input-bordered w-2/3"
+          />
+        </div>
+        <div className="flex justify-center mb-8">
+          <button className="btn btn-primary px-24" onClick={handleStartClick}>
+            スタート
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 
