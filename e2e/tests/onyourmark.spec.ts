@@ -11,6 +11,22 @@ test.describe('表示', () => {
     const button = await page.locator('button').textContent();
     expect(button).toBe('スタート');
   });
+  test('履歴一覧の見出しが表示されていること', async ({ page }) => {
+    await page.goto('/onyourmark');
+    const title = page.getByText('最近このブラウザで作成したメモ');
+    await expect(title).toBeVisible();
+  });
+  test('履歴が3件表示されていること', async ({ page }) => {
+    await page.goto('/onyourmark');
+    const recordsTitle = page.locator('.record').count();
+    expect(recordsTitle).toBe(3);
+  });
+  test('履歴の主題が表示されていること', async ({ page }) => {
+    await page.goto('/onyourmark');
+    // 全ての.record要素のテキストを取得
+    const subjects = await page.locator('.record > h2').allInnerTexts();
+    expect(subjects).toEqual(['ぴよぴよ', 'ふかふか', 'ぱやぱや']);
+  });
 });
 
 test.describe('操作', () => {
