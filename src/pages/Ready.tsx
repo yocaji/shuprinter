@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar.tsx';
 import { fetchSubject } from '../hooks/fetchSubject.ts';
+import { generateKey } from '../hooks/generateKey.ts';
+import { createNote } from '../hooks/createNote.ts';
 
-function OnYourMark() {
+function Ready() {
   const [subject, setSubject] = useState<string>('');
-  const [recordKeys] = useState<string[]>(['piyo', 'fuwa', 'paya']);
+  const [recordKeys] = useState<string[]>(['piyo', 'puka', 'paya']);
   const [recordSubjects, setRecordSubjects] = useState<string[]>([]);
   const navigate = useNavigate();
 
@@ -13,9 +15,14 @@ function OnYourMark() {
     setSubject(e.target.value);
   };
 
-  const handleStartClick = () => {
-    console.log(`Create ${subject}`);
-    navigate('/notes');
+  const handleStartClick = async () => {
+    const key = await generateKey(subject);
+    const response = await createNote(subject, key);
+    if (response.ok) {
+      navigate('/notes');
+    } else {
+      console.error('Failed to create a note');
+    }
   };
 
   useEffect(() => {
@@ -30,20 +37,28 @@ function OnYourMark() {
       <Navbar />
       <div className="container mx-auto max-w-screen-lg px-4 py-8">
         <h2 className="text-2xl text-center mb-8">何について書きますか？</h2>
-        <div className="flex justify-center mb-8">
-          <input
-            type="text"
-            value={subject}
-            onChange={handleSubjectChange}
-            placeholder="主題"
-            className="input input-bordered w-2/3"
-          />
-        </div>
-        <div className="flex justify-center mb-8">
-          <button className="btn btn-primary px-24" onClick={handleStartClick}>
-            スタート
-          </button>
-        </div>
+        <form>
+          <div className="flex justify-center mb-8">
+            <input
+              type="text"
+              value={subject}
+              onChange={handleSubjectChange}
+              placeholder="主題"
+              className="input input-bordered w-2/3"
+              required={true}
+            />
+          </div>
+          <div className="flex justify-center mb-8">
+            <button
+              className="btn btn-primary px-24"
+              type={'button'}
+              disabled={!subject}
+              onClick={handleStartClick}
+            >
+              スタート
+            </button>
+          </div>
+        </form>
       </div>
       <div className="container mx-auto max-w-screen-lg px-4 py-8">
         <h2 className="text-2xl text-center mb-8">
@@ -70,4 +85,4 @@ function OnYourMark() {
   );
 }
 
-export default OnYourMark;
+export default Ready;
