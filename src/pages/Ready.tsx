@@ -7,7 +7,11 @@ import { createNote } from '../hooks/createNote.ts';
 
 function Ready() {
   const [subject, setSubject] = useState<string>('');
-  const [recordKeys] = useState<string[]>(['piyo', 'puka', 'paya']);
+  const [recordNoteKeys] = useState<string[]>([
+    'b975ceeb58c2bb1d9bdf6162c64c5e2dde2b3493397ceb85841ab50714653a38',
+    'puka',
+    'paya',
+  ]);
   const [recordSubjects, setRecordSubjects] = useState<string[]>([]);
   const navigate = useNavigate();
 
@@ -16,10 +20,10 @@ function Ready() {
   };
 
   const handleStartClick = async () => {
-    const key = await generateKey(subject);
-    const response = await createNote(subject, key);
+    const noteKey = await generateKey(subject);
+    const response = await createNote(subject, noteKey, '');
     if (response.ok) {
-      navigate('/notes');
+      navigate('/note', { state: { subject, noteKey } });
     } else {
       console.error('Failed to create a note');
     }
@@ -27,10 +31,10 @@ function Ready() {
 
   useEffect(() => {
     (async () => {
-      const subjects = await Promise.all(recordKeys.map(fetchSubject));
+      const subjects = await Promise.all(recordNoteKeys.map(fetchSubject));
       setRecordSubjects(subjects);
     })();
-  }, [recordKeys]);
+  }, [recordNoteKeys]);
 
   return (
     <>
