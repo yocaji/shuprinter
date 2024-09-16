@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.tsx';
 import { fetchSubject } from '../hooks/fetchSubject.ts';
 import { generateKey } from '../hooks/generateKey.ts';
 import { createNote } from '../hooks/createNote.ts';
+import { setHistory } from '../hooks/localStorage.ts';
 
 function Ready() {
   const [subject, setSubject] = useState<string>('');
@@ -24,7 +25,8 @@ function Ready() {
     const noteKey = await generateKey(subject);
     const response = await createNote(subject, noteKey, '');
     if (response.ok) {
-      navigate('/note', { state: { subject, noteKey } });
+      setHistory(noteKey, subject);
+      navigate('/note', { state: { noteKey, subject } });
     } else {
       console.error('Failed to create a note');
     }
