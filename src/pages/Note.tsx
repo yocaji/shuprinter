@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar.tsx';
+import { useLocation } from 'react-router-dom';
 
 function Note() {
   const [subject, setSubject] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const location = useLocation();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -12,6 +14,12 @@ function Note() {
       setSubject(subjectParam);
     }
   }, []);
+
+  useEffect(() => {
+    if (location.state) {
+      setSubject(location.state.subject);
+    }
+  }, [location]);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
