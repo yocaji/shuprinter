@@ -11,3 +11,7 @@ export const setHistory = (noteKey: string, subject: string) => {
   localStorage.setItem('HistoryKeys', JSON.stringify(historyKeysArray));
   localStorage.setItem(noteKey, JSON.stringify({ subject, content: '' }));
 };
+
+export const setNote = (noteKey: string, subject: string, content: string) => {
+  localStorage.setItem(noteKey, JSON.stringify({ subject, content }));
+};

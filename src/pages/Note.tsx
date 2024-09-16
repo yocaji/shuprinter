@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar.tsx';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import Navbar from '../components/Navbar.tsx';
+import { setNote } from '../hooks/localStorage.ts';
 
 function Note() {
-  const [subject, setSubject] = useState<string>('');
-  const [content, setContent] = useState<string>('');
   const location = useLocation();
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const subjectParam = params.get('subject');
-    if (subjectParam) {
-      setSubject(subjectParam);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (location.state) {
-      setSubject(location.state.subject);
-    }
-  }, [location]);
+  const noteKeyRef = useRef<string>(location.state.noteKey);
+  const subjectRef = useRef<string>(location.state.subject);
+  const [content, setContent] = useState<string>('');
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   };
+  useEffect(() => {
+    setNote(noteKeyRef.current, subjectRef.current, content);
+  }, [content]);
 
   const handleSaveClick = () => {
     // Save content logic here
@@ -45,7 +36,7 @@ function Note() {
     <>
       <Navbar />
       <div className="container mx-auto max-w-screen-lg px-4 py-8">
-        <h2 className="text-2xl text-center mb-8">{subject}</h2>
+        <h2 className="text-2xl text-center mb-8">{subjectRef.current}</h2>
         <div className="flex justify-center mb-8">
           <textarea
             value={content}
