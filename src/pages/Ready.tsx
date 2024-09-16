@@ -19,7 +19,8 @@ function Ready() {
     setSubject(e.target.value);
   };
 
-  const handleStartClick = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const noteKey = await generateKey(subject);
     const response = await createNote(subject, noteKey, '');
     if (response.ok) {
@@ -41,7 +42,7 @@ function Ready() {
       <Navbar />
       <div className="container mx-auto max-w-screen-lg px-4 py-8">
         <h2 className="text-2xl text-center mb-8">何について書きますか？</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex justify-center mb-8">
             <input
               type="text"
@@ -55,9 +56,8 @@ function Ready() {
           <div className="flex justify-center mb-8">
             <button
               className="btn btn-primary px-24"
-              type={'button'}
+              type={'submit'}
               disabled={!subject}
-              onClick={handleStartClick}
             >
               スタート
             </button>
