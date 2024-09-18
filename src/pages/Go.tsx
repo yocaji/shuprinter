@@ -47,14 +47,22 @@ function Go() {
             value={content}
             onChange={handleContentChange}
             placeholder="内容"
-            className="textarea textarea-bordered w-2/3"
+            rows={24}
+            className="p-4 block w-full text-lg border border-gray-200 rounded-lg focus:outline-none"
           ></textarea>
         </div>
         <div className="flex justify-center mb-8">
-          <button className="btn btn-primary px-4" onClick={handleSaveClick}>
+          <button
+            onClick={handleSaveClick}
+            disabled={!content}
+            className="py-3 px-4 mr-2 inline-flex items-center text-lg text-white font-medium rounded-lg border border-transparent bg-gray-800 hover:bg-gray-700 focus:outline-none focus:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
+          >
             保存
           </button>
-          <button className="btn btn-secondary px-4" onClick={handleCopyClick}>
+          <button
+            onClick={handleCopyClick}
+            className="py-3 px-4 inline-flex items-center text-lg text-gray-500 font-medium rounded-lg border border-gray-200 hover:border-gray-800 hover:text-gray-800 focus:outline-none focus:border-gray-800 focus:text-gray-800"
+          >
             コピー
           </button>
         </div>
