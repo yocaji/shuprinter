@@ -5,7 +5,7 @@ import { setNote } from '../hooks/localStorage.ts';
 
 function Note() {
   const location = useLocation();
-  const noteKeyRef = useRef<string>(location.state.noteKey);
+  const noteIdRef = useRef<string>(location.state.id);
   const subjectRef = useRef<string>(location.state.subject);
   const [content, setContent] = useState<string>('');
 
@@ -13,7 +13,7 @@ function Note() {
     setContent(e.target.value);
   };
   useEffect(() => {
-    setNote(noteKeyRef.current, subjectRef.current, content);
+    setNote(noteIdRef.current, subjectRef.current, content);
   }, [content]);
 
   const handleSaveClick = () => {

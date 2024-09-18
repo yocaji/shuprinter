@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar.tsx';
 import { fetchSubject } from '../hooks/fetchSubject.ts';
-import { generateKey } from '../hooks/generateKey.ts';
-import { createNote } from '../hooks/createNote.ts';
-import { setHistory } from '../hooks/localStorage.ts';
+import { createNote } from '../hooks/api.ts';
+import { setNote } from '../hooks/localStorage.ts';
 
 function Ready() {
   const [subject, setSubject] = useState<string>('');
@@ -22,11 +21,13 @@ function Ready() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const noteKey = await generateKey(subject);
-    const response = await createNote(subject, noteKey, '');
+    const response = await createNote(subject, '');
     if (response.ok) {
-      setHistory(noteKey, subject);
-      navigate('/note', { state: { noteKey, subject } });
+      type Note = { id: string; subject: string; content: string };
+      const note: Note = await response.json();
+      const { id, subject, content } = note;
+      setNote(id, subject, content);
+      navigate('/note', { state: { id, subject } });
     } else {
       console.error('Failed to create a note');
     }
