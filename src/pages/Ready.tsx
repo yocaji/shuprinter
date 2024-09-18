@@ -27,11 +27,11 @@ function Ready() {
     const note = await createNote(subject, '');
     if (!note) return;
     saveNoteLocal(note.id, note.subject, note.content);
-    navigate('/note', { state: { id: note.id, subject: note.subject } });
+    navigate('/go', { state: { id: note.id, subject: note.subject } });
   };
 
   const handleHistoryClick = async (note: Note) => {
-    navigate('/note', {
+    navigate('/go', {
       state: { id: note.id, subject: note.subject, content: note.content },
     });
   };

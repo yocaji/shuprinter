@@ -21,6 +21,15 @@ function Go() {
     saveNoteLocal(noteIdRef.current, subjectRef.current, content);
   }, [content]);
 
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      await updateNote(noteIdRef.current, subjectRef.current, content);
+    } else if (e.key === 'Backspace') {
+      e.preventDefault();
+    }
+  };
+
   const handleSaveClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     await updateNote(noteIdRef.current, subjectRef.current, content);
@@ -46,6 +55,7 @@ function Go() {
           <textarea
             value={content}
             onChange={handleContentChange}
+            onKeyDown={handleKeyDown}
             placeholder="内容"
             rows={24}
             className="p-4 block w-full text-lg border border-gray-200 rounded-lg focus:outline-none"
