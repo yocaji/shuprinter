@@ -4,11 +4,15 @@ import Navbar from '../components/Navbar.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 import { updateNote } from '../hooks/api.ts';
 
-function Note() {
+function Go() {
   const location = useLocation();
   const noteIdRef = useRef<string>(location.state.id);
   const subjectRef = useRef<string>(location.state.subject);
   const [content, setContent] = useState<string>('');
+
+  useEffect(() => {
+    setContent(location.state.content);
+  }, [location.state.content]);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -59,4 +63,4 @@ function Note() {
   );
 }
 
-export default Note;
+export default Go;
