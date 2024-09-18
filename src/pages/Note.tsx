@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar.tsx';
 import { setNote } from '../hooks/localStorage.ts';
+import { updateNote } from '../hooks/api.ts';
 
 function Note() {
   const location = useLocation();
@@ -16,9 +17,18 @@ function Note() {
     setNote(noteIdRef.current, subjectRef.current, content);
   }, [content]);
 
-  const handleSaveClick = () => {
-    // Save content logic here
-    alert(content);
+  const handleSaveClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const response = await updateNote(
+      noteIdRef.current,
+      subjectRef.current,
+      content,
+    );
+    if (response.ok) {
+      console.log('Note saved');
+    } else {
+      console.error('Failed to save the note');
+    }
   };
 
   const handleCopyClick = () => {
