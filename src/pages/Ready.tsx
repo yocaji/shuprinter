@@ -30,6 +30,12 @@ function Ready() {
     navigate('/note', { state: { id: note.id, subject: note.subject } });
   };
 
+  const handleHistoryClick = async (note: Note) => {
+    navigate('/note', {
+      state: { id: note.id, subject: note.subject, content: note.content },
+    });
+  };
+
   return (
     <>
       <Navbar />
@@ -58,21 +64,20 @@ function Ready() {
         </form>
       </div>
       <div className="container mx-auto max-w-screen-lg px-4 py-8">
-        <h2 className="text-2xl text-center mb-8">
-          最近このブラウザで作成したメモ
-        </h2>
-        <div className="flex justify-center">
-          <div className="w-2/3">
-            <div className="record">
-              {notes.map((note) => (
-                <div key={note.id}>
-                  <h2>{note.subject}</h2>
-                  <p>{note.createdAt}</p>
-                </div>
-              ))}
+        <h2 className="text-2xl text-center mb-8">最近のメモ</h2>
+        {notes.map((note) => (
+          <button
+            type="button"
+            key={note.id}
+            className="inline-flex items-center w-full gap-x-2 py-3 px-4 text-sm text-start font-medium border border-gray-200 text-blue-600 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg hover:bg-gray-50 focus:outline-none focus:bg-gray-50 dark:border-neutral-700"
+            onClick={() => handleHistoryClick(note)}
+          >
+            <div className="flex items-center justify-between w-full">
+              <span>{note.subject}</span>
+              <span>{note.updatedAt}</span>
             </div>
-          </div>
-        </div>
+          </button>
+        ))}
       </div>
     </>
   );

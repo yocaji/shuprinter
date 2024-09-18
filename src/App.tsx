@@ -3,7 +3,7 @@ import Home from './pages/Home.tsx';
 import News from './pages/News.tsx';
 import NotFound from './pages/NotFound.tsx';
 import Ready from './pages/Ready.tsx';
-import Note from './pages/Note.tsx';
+import Go from './pages/Go.tsx';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/news" element={<News />} />
         <Route path="/ready" element={<Ready />} />
-        <Route path="/note" element={<Note />} />
+        <Route path="/note" element={<Go />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
