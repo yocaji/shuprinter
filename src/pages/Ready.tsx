@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { Note } from '../types';
 import Navbar from '../components/Navbar.tsx';
-import { fetchSubject } from '../hooks/fetchSubject.ts';
-import { createNote } from '../hooks/api.ts';
-import { setNote } from '../hooks/localStorage.ts';
+import { createNote, readNotes } from '../hooks/api.ts';
+import { saveNoteLocal } from '../hooks/localStorage.ts';
 
 function Ready() {
-  const [subject, setSubject] = useState<string>('');
-  const [recordNoteKeys] = useState<string[]>([
-    'b975ceeb58c2bb1d9bdf6162c64c5e2dde2b3493397ceb85841ab50714653a38',
-    'puka',
-    'paya',
-  ]);
-  const [recordSubjects, setRecordSubjects] = useState<string[]>([]);
   const navigate = useNavigate();
+  const [subject, setSubject] = useState<string>('');
+  const [notes, setNotes] = useState<Note[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const notes = await readNotes();
+      if (!notes) return;
+      setNotes(notes);
+    })();
+  }, []);
 
   const handleSubjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubject(e.target.value);
@@ -21,24 +24,11 @@ function Ready() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await createNote(subject, '');
-    if (response.ok) {
-      type Note = { id: string; subject: string; content: string };
-      const note: Note = await response.json();
-      const { id, subject, content } = note;
-      setNote(id, subject, content);
-      navigate('/note', { state: { id, subject } });
-    } else {
-      console.error('Failed to create a note');
-    }
+    const note = await createNote(subject, '');
+    if (!note) return;
+    saveNoteLocal(note.id, note.subject, note.content);
+    navigate('/note', { state: { id: note.id, subject: note.subject } });
   };
-
-  useEffect(() => {
-    (async () => {
-      const subjects = await Promise.all(recordNoteKeys.map(fetchSubject));
-      setRecordSubjects(subjects);
-    })();
-  }, [recordNoteKeys]);
 
   return (
     <>
@@ -74,16 +64,12 @@ function Ready() {
         <div className="flex justify-center">
           <div className="w-2/3">
             <div className="record">
-              <h2>{recordSubjects[0]}</h2>
-              <p>2021/04/01 12:34</p>
-            </div>
-            <div className="record">
-              <h2>{recordSubjects[1]}</h2>
-              <p>2021/04/01 12:34</p>
-            </div>
-            <div className="record">
-              <h2>{recordSubjects[2]}</h2>
-              <p>2021/04/01 12:34</p>
+              {notes.map((note) => (
+                <div key={note.id}>
+                  <h2>{note.subject}</h2>
+                  <p>{note.createdAt}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
