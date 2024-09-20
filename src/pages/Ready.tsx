@@ -39,49 +39,55 @@ function Ready() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto max-w-screen-lg px-4 py-8">
-        <h2 className="text-2xl text-center mb-8">何について書きますか？</h2>
+      <div className="px-4 py-12 bg-stone-50">
+        <h2 className="text-3xl mb-8 flex justify-center items-end gap-3">
+          <span className="i-ph-feather-thin text-4xl" />
+          何について書きますか？
+        </h2>
         <form onSubmit={handleSubmit}>
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mx-auto max-w-screen-md mb-6 rounded-lg">
             <input
               type="text"
               value={subject}
               onChange={handleSubjectChange}
-              placeholder="主題"
-              className="py-3 px-4 block w-full text-lg text-gray-800 border border-gray-200 rounded-lg focus:outline-none"
+              placeholder="テーマ"
+              className="py-3 px-4 block w-full text-lg text-gray-800 border border-gray-200 rounded-s-lg focus:outline-none"
               required={true}
             />
-          </div>
-          <div className="flex justify-center mb-8">
             <button
               type={'submit'}
               disabled={!subject}
-              className="py-3 px-4 mr-2 inline-flex items-center gap-x-2 text-lg font-medium rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
+              className="py-3 px-4 inline-flex text-xl font-medium rounded-e-lg border border-transparent bg-gray-800 text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 disabled:opacity-50 disabled:pointer-events-none"
             >
-              スタート
+              Start
             </button>
           </div>
         </form>
       </div>
-      <div className="container mx-auto max-w-screen-lg px-4 py-8">
-        <h2 className="text-2xl text-center mb-8">最近のメモ</h2>
-        {notes.map((note) => (
-          <button
-            type="button"
-            key={note.id}
-            className="inline-flex items-center w-full py-3 px-4 text-start border border-gray-200 -mt-px first:rounded-t-lg last:rounded-b-lg hover:bg-gray-50 focus:outline-none focus:bg-gray-50"
-            onClick={() => handleHistoryClick(note)}
-          >
-            <div className="flex items-center justify-between w-full">
-              <span className="text-base font-normal text-gray-800">
-                {note.subject}
-              </span>
-              <span className="text-sm font-normal text-gray-500">
-                {note.updatedAt}
-              </span>
-            </div>
-          </button>
-        ))}
+      <div className="px-4 py-12 bg-stone-100">
+        <h2 className="text-3xl mb-8 flex justify-center items-end gap-3">
+          <span className="i-ph-bookmarks-simple-thin text-4xl" />
+          保存したメモ
+        </h2>
+        <div className="mx-auto max-w-screen-md mb-6">
+          {notes.map((note) => (
+            <button
+              type="button"
+              key={note.id}
+              className="w-full py-3 px-4 mb-3 rounded-lg border border-gray-200 bg-stone-100 focus:outline-none focus:bg-stone-50 hover:bg-stone-50"
+              onClick={() => handleHistoryClick(note)}
+            >
+              <div className="flex items-center justify-between w-full">
+                <span className="text-base font-normal text-gray-800">
+                  {note.subject}
+                </span>
+                <span className="text-sm font-normal text-gray-500">
+                  {note.updatedAt}
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );
