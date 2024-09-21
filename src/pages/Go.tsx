@@ -100,11 +100,13 @@ function Go() {
             </button>
           </form>
         ) : (
-          <div className="flex mx-auto max-w-screen-md gap-x-1">
+          <div className="mx-auto max-w-screen-md flex gap-x-1">
             <button
               type={'button'}
               onClick={handleEditClick}
-              className="px-2 text-xl font-medium text-slate-600 rounded-lg hover:bg-stone-100 focus:outline-none focus:bg-stone-100 disabled:opacity-50 disabled:pointer-events-none"
+              className="px-2 rounded-lg
+              text-xl font-medium text-slate-600
+              hover:bg-stone-100 focus:outline-none focus:bg-stone-100 disabled:opacity-50 disabled:pointer-events-none"
             >
               <span className="i-ph-pencil-simple-line-light" />
             </button>
