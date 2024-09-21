@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 import { updateNote } from '../hooks/api.ts';
+import Footer from '../components/Footer.tsx';
 
 function Go() {
   const location = useLocation();
@@ -143,6 +144,7 @@ function Go() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
