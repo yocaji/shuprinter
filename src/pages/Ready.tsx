@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar.tsx';
 import { createNote, readNotes, deleteNote } from '../hooks/api.ts';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 import Footer from '../components/Footer.tsx';
+import dayjs from 'dayjs';
 
 function Ready() {
   const navigate = useNavigate();
@@ -38,8 +39,17 @@ function Ready() {
   };
 
   const handleDeleteClick = async (id: string) => {
-    const note = await deleteNote(id);
-    if (!note) return;
+    const selectedNote = notes.find((note) => note.id === id);
+    if (!selectedNote) return;
+    const selectedNoteUpdatedAt = dayjs(selectedNote.updatedAt).format(
+      'YYYY/MM/DD HH:mm:ss',
+    );
+    const isConfirmed = confirm(
+      `このメモを削除しますか？\n\n${selectedNote.subject}\n\n${selectedNoteUpdatedAt}`,
+    );
+    if (!isConfirmed) return;
+    const deletedNote = await deleteNote(id);
+    if (!deletedNote) return;
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
   };
