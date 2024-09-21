@@ -9,7 +9,7 @@ function Navbar() {
             to="/ready"
             className="flex-none text-xl font-semibold text-white focus:outline-none focus:opacity-80"
           >
-            SprintPost
+            Shuprinter
           </Link>
         </div>
       </nav>
