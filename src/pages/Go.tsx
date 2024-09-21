@@ -42,9 +42,7 @@ function Go() {
     setSubjectIsEditing(true);
   };
 
-  const handleSubjectSaveClick = async (
-    e: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const handleSubjectSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // subjectのみ更新できるようにする
     await updateNote(noteIdRef.current, subject, content);
@@ -72,23 +70,34 @@ function Go() {
       <Navbar />
       <div className="px-4 pt-12 pb-6 bg-stone-50">
         {subjectIsEditing ? (
-          <div className="flex mx-auto max-w-screen-md rounded-lg gap-x-2">
+          <form
+            name="subject"
+            onSubmit={handleSubjectSubmit}
+            className="flex mx-auto max-w-screen-md"
+          >
             <input
-              type="text"
-              name="subject"
+              type={'text'}
+              name={'subject'}
               value={subject}
               onChange={handleSubjectChange}
-              className="py-3 px-4 block w-full text-lg text-gray-800 border border-gray-200 rounded-lg focus:outline-none"
+              className="py-3 px-4 block w-full text-lg text-gray-800 border border-gray-200 shadow-sm rounded-s-lg focus:outline-none"
               required={true}
             />
             <button
               type={'button'}
-              onClick={handleSubjectSaveClick}
-              className="py-3 px-4 inline-flex text-xl font-medium rounded-lg border border-transparent bg-stone-200 text-gray-500 hover:bg-stone-100 focus:outline-none focus:bg-stone-100 disabled:opacity-50 disabled:pointer-events-none"
+              name={'cancel'}
+              onClick={() => setSubjectIsEditing(false)}
+              className="py-3 px-4 -ms-px inline-flex text-xl font-medium border border-gray-200 bg-white shadow-sm text-gray-500 hover:bg-stone-100 focus:outline-none focus:bg-stone-100 disabled:opacity-50 disabled:pointer-events-none"
             >
               <span className="i-ph-check-light" />
             </button>
-          </div>
+            <button
+              type={'submit'}
+              className="py-3 px-4 -ms-px inline-flex text-xl font-medium rounded-e-lg border border-gray-200 bg-white shadow-sm text-gray-500 hover:bg-stone-100 focus:outline-none focus:bg-stone-100 disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <span className="i-ph-arrow-arc-left-light" />
+            </button>
+          </form>
         ) : (
           <div className="flex mx-auto max-w-screen-md gap-x-1">
             <button
@@ -116,17 +125,17 @@ function Go() {
         <div className="flex justify-end mx-auto max-w-screen-md">
           <div className="inline-flex rounded-lg">
             <button
-              type="button"
+              type={'button'}
               onClick={handleSaveClick}
-              className="py-2 px-3 -ms-px text-sm inline-flex justify-center items-center gap-1 rounded-s-lg border border-gray-200 shadow-sm bg-white text-gray-800 hover:bg-gray-50 focus:z-10 focus:outline-none focus:bg-gray-50"
+              className="py-2 px-4 -ms-px text-sm inline-flex justify-center items-center gap-2 rounded-s-lg border border-gray-200 shadow-sm bg-white text-gray-800 hover:bg-gray-50 focus:z-10 focus:outline-none focus:bg-gray-50"
             >
               <span className="i-ph-cloud-arrow-up-light" />
               保存する
             </button>
             <button
-              type="button"
+              type={'button'}
               onClick={handleCopyClick}
-              className="py-2 px-3 -ms-px text-sm inline-flex justify-center items-center gap-1 rounded-e-lg border border-gray-200 shadow-sm bg-white text-gray-800 hover:bg-gray-50 focus:z-10 focus:outline-none focus:bg-gray-50"
+              className="py-2 px-4 -ms-px text-sm inline-flex justify-center items-center gap-1 rounded-e-lg border border-gray-200 shadow-sm bg-white text-gray-800 hover:bg-gray-50 focus:z-10 focus:outline-none focus:bg-gray-50"
             >
               <span className="i-ph-clipboard-light" />
               コピーする
