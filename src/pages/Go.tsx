@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Navbar from '../components/Navbar.tsx';
+import NavbarGo from '../components/NavbarGo.tsx';
+import Footer from '../components/Footer.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 import { updateNote } from '../hooks/api.ts';
-import Footer from '../components/Footer.tsx';
 
 function Go() {
   const location = useLocation();
@@ -11,6 +11,7 @@ function Go() {
   const [subject, setSubject] = useState<string>(location.state.subject);
   const [content, setContent] = useState<string>('');
   const [subjectIsEditing, setSubjectIsEditing] = useState<boolean>(false);
+  const [isSaved, setIsSaved] = useState<boolean>(true);
 
   useEffect(() => {
     setContent(location.state.content);
@@ -25,6 +26,7 @@ function Go() {
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
+    setIsSaved(false);
   };
   useEffect(() => {
     saveNoteLocal(noteIdRef.current, subject, content);
@@ -51,6 +53,7 @@ function Go() {
   };
 
   const handleSaveClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsSaved(true);
     e.preventDefault();
     await updateNote(noteIdRef.current, subject, content);
   };
@@ -68,8 +71,8 @@ function Go() {
 
   return (
     <>
-      <Navbar />
-      <div className="px-4 pt-12 pb-6 bg-stone-50">
+      <NavbarGo isSaved={isSaved} />
+      <div className="px-4 pt-9 pb-6 bg-stone-50">
         {subjectIsEditing ? (
           <form
             name="subject"
