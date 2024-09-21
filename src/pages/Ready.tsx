@@ -4,6 +4,7 @@ import type { Note } from '../types';
 import Navbar from '../components/Navbar.tsx';
 import { createNote, readNotes } from '../hooks/api.ts';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
+import Footer from '../components/Footer.tsx';
 
 function Ready() {
   const navigate = useNavigate();
@@ -89,6 +90,7 @@ function Ready() {
           ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 }
