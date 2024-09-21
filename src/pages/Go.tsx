@@ -52,27 +52,16 @@ function Go() {
     setSubjectIsEditing(false);
   };
 
-  const handleSaveClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    setIsSaved(true);
-    e.preventDefault();
-    await updateNote(noteIdRef.current, subject, content);
-  };
-
-  const handleCopyClick = () => {
-    navigator.clipboard
-      .writeText(`${subject}\n\n${content}`)
-      .then(() => {
-        console.log('Content copied to clipboard');
-      })
-      .catch((err) => {
-        console.error('Failed to copy content: ', err);
-      });
-  };
-
   return (
     <>
-      <NavbarGo isSaved={isSaved} />
-      <div className="px-4 pt-9 pb-6 bg-stone-50">
+      <NavbarGo
+        isSaved={isSaved}
+        setIsSaved={setIsSaved}
+        id={noteIdRef.current}
+        subject={subject}
+        content={content}
+      />
+      <div className="px-4 py-6 bg-stone-50">
         {subjectIsEditing ? (
           <form
             name="subject"
@@ -104,16 +93,16 @@ function Go() {
           </form>
         ) : (
           <div className="mx-auto max-w-screen-md flex gap-x-1">
+            <h2 className="pb-1 text-xl truncate">{subject}</h2>
             <button
               type={'button'}
               onClick={handleEditClick}
               className="px-2 rounded-lg
               text-xl font-medium text-slate-600
-              hover:bg-stone-100 focus:outline-none focus:bg-stone-100 disabled:opacity-50 disabled:pointer-events-none"
+              hover:bg-yellow-300 focus:outline-none focus:bg-yellow-300"
             >
               <span className="i-ph-pencil-simple-line-light" />
             </button>
-            <h2 className="pb-1 text-xl truncate">{subject}</h2>
           </div>
         )}
       </div>
@@ -127,26 +116,6 @@ function Go() {
             rows={18}
             className="p-4 block w-full text-lg border border-gray-200 rounded-lg focus:outline-none"
           ></textarea>
-        </div>
-        <div className="flex justify-end mx-auto max-w-screen-md">
-          <div className="inline-flex rounded-lg">
-            <button
-              type={'button'}
-              onClick={handleSaveClick}
-              className="py-2 px-4 -ms-px text-sm inline-flex justify-center items-center gap-2 rounded-s-lg border border-gray-200 shadow-sm bg-white text-gray-800 hover:bg-gray-50 focus:z-10 focus:outline-none focus:bg-gray-50"
-            >
-              <span className="i-ph-cloud-arrow-up-light" />
-              保存する
-            </button>
-            <button
-              type={'button'}
-              onClick={handleCopyClick}
-              className="py-2 px-4 -ms-px text-sm inline-flex justify-center items-center gap-1 rounded-e-lg border border-gray-200 shadow-sm bg-white text-gray-800 hover:bg-gray-50 focus:z-10 focus:outline-none focus:bg-gray-50"
-            >
-              <span className="i-ph-clipboard-light" />
-              コピーする
-            </button>
-          </div>
         </div>
       </div>
       <Footer />
