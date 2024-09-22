@@ -73,14 +73,19 @@ function Go() {
               name={'subject'}
               value={subject}
               onChange={handleSubjectChange}
-              className="py-3 px-4 block w-full text-lg text-gray-800 border border-gray-200 shadow-sm rounded-s-lg focus:outline-none"
+              className="py-3 px-4 block w-full
+              text-lg text-gray-800
+              border border-gray-200 shadow-sm rounded-s-lg focus:outline-none"
               required={true}
             />
             <button
               type={'button'}
               name={'cancel'}
               onClick={() => setSubjectIsEditing(false)}
-              className="py-3 px-4 -ms-px inline-flex text-xl font-medium border border-gray-200 bg-white shadow-sm text-gray-500 hover:bg-stone-100 focus:outline-none focus:bg-stone-100 disabled:opacity-50 disabled:pointer-events-none"
+              className="py-3 px-4 -ms-px inline-flex
+              text-xl text-gray-500 font-medium
+              border border-gray-200 bg-white shadow-sm
+              hover:bg-stone-100 focus:outline-none focus:bg-stone-100 disabled:opacity-50 disabled:pointer-events-none"
             >
               <span className="i-ph-check-light" />
             </button>
@@ -99,7 +104,7 @@ function Go() {
               onClick={handleEditClick}
               className="px-2 rounded-lg
               text-xl font-medium text-slate-600
-              hover:bg-yellow-300 focus:outline-none focus:bg-yellow-300"
+              hover:bg-amber-100 focus:outline-none focus:bg-amber-200"
             >
               <span className="i-ph-pencil-simple-line-light" />
             </button>

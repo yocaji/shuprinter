@@ -23,7 +23,7 @@ function Ready() {
 
   return (
     <>
-      <div className="px-4 py-12 bg-stone-50">
+      <div className="px-4 py-12 bg-stone-50 border-t-4 border-amber-200">
         <h2 className="mb-8 flex justify-center items-end gap-3 text-3xl">
           <span className="i-ph-feather-thin text-4xl" />
           何について書きますか？
