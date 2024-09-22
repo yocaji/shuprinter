@@ -10,7 +10,7 @@ export default {
         sans: ['Zen Kurenaido', 'sans-serif'],
         logo: ['Oooh Baby', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
-        solid: ['BIZ UDPGothic', 'sans-serif'],
+        solid: ['Zen Maru Gothic', 'sans-serif'],
       },
     },
   },
