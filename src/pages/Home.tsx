@@ -1,9 +1,9 @@
-import User from '../components/User.tsx';
+import Login from '../components/Login.tsx';
 
 function Home() {
   return (
     <>
-      <User />
+      <Login />
       <h1 className="text-3xl font-bold underline">Home Page</h1>
     </>
   );

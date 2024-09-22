@@ -1,7 +1,8 @@
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 
-function User() {
+function LoginStatus() {
   const authContext = AuthContextConsumer();
+  console.log(authContext?.currentUser);
 
   if (!authContext) {
     console.error(`AuthContextConsumer is ${authContext}`);
@@ -12,22 +13,28 @@ function User() {
 
   return (
     <>
-      <div className="user_info">
-        <p className="user_name">
-          {currentUser && (
+      {currentUser ? (
+        <div className="user_info">
+          <p className="user_name">
             <img
               className="inline-block size-[38px] rounded-full"
               src={currentUser.photoURL ?? undefined}
               alt={currentUser.displayName ?? undefined}
             />
-          )}
-        </p>
-        <button className="login_btn" onClick={currentUser ? logout : login}>
-          {currentUser ? 'logout' : 'login'}
-        </button>
-      </div>
+          </p>
+          <button className="login_btn" onClick={logout}>
+            ログアウト
+          </button>
+        </div>
+      ) : (
+        <div className="user_info">
+          <button className="login_btn" onClick={login}>
+            ログイン
+          </button>
+        </div>
+      )}
     </>
   );
 }
 
-export default User;
+export default LoginStatus;
