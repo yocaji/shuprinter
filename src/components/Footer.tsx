@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import LoginStatus from './LoginStatus.tsx';
 
 function Footer() {
   return (
@@ -33,6 +34,7 @@ function Footer() {
           <a href="https://github.com/yocaji/sprintpost" target="_blank">
             <span className="i-fa6-brands-github text-2xl" />
           </a>
+          <LoginStatus />
         </div>
       </div>
     </footer>
