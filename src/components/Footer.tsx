@@ -2,7 +2,15 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <footer className="px-4 py-12 w-full bg-slate-200">
+    <footer className="px-4 py-12 w-full bg-stone-200 font-solid text-sm">
+      <div className="mb-3 mx-auto max-w-screen-md">
+        <Link
+          className="text-2xl font-bold font-logo focus:outline-none focus:opacity-80"
+          to="/ready"
+        >
+          Shuprinter
+        </Link>
+      </div>
       <div className="mx-auto max-w-screen-md flex justify-between">
         <div className="flex gap-3">
           <Link to="/" className="focus:outline-none focus:opacity-80">
