@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Oooh+Baby&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

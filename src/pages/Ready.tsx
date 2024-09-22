@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar.tsx';
 import Footer from '../components/Footer.tsx';
 import Notes from '../components/Notes.tsx';
 import { createNote } from '../hooks/api.ts';
@@ -24,7 +23,6 @@ function Ready() {
 
   return (
     <>
-      <Navbar />
       <div className="px-4 py-12 bg-stone-50">
         <h2 className="mb-8 flex justify-center items-end gap-3 text-3xl">
           <span className="i-ph-feather-thin text-4xl" />
@@ -56,8 +54,8 @@ function Ready() {
         </form>
       </div>
       <div className="px-4 py-12 bg-stone-100">
-        <h2 className="text-3xl mb-8 flex justify-center items-end gap-3">
-          <span className="i-ph-bookmarks-simple-thin text-4xl" />
+        <h2 className="mb-8 mx-auto max-w-screen-md flex items-end gap-3 text-2xl">
+          <span className="i-ph-notepad-thin text-3xl" />
           保存したメモ
         </h2>
         <Notes />
