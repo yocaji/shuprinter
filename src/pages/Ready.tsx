@@ -23,30 +23,30 @@ function Ready() {
 
   return (
     <>
-      <div className="px-4 py-12 bg-stone-50 border-t-4 border-amber-200">
+      <div className="px-4 py-12 bg-stone-50 border-t-4 border-amber-200 text-sky-800">
         <h2 className="mb-8 flex justify-center items-end gap-3 text-3xl">
           <span className="i-ph-feather-thin text-4xl" />
           何について書きますか？
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-6 mx-auto max-w-screen-md flex items-center rounded-lg text-lg">
+          <div className="mb-6 mx-auto max-w-screen-md flex items-center text-lg">
             <input
               type="text"
               value={subject}
               onChange={handleSubjectChange}
               placeholder="テーマ"
-              className="py-3 px-4 block w-full
-              border border-gray-200 rounded-s-lg
-              text-gray-800 focus:outline-none"
+              className="py-3 px-4 block w-full rounded-s-lg
+              border border-stone-200 bg-white
+              focus:outline-none"
               required={true}
             />
             <button
               type={'submit'}
               disabled={!subject}
-              className="py-3 px-4 rounded-e-lg
-              bg-slate-200 border border-transparent
-              hover:bg-slate-300 focus:outline-none focus:bg-slate-300
-              disabled:opacity-30 disabled:pointer-events-none"
+              className="py-3 px-4 rounded-e-lg -mx-px
+              border border-stone-200 bg-stone-200
+              hover:bg-amber-100 hover:border-amber-100 focus:outline-none focus:border-amber-200 focus:bg-amber-200 focus:ring-2 ring-offset-2 focus:ring-amber-200
+              disabled:opacity-25 disabled:pointer-events-none"
             >
               <span className="i-ph-arrow-right-light" />
             </button>
