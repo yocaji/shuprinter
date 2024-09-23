@@ -8,13 +8,11 @@ function Go() {
   const location = useLocation();
   const noteIdRef = useRef<string>(location.state.id);
   const [subject, setSubject] = useState<string>(location.state.subject);
-  const [content, setContent] = useState<string>('');
+  const [content, setContent] = useState<string>(location.state.content || '');
   const [subjectIsEditing, setSubjectIsEditing] = useState<boolean>(false);
-  const [isSaved, setIsSaved] = useState<boolean>(true);
-
-  useEffect(() => {
-    setContent(location.state.content);
-  }, [location.state.content]);
+  const [isSaved, setIsSaved] = useState<boolean>(
+    location.state.content !== undefined,
+  );
 
   const handleSubjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSubject(e.target.value);

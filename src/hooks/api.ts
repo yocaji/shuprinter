@@ -44,15 +44,20 @@ export const deleteNote = async (id: string): Promise<Note[] | undefined> => {
   }
 };
 
-export const readNotes = async (): Promise<Note[] | undefined> => {
+export const readNotes = async (
+  userId: string,
+): Promise<Note[] | undefined> => {
   let response;
   try {
-    response = await fetch(`${import.meta.env.VITE_API_URL}/notes`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users/${userId}/notes`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
+    );
     if (response?.ok) {
       return await response.json();
     } else {

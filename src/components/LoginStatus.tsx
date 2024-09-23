@@ -2,7 +2,6 @@ import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 
 function LoginStatus() {
   const authContext = AuthContextConsumer();
-  console.log(authContext?.currentUser);
 
   if (!authContext) {
     console.error(`AuthContextConsumer is ${authContext}`);

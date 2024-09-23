@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer.tsx';
 import Notes from '../components/Notes.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
+import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 
 function Ready() {
   const navigate = useNavigate();
+  const authContext = AuthContextConsumer();
   const [subject, setSubject] = useState<string>('');
 
   const handleSubjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,13 +53,7 @@ function Ready() {
           </div>
         </form>
       </div>
-      <div className="px-4 py-12 bg-stone-100">
-        <h2 className="mb-8 mx-auto max-w-screen-md flex items-end gap-3 text-2xl">
-          <span className="i-ph-notepad-thin text-3xl" />
-          保存したメモ
-        </h2>
-        <Notes />
-      </div>
+      {authContext?.currentUser && <Notes />}
       <Footer />
     </>
   );
