@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import NavbarGo from '../components/NavbarGo.tsx';
 import Footer from '../components/Footer.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
-import { updateNote } from '../hooks/api.ts';
 
 function Go() {
   const location = useLocation();
@@ -32,25 +31,27 @@ function Go() {
     saveNoteLocal(noteIdRef.current, subject, content);
   }, [subject, content]);
 
+  // ヘッダとの協調方法を検討中
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      await updateNote(noteIdRef.current, subject, content);
-    } else if (e.key === 'Backspace') {
+    //   if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
+    //     e.preventDefault();
+    //     await upsertNote(noteIdRef.current, subject, content);
+    //   } else if (e.key === 'Backspace') {
+    if (e.key === 'Backspace') {
       e.preventDefault();
     }
   };
 
-  const handleEditClick = () => {
-    setSubjectIsEditing(true);
-  };
+  // Subjectの編集はノート一覧から行う
+  // const handleEditClick = () => {
+  //   setSubjectIsEditing(true);
+  // };
 
-  const handleSubjectSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // subjectのみ更新できるようにする
-    await updateNote(noteIdRef.current, subject, content);
-    setSubjectIsEditing(false);
-  };
+  // const handleSubjectSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   await upsertNote(noteIdRef.current, subject, content);
+  //   setSubjectIsEditing(false);
+  // };
 
   return (
     <>
@@ -63,11 +64,7 @@ function Go() {
       />
       <div className="px-4 py-6 bg-stone-50">
         {subjectIsEditing ? (
-          <form
-            name="subject"
-            onSubmit={handleSubjectSubmit}
-            className="flex mx-auto max-w-screen-md"
-          >
+          <form name="subject" className="flex mx-auto max-w-screen-md">
             <input
               type={'text'}
               name={'subject'}
@@ -101,7 +98,6 @@ function Go() {
             <h2 className="pb-1 text-xl truncate">{subject}</h2>
             <button
               type={'button'}
-              onClick={handleEditClick}
               className="px-2 rounded-lg
               text-xl font-medium text-slate-600
               hover:bg-amber-100 focus:outline-none focus:bg-amber-200"
