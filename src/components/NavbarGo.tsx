@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { updateNote } from '../hooks/api.ts';
+import { upsertNote } from '../hooks/api.ts';
+import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 
 interface NavbarGoProps {
   isSaved: boolean;
@@ -17,6 +18,13 @@ function NavbarGo({
   content,
   subject,
 }: NavbarGoProps) {
+  const authContext = AuthContextConsumer();
+
+  // 未ログインの場合は何も表示しない
+  if (!authContext?.currentUser) return;
+
+  const userId = authContext.currentUser.uid;
+
   const handleReturnClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isSaved) return;
     const isConfirmed = window.confirm('変更を保存せずに戻りますか？');
@@ -27,7 +35,8 @@ function NavbarGo({
   const handleSaveClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsSaved(true);
     e.preventDefault();
-    await updateNote(id, subject, content);
+    console.log(userId);
+    await upsertNote(id, subject, content, userId);
   };
 
   const handleCopyClick = () => {
@@ -53,7 +62,7 @@ function NavbarGo({
       >
         <div className="flex items-center justify-between">
           <Link
-            to="/ready"
+            to={'/ready'}
             onClick={handleReturnClick}
             className="px-2 py-1 flex-none rounded-lg
             text-xl text-gray-700

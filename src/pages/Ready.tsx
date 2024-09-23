@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer.tsx';
 import Notes from '../components/Notes.tsx';
-import { createNote } from '../hooks/api.ts';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 
 function Ready() {
@@ -15,10 +14,9 @@ function Ready() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const note = await createNote(subject, '');
-    if (!note) return;
-    saveNoteLocal(note.id, note.subject, note.content);
-    navigate('/go', { state: { id: note.id, subject: note.subject } });
+    const id = crypto.randomUUID();
+    saveNoteLocal(id, subject, '');
+    navigate('/go', { state: { id, subject } });
   };
 
   return (
