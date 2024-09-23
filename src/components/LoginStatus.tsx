@@ -10,29 +10,39 @@ function LoginStatus() {
 
   const { currentUser, login, logout } = authContext;
 
+  if (!currentUser) {
+    return (
+      <div className="user_info">
+        <button
+          className="px-4 py-3 inline-flex items-center
+          text-sm font-medium rounded-lg bg-stone-100
+          hover:bg-yellow-100 focus:bg-yellow-200 focus:ring-2 ring-offset-2 ring-amber-300"
+          onClick={login}
+        >
+          ログイン
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <>
-      {currentUser ? (
-        <div className="user_info">
-          <p className="user_name">
-            <img
-              className="inline-block size-[38px] rounded-full"
-              src={currentUser.photoURL ?? undefined}
-              alt={currentUser.displayName ?? undefined}
-            />
-          </p>
-          <button className="login_btn" onClick={logout}>
-            ログアウト
-          </button>
-        </div>
-      ) : (
-        <div className="user_info">
-          <button className="login_btn" onClick={login}>
-            ログイン
-          </button>
-        </div>
-      )}
-    </>
+    <div className="flex items-center gap-3">
+      <div>
+        <button
+          className="px-2 py-1 items-center
+          text-sm font-medium rounded-sm
+          hover:bg-stone-300/50 focus:bg-stone-300/50"
+          onClick={logout}
+        >
+          ログアウト
+        </button>
+      </div>
+      <img
+        className="inline-block size-[38px] rounded-full"
+        src={currentUser.photoURL ?? undefined}
+        alt={currentUser.displayName ?? undefined}
+      />
+    </div>
   );
 }
 
