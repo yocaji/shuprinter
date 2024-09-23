@@ -35,7 +35,6 @@ function NavbarGo({
   const handleSaveClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsSaved(true);
     e.preventDefault();
-    console.log(userId);
     await upsertNote(id, subject, content, userId);
   };
 
