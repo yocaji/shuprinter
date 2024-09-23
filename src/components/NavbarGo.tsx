@@ -6,7 +6,7 @@ import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 interface NavbarGoProps {
   isSaved: boolean;
   setIsSaved: (isSaved: boolean) => void;
-  id: string;
+  noteId: string;
   subject: string;
   content: string;
 }
@@ -14,32 +14,32 @@ interface NavbarGoProps {
 function NavbarGo({
   isSaved,
   setIsSaved,
-  id,
+  noteId,
   content,
   subject,
 }: NavbarGoProps) {
   const authContext = AuthContextConsumer();
-
-  // 未ログインの場合は何も表示しない
-  if (!authContext?.currentUser) return;
-
-  const login = authContext.login;
-  const userId = authContext.currentUser.uid;
+  const login = authContext?.login;
 
   const handleReturnClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isSaved) return;
     const isConfirmed = window.confirm('変更を保存せずに戻りますか？');
     if (isConfirmed) return;
     e.preventDefault();
+    e.currentTarget.blur();
   };
 
   const handleSaveClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!authContext?.currentUser) return;
+    const userId = authContext.currentUser.uid;
     setIsSaved(true);
     e.preventDefault();
-    await upsertNote(id, subject, content, userId);
+    await upsertNote(noteId, subject, content, userId);
+    // "保存しました"的な処理を入れる
+    e.currentTarget.blur();
   };
 
-  const handleCopyClick = () => {
+  const handleCopyClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigator.clipboard
       .writeText(`${subject}\n\n${content}`)
       .then(() => {
@@ -48,6 +48,8 @@ function NavbarGo({
       .catch((err) => {
         console.error('Failed to copy content: ', err);
       });
+    // "コピーしました"的な処理を入れる
+    e.currentTarget.blur();
   };
 
   return (
@@ -72,10 +74,10 @@ function NavbarGo({
             <button
               type={'button'}
               onClick={handleSaveClick}
-              disabled={isSaved}
+              disabled={isSaved || !authContext?.currentUser}
               className="px-3 py-1 -me-px inline-flex justify-center items-center gap-2
               rounded-s-lg border border-stone-100 border-2
-              hover:bg-stone-100 focus:outline-none focus:bg-stone-100
+              hover:bg-stone-100 focus:outline-none focus:bg-stone-200 focus:border-stone-200
               disabled:opacity-40 disabled:pointer-events-none"
             >
               <span className="i-ph-cloud-arrow-up-light" />
@@ -86,22 +88,24 @@ function NavbarGo({
               onClick={handleCopyClick}
               className="px-3 py-1 -ms-px inline-flex justify-center items-center gap-1
               rounded-e-lg border border-stone-100 border-2
-              hover:bg-stone-100 focus:outline-none focus:bg-stone-100"
+              hover:bg-stone-100 focus:outline-none focus:bg-stone-200 focus:border-stone-200"
             >
               <span className="i-ph-clipboard-light" />
               コピーする
             </button>
           </div>
-          <div className="text-xs">
-            Googleアカウントで
-            <button
-              onClick={login}
-              className="border-b border-stone-200 hover:opacity-50 focus:opacity-50"
-            >
-              ログイン
-            </button>
-            すると、メモを保存することができます
-          </div>
+          {!authContext?.currentUser && (
+            <div className="text-xs">
+              Googleアカウントで
+              <button
+                onClick={login}
+                className="border-b border-stone-200 hover:opacity-50 focus:opacity-50"
+              >
+                ログイン
+              </button>
+              すると、メモを保存することができます
+            </div>
+          )}
         </div>
       </div>
     </header>

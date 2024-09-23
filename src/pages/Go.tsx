@@ -56,7 +56,7 @@ function Go() {
       <NavbarGo
         isSaved={isSaved}
         setIsSaved={setIsSaved}
-        id={noteIdRef.current}
+        noteId={noteIdRef.current}
         subject={subject}
         content={content}
       />
