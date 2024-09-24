@@ -8,9 +8,13 @@ function Home() {
 
   return (
     <>
-      <Start />
-      {authContext?.currentUser ? <Notes /> : null}
-      <Footer />
+      <div className="flex flex-col justify-between min-h-screen">
+        <Start />
+        <div className="bg-stone-100 grow">
+          {authContext?.currentUser ? <Notes /> : <div />}
+        </div>
+        <Footer />
+      </div>
     </>
   );
 }

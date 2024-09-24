@@ -27,10 +27,10 @@ function NoteCard({
 
   const handleSubjectEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    e.preventDefault();
     setSubjectIsEditing(true);
     setCardIsDraggable(false);
     e.currentTarget.blur();
-    e.preventDefault();
   };
 
   const handleSubjectFixClick = async (
@@ -56,6 +56,7 @@ function NoteCard({
     e: React.MouseEvent<HTMLButtonElement>,
     id: string,
   ) => {
+    e.stopPropagation();
     e.preventDefault();
     e.currentTarget.blur();
     const selectedNoteUpdatedAt = dayjs(updatedAt).format('YYYY-MM-DD HH:mm');
@@ -78,8 +79,9 @@ function NoteCard({
       to={'/page'}
       state={{ id: id, subject: editableSubject, content: content }}
       onClick={handleCardClick}
-      className="p-4 w-full bg-stone-50 border rounded-xl disabled:pointer-events-none
-      hover:shadow-sm focus:outline-none focus:shadow-lg transition"
+      className="p-4 w-full bg-stone-50 border rounded-xl
+      hover:ring-2 ring-amber-200 ring-offset-2
+      active:scale-[.98] transition duration-300"
       draggable={cardIsDraggable}
     >
       <div className="mb-2">
@@ -93,7 +95,7 @@ function NoteCard({
               type={'text'}
               value={editableSubject}
               onChange={(e) => setEditableSubject(e.target.value)}
-              className="px-2 py-1 block w-full
+              className="px-2 py-1 w-full
               border-b border-stone-200 bg-transparent
               focus:outline-none"
               required={true}
@@ -111,7 +113,7 @@ function NoteCard({
               type={'button'}
               onClick={(e) => handleSubjectFixClick(e)}
               className="px-2 py-1 rounded-lg
-            hover:bg-stone-100 focus:bg-stone-200"
+              hover:bg-stone-100 focus:bg-stone-200 transition duration-300"
             >
               <span className="i-ph-check-light" />
             </button>
@@ -120,7 +122,7 @@ function NoteCard({
               type={'button'}
               onClick={(e) => handleSubjectEditClick(e)}
               className="px-2 py-1 rounded-lg
-            hover:bg-stone-100 focus:bg-stone-200"
+              hover:bg-stone-100 focus:bg-stone-200 transition duration-300"
             >
               <span className="i-ph-pencil-simple-line-light" />
             </button>
@@ -129,7 +131,7 @@ function NoteCard({
             type={'button'}
             onClick={(e) => handleDeleteClick(e, id)}
             className="px-2 py-1 rounded-lg
-          hover:bg-stone-100 focus:bg-stone-200"
+            hover:bg-stone-100 focus:bg-stone-200 traisition duration-300"
           >
             <span className="i-ph-trash-light" />
           </button>

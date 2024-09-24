@@ -17,21 +17,25 @@ function Footer() {
               Shuprinter
             </Link>
           </div>
-          <div className="flex gap-3">
+          <div className="flex items-center gap-5">
             <Link
               to={'/'}
-              className="hover:opacity-70 focus:outline-none focus:opacity-80"
+              className="hover:opacity-70 focus:opacity-80 transition duration-300"
             >
               ホーム
             </Link>
             <Link
               to={'/terms'}
-              className="hover:opacity-70 focus:outline-none focus:opacity-80"
+              className="hover:opacity-70 focus:opacity-80 transition duration-300"
             >
               規約とポリシー
             </Link>
-            <a href="https://github.com/yocaji/sprintpost" target="_blank">
-              <span className="i-fa6-brands-github text-2xl" />
+            <a
+              href="https://github.com/yocaji/sprintpost"
+              target="_blank"
+              className="text-2xl hover:opacity-70 transition duration-300"
+            >
+              <span className="i-fa6-brands-github" />
             </a>
           </div>
         </div>
