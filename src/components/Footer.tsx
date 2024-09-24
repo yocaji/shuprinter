@@ -12,7 +12,7 @@ function Footer() {
           <div className="mb-6">
             <Link
               className="text-2xl font-bold font-logo hover:opacity-70 focus:outline-none focus:opacity-70"
-              to={'/ready'}
+              to={'/'}
             >
               Shuprinter
             </Link>
