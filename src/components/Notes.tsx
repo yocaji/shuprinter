@@ -28,30 +28,17 @@ function Notes() {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   };
 
-  // const handleSubjectEditClick = () => {
-  //   setSubjectIsEditing(true);
-  // };
-
-  // const handleSubjectSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   await upsertNote(noteIdRef.current, subject, content);
-  //   setSubjectIsEditing(false);
-  // };
-
   return (
     <div className="px-4 py-12 bg-stone-100 text-sky-800">
-      <h2 className="mb-8 mx-auto max-w-screen-md flex items-end gap-3 text-2xl">
-        <span className="i-ph-notepad-thin text-3xl" />
-        保存したメモ
-      </h2>
       {isLoaded ? (
-        <div className="mb-6 mx-auto max-w-screen-md">
+        <div className="my-6 mx-auto max-w-screen-md flex flex-col gap-3">
           {notes.map((note) => (
             <NoteCard
               id={note.id}
               subject={note.subject}
               content={note.content}
               updatedAt={note.updatedAt}
+              userId={note.userId}
               onDelete={handleDelete}
             />
           ))}

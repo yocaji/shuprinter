@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import React from 'react';
-import { deleteNote } from '../hooks/api.ts';
+import { deleteNote, upsertNote } from '../hooks/api.ts';
 
 interface NoteCardProps {
   id: string;
   subject: string;
   content: string;
   updatedAt: string;
+  userId: string;
   onDelete: (id: string) => void;
 }
 
@@ -16,21 +17,35 @@ function NoteCard({
   subject,
   content,
   updatedAt,
+  userId,
   onDelete,
 }: NoteCardProps) {
   const [subjectIsEditing, setSubjectIsEditing] =
     React.useState<boolean>(false);
+  const [editableSubject, setEditableSubject] = React.useState<string>(subject);
 
   const handleSubjectEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setSubjectIsEditing(true);
+    e.currentTarget.blur();
     e.preventDefault();
   };
 
-  const handleSubjectSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.stopPropagation();
+  const handleSubjectFixClick = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    // 0文字の場合の処理を入れる
+    e.currentTarget.blur();
+    await upsertNote(id, editableSubject, content, userId);
     setSubjectIsEditing(false);
+    e.stopPropagation();
+  };
+
+  const handleSubjectSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await upsertNote(id, editableSubject, content, userId);
+    setSubjectIsEditing(false);
+    e.stopPropagation();
   };
 
   const handleDeleteClick = async (
@@ -48,29 +63,32 @@ function NoteCard({
     onDelete(id);
   };
 
+  const handleCardClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!subjectIsEditing) return;
+    e.preventDefault();
+  };
+
   return (
     <Link
       key={id}
       to={'/go'}
-      state={{ id: id, subject: subject, content: content }}
-      className="flex justify-between mb-3 w-full bg-stone-50 border rounded-xl 
+      state={{ id: id, subject: editableSubject, content: content }}
+      onClick={handleCardClick}
+      className="p-4 w-full bg-stone-50 border rounded-xl
       hover:shadow-sm focus:outline-none focus:shadow-lg transition"
     >
-      <div className="p-4">
+      <div className="mb-2">
         {subjectIsEditing ? (
-          <form name="subject" className="flex mx-auto max-w-screen-md">
-            <button
-              type={'button'}
-              onClick={() => handleSubjectSubmit}
-              className="px-2 py-1 rounded-lg
-              hover:bg-stone-100 focus:bg-stone-200"
-            >
-              <span className="i-ph-check-light" />
-            </button>
+          <form
+            name={'subject'}
+            className="flex mx-auto max-w-screen-md"
+            onSubmit={(e) => handleSubjectSubmit(e)}
+          >
             <input
               type={'text'}
-              name={'subject'}
-              value={subject}
+              value={editableSubject}
+              onChange={(e) => setEditableSubject(e.target.value)}
+              onMouseDown={(e) => e.stopPropagation()}
               className="px-2 py-1 block w-full
               border-b border-stone-200 bg-transparent
               focus:outline-none"
@@ -78,29 +96,40 @@ function NoteCard({
             />
           </form>
         ) : (
-          <div className="flex items-center gap-1">
+          <h3 className="text-lg truncate">{editableSubject}</h3>
+        )}
+      </div>
+      <div className="flex justify-between items-end">
+        <p className="text-sm">{dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}</p>
+        <div className="-mb-2 -me-2">
+          {subjectIsEditing ? (
+            <button
+              type={'button'}
+              onClick={(e) => handleSubjectFixClick(e)}
+              className="px-2 py-1 rounded-lg
+            hover:bg-stone-100 focus:bg-stone-200"
+            >
+              <span className="i-ph-check-light" />
+            </button>
+          ) : (
             <button
               type={'button'}
               onClick={(e) => handleSubjectEditClick(e)}
               className="px-2 py-1 rounded-lg
-              hover:bg-stone-100 focus:bg-stone-200"
+            hover:bg-stone-100 focus:bg-stone-200"
             >
               <span className="i-ph-pencil-simple-line-light" />
             </button>
-            <h3 className="mb-2 text-lg">{subject}</h3>
-          </div>
-        )}
-        <p className="text-sm">{dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}</p>
-      </div>
-      <div className="">
-        <button
-          type={'button'}
-          onClick={(e) => handleDeleteClick(id, e)}
-          className="m-2 px-2 py-1 rounded-lg
+          )}
+          <button
+            type={'button'}
+            onClick={(e) => handleDeleteClick(id, e)}
+            className="px-2 py-1 rounded-lg
           hover:bg-stone-100 focus:bg-stone-200"
-        >
-          <span className="i-ph-trash-light" />
-        </button>
+          >
+            <span className="i-ph-trash-light" />
+          </button>
+        </div>
       </div>
     </Link>
   );
