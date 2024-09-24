@@ -62,7 +62,7 @@ function NavbarGo({
         flex items-start justify-between"
       >
         <Link
-          to={'/ready'}
+          to={'/'}
           onClick={handleReturnClick}
           className="px-2 py-1 rounded-lg text-xl
           hover:bg-yellow-100 focus:bg-yellow-200 focus:ring-2 ring-offset-2 ring-amber-300"

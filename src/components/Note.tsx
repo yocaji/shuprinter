@@ -23,10 +23,12 @@ function NoteCard({
   const [subjectIsEditing, setSubjectIsEditing] =
     React.useState<boolean>(false);
   const [editableSubject, setEditableSubject] = React.useState<string>(subject);
+  const [cardIsDraggable, setCardIsDraggable] = React.useState<boolean>(true);
 
   const handleSubjectEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setSubjectIsEditing(true);
+    setCardIsDraggable(false);
     e.currentTarget.blur();
     e.preventDefault();
   };
@@ -38,6 +40,7 @@ function NoteCard({
     e.currentTarget.blur();
     await upsertNote(id, editableSubject, content, userId);
     setSubjectIsEditing(false);
+    setCardIsDraggable(true);
     e.stopPropagation();
   };
 
@@ -45,14 +48,16 @@ function NoteCard({
     e.preventDefault();
     await upsertNote(id, editableSubject, content, userId);
     setSubjectIsEditing(false);
+    setCardIsDraggable(true);
     e.stopPropagation();
   };
 
   const handleDeleteClick = async (
-    id: string,
     e: React.MouseEvent<HTMLButtonElement>,
+    id: string,
   ) => {
     e.preventDefault();
+    e.currentTarget.blur();
     const selectedNoteUpdatedAt = dayjs(updatedAt).format('YYYY-MM-DD HH:mm');
     const isConfirmed = confirm(
       `このメモを削除しますか？\n\n${subject}\n\n${selectedNoteUpdatedAt}`,
@@ -70,12 +75,12 @@ function NoteCard({
 
   return (
     <Link
-      key={id}
-      to={'/go'}
+      to={'/page'}
       state={{ id: id, subject: editableSubject, content: content }}
       onClick={handleCardClick}
-      className="p-4 w-full bg-stone-50 border rounded-xl
+      className="p-4 w-full bg-stone-50 border rounded-xl disabled:pointer-events-none
       hover:shadow-sm focus:outline-none focus:shadow-lg transition"
+      draggable={cardIsDraggable}
     >
       <div className="mb-2">
         {subjectIsEditing ? (
@@ -88,7 +93,6 @@ function NoteCard({
               type={'text'}
               value={editableSubject}
               onChange={(e) => setEditableSubject(e.target.value)}
-              onMouseDown={(e) => e.stopPropagation()}
               className="px-2 py-1 block w-full
               border-b border-stone-200 bg-transparent
               focus:outline-none"
@@ -123,7 +127,7 @@ function NoteCard({
           )}
           <button
             type={'button'}
-            onClick={(e) => handleDeleteClick(id, e)}
+            onClick={(e) => handleDeleteClick(e, id)}
             className="px-2 py-1 rounded-lg
           hover:bg-stone-100 focus:bg-stone-200"
           >

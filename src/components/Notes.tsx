@@ -24,8 +24,9 @@ function Notes() {
     })();
   }, [currentUser]);
 
-  const handleDelete = async (id: string) => {
-    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+  const handleDelete = (id: string) => {
+    const newNotes = notes.filter((note) => note.id !== id);
+    setNotes(newNotes);
   };
 
   return (
@@ -34,6 +35,7 @@ function Notes() {
         <div className="my-6 mx-auto max-w-screen-md flex flex-col gap-3">
           {notes.map((note) => (
             <NoteCard
+              key={note.id}
               id={note.id}
               subject={note.subject}
               content={note.content}

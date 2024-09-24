@@ -6,7 +6,7 @@ import Footer from '../components/Footer.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 import { upsertNote } from '../hooks/api.ts';
 
-function Go() {
+function Page() {
   const location = useLocation();
   const authContext = AuthContextConsumer();
   const noteIdRef = useRef<string>(location.state.id);
@@ -38,6 +38,13 @@ function Go() {
       setIsSaved(true);
     }
   };
+
+  const moveCaretAtEnd = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    e.target.value = '';
+    e.target.value = value;
+  };
+
   return (
     <>
       <NavbarGo
@@ -52,10 +59,12 @@ function Go() {
           <h2 className="pb-6 text-xl">{subjectRef.current}</h2>
           <textarea
             value={content}
+            rows={18}
             onChange={handleContentChange}
             onKeyDown={handleKeyDown}
+            onFocus={moveCaretAtEnd}
+            autoFocus={true}
             placeholder="昔々あるところにおじいさんとおばあさんが住んでいました。"
-            rows={18}
             className="w-full bg-transparent text-lg focus:outline-none"
           ></textarea>
         </div>
@@ -65,4 +74,4 @@ function Go() {
   );
 }
 
-export default Go;
+export default Page;

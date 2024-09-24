@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../components/Footer.tsx';
-import Notes from '../components/Notes.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
-import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 
-function Ready() {
+function Start() {
   const navigate = useNavigate();
-  const authContext = AuthContextConsumer();
   const [subject, setSubject] = useState<string>('');
 
   const handleSubjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +14,7 @@ function Ready() {
     e.preventDefault();
     const id = crypto.randomUUID();
     saveNoteLocal(id, subject, '');
-    navigate('/go', { state: { id, subject } });
+    navigate('/page', { state: { id, subject } });
   };
 
   return (
@@ -53,10 +49,8 @@ function Ready() {
           </div>
         </form>
       </div>
-      {authContext?.currentUser && <Notes />}
-      <Footer />
     </>
   );
 }
 
-export default Ready;
+export default Start;
