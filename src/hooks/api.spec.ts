@@ -1,9 +1,14 @@
-import { createNote } from './api.ts';
+import { upsertNote } from './api.ts';
 import { expect } from '@playwright/test';
 
 describe('createNote()', () => {
   test.concurrent('Happy path', async () => {
-    const note = await createNote('白雪姫', '昔々あるところに...');
+    const note = await upsertNote(
+      '47fa58e4-6692-449c-b091-074f246d6ae8',
+      '白雪姫',
+      '昔々あるところに...',
+      'S0RAA7Fk1TzcK2qPtET6b1oW4JjQ',
+    );
 
     test.concurrent('戻り値のプロパティが一致すること', () => {
       expect(note).toHaveProperty('id');
