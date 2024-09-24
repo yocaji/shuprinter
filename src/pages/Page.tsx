@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
-import NavbarGo from '../components/NavbarGo.tsx';
+import Navbar from '../components/Navbar.tsx';
 import Footer from '../components/Footer.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 import { upsertNote } from '../hooks/api.ts';
@@ -12,9 +12,9 @@ function Page() {
   const noteIdRef = useRef<string>(location.state.id);
   const subjectRef = useRef<string>(location.state.subject);
   const [content, setContent] = useState<string>(location.state.content || '');
-  const [isSaved, setIsSaved] = useState<boolean>(
-    location.state.content !== undefined,
-  );
+  const [saveStatus, setSaveStatus] = useState<string>(
+    location.state.content === undefined ? 'unsaved' : 'saved',
+  ); // unsaved, saving, saved
 
   useEffect(() => {
     saveNoteLocal(noteIdRef.current, subjectRef.current, content);
@@ -22,7 +22,7 @@ function Page() {
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
-    setIsSaved(false);
+    setSaveStatus('unsaved');
     e.target.style.height = 'auto';
     e.target.style.height = e.target.scrollHeight + 'px';
   };
@@ -33,9 +33,10 @@ function Page() {
     } else if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
       if (!authContext?.currentUser) return;
       e.preventDefault();
+      setSaveStatus('saving');
       const userId = authContext.currentUser.uid;
       await upsertNote(noteIdRef.current, subjectRef.current, content, userId);
-      setIsSaved(true);
+      setSaveStatus('saved');
     }
   };
 
@@ -47,9 +48,9 @@ function Page() {
 
   return (
     <>
-      <NavbarGo
-        isSaved={isSaved}
-        setIsSaved={setIsSaved}
+      <Navbar
+        saveStatus={saveStatus}
+        setSaveStatus={setSaveStatus}
         noteId={noteIdRef.current}
         subject={subjectRef.current}
         content={content}
@@ -65,7 +66,8 @@ function Page() {
             onFocus={moveCaretAtEnd}
             autoFocus={true}
             placeholder="昔々あるところにおじいさんとおばあさんが住んでいました。"
-            className="w-full bg-transparent text-lg focus:outline-none"
+            className="w-full bg-transparent text-lg leading-8 placeholder-stone-300
+            focus:outline-none focus:placeholder-white"
           ></textarea>
         </div>
       </div>
