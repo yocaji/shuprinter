@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 import NavbarGo from '../components/NavbarGo.tsx';
 import Footer from '../components/Footer.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
+import { upsertNote } from '../hooks/api.ts';
 
 function Go() {
   const location = useLocation();
+  const authContext = AuthContextConsumer();
   const noteIdRef = useRef<string>(location.state.id);
   const subjectRef = useRef<string>(location.state.subject);
   const [content, setContent] = useState<string>(location.state.content || '');
@@ -15,27 +18,26 @@ function Go() {
 
   useEffect(() => {
     saveNoteLocal(noteIdRef.current, subjectRef.current, content);
-  }, [subjectRef.current, content]);
+  }, [content]);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
     setIsSaved(false);
+    e.target.style.height = 'auto';
+    e.target.style.height = e.target.scrollHeight + 'px';
   };
-  useEffect(() => {
-    saveNoteLocal(noteIdRef.current, subjectRef.current, content);
-  }, [subjectRef.current, content]);
 
-  // ヘッダとの協調方法を検討中
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    //   if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
-    //     e.preventDefault();
-    //     await upsertNote(noteIdRef.current, subjectRef.current, content);
-    //   } else if (e.key === 'Backspace') {
-    if (e.key === 'Backspace') {
+    if (e.key === 'Backspace' || e.key === 'Delete') {
       e.preventDefault();
+    } else if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
+      if (!authContext?.currentUser) return;
+      e.preventDefault();
+      const userId = authContext.currentUser.uid;
+      await upsertNote(noteIdRef.current, subjectRef.current, content, userId);
+      setIsSaved(true);
     }
   };
-
   return (
     <>
       <NavbarGo
@@ -45,20 +47,16 @@ function Go() {
         subject={subjectRef.current}
         content={content}
       />
-      <div className="px-4 pb-6 bg-stone-50">
-        <div className="mx-auto max-w-screen-md flex gap-x-1">
-          <h2 className="pb-1 text-xl truncate">{subjectRef.current}</h2>
-        </div>
-      </div>
-      <div className="px-4 pb-12 bg-stone-50">
-        <div className="pb-6 flex justify-center mx-auto max-w-screen-md">
+      <div className="px-4 pb-12 bg-stone-50 text-sky-800">
+        <div className="pb-6 mx-auto max-w-screen-md">
+          <h2 className="pb-6 text-xl">{subjectRef.current}</h2>
           <textarea
             value={content}
             onChange={handleContentChange}
             onKeyDown={handleKeyDown}
-            placeholder="内容"
+            placeholder="昔々あるところにおじいさんとおばあさんが住んでいました。"
             rows={18}
-            className="p-4 block w-full text-lg border border-gray-200 rounded-lg focus:outline-none"
+            className="w-full bg-transparent text-lg focus:outline-none"
           ></textarea>
         </div>
       </div>
