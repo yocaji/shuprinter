@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { upsertNote } from '../hooks/api.ts';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 
@@ -9,14 +8,16 @@ interface NavbarGoProps {
   noteId: string;
   subject: string;
   content: string;
+  handleReturn: () => void;
 }
 
 function Navbar({
   saveStatus,
   setSaveStatus,
   noteId,
-  content,
   subject,
+  content,
+  handleReturn,
 }: NavbarGoProps) {
   const authContext = AuthContextConsumer();
   const login = authContext?.login;
@@ -33,11 +34,9 @@ function Navbar({
     e.currentTarget.blur();
   };
 
-  const handleReturnClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (saveStatus === 'saved') return;
-    const isConfirmed = window.confirm('変更を保存せずに戻りますか？');
-    if (isConfirmed) return;
+  const handleReturnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    handleReturn();
     e.currentTarget.blur();
   };
 
@@ -110,8 +109,8 @@ function Navbar({
           </div>
         )}
         <div className="flex items-center justify-between">
-          <Link
-            to={'/'}
+          <button
+            type={'button'}
             onClick={handleReturnClick}
             className="h-10 w-10 rounded-full inline-flex items-center justify-center
             border border-stone-200 ring-offset-2 ring-amber-200
@@ -120,7 +119,7 @@ function Navbar({
             focus:bg-amber-200 focus:ring-2 focus:border-none focus:outline-none transition duration-300"
           >
             <span className="i-ph-arrow-left-light" />
-          </Link>
+          </button>
           <div className="">
             <button
               type={'button'}

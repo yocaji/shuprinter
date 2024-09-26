@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 import Navbar from '../components/Navbar.tsx';
 import Footer from '../components/Footer.tsx';
@@ -8,6 +8,7 @@ import { upsertNote } from '../hooks/api.ts';
 
 function Page() {
   const location = useLocation();
+  const navigate = useNavigate();
   const authContext = AuthContextConsumer();
   const noteIdRef = useRef<string>(location.state.id);
   const subjectRef = useRef<string>(location.state.subject);
@@ -30,6 +31,11 @@ function Page() {
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Backspace' || e.key === 'Delete') {
       e.preventDefault();
+    } else if (e.key === 'b' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      handleReturn();
+    } else if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
     } else if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
       if (!authContext?.currentUser) return;
       e.preventDefault();
@@ -38,6 +44,12 @@ function Page() {
       await upsertNote(noteIdRef.current, subjectRef.current, content, userId);
       setSaveStatus('saved');
     }
+  };
+
+  const handleReturn = () => {
+    if (saveStatus === 'saved') return navigate('/');
+    const isConfirmed = window.confirm('変更を保存せずに戻りますか？');
+    if (isConfirmed) return navigate('/');
   };
 
   const moveCaretAtEnd = (e: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -54,6 +66,7 @@ function Page() {
         noteId={noteIdRef.current}
         subject={subjectRef.current}
         content={content}
+        handleReturn={handleReturn}
       />
       <div className="px-4 pb-12 bg-stone-50 text-sky-800">
         <div className="pb-6 mx-auto max-w-screen-md">
