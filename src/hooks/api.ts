@@ -1,4 +1,4 @@
-import type { Note } from '../types';
+import type { Count, Note } from '../types';
 
 export const upsertNote = async (
   id: string,
@@ -64,7 +64,7 @@ export const readNotes = async (
 
 export const deleteNotes = async (
   userId: string,
-): Promise<Note[] | undefined> => {
+): Promise<Count | undefined> => {
   let response;
   try {
     response = await fetch(
