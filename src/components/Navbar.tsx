@@ -67,7 +67,7 @@ function Navbar({
 
   return (
     <header
-      className="px-4 py-4 w-full text-sky-800 font-solid
+      className="sticky top-0 px-4 py-4 w-full text-sky-800 font-solid
       bg-stone-50 border-amber-300 border-t-4"
     >
       <div className="w-full max-w-screen-md mx-auto">
