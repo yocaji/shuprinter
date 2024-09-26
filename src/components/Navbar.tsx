@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { upsertNote } from '../hooks/api.ts';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
@@ -21,6 +21,17 @@ function Navbar({
   const authContext = AuthContextConsumer();
   const login = authContext?.login;
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
+  const [isGuest, setIsGuest] = React.useState<boolean>(false);
+  const [isDismissed, setIsDismissed] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    setIsGuest(!authContext?.currentUser);
+  }, [authContext?.currentUser]);
+
+  const handleDismissClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsDismissed(true);
+    e.currentTarget.blur();
+  };
 
   const handleReturnClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (saveStatus === 'saved') return;
@@ -61,16 +72,41 @@ function Navbar({
       bg-stone-50 border-amber-300 border-t-4"
     >
       <div className="w-full max-w-screen-md mx-auto">
-        {!authContext?.currentUser && (
-          <div className="text-xs">
-            Googleアカウントで
-            <button
-              onClick={login}
-              className="border-b border-stone-200 hover:opacity-50 focus:opacity-50"
-            >
-              ログイン
-            </button>
-            すると、メモを保存することができます
+        {isGuest && !isDismissed && (
+          <div
+            className="hs-removing:translate-x-5 hs-removing:opacity-0 transition duration-300
+            p-3 md:p-4 mb-4 border border-stone-200 rounded-lg
+            text-sky-800 bg-white"
+            role="alert"
+            tabIndex={-1}
+          >
+            <div className="flex gap-2">
+              <div>
+                <span className="i-ph-info-bold" />
+              </div>
+              <p className="w-full text-xs leading-relaxed">
+                Googleアカウントで
+                <button
+                  onClick={login}
+                  className="border-b border-stone-300 hover:opacity-50 focus:opacity-50"
+                >
+                  ログイン
+                </button>
+                すると、メモを保存することができます
+              </p>
+              <div>
+                <button
+                  type={'button'}
+                  onClick={handleDismissClick}
+                  className="p-1 inline-flex rounded-lg
+                  hover:bg-stone-100
+                  focus:bg-stone-200"
+                >
+                  <span className="sr-only">Dismiss</span>
+                  <span className="i-ph-x" />
+                </button>
+              </div>
+            </div>
           </div>
         )}
         <div className="flex items-center justify-between">
@@ -90,9 +126,7 @@ function Navbar({
               type={'button'}
               onClick={handleSaveClick}
               disabled={
-                !authContext?.currentUser ||
-                saveStatus === 'saved' ||
-                saveStatus === 'saving'
+                isGuest || saveStatus === 'saved' || saveStatus === 'saving'
               }
               className="h-10 w-32 ps-1 inline-flex justify-center items-center gap-2
               rounded-s-full border-l border-t border-b border-stone-200 ring-offset-2 ring-amber-200
