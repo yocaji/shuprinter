@@ -1,4 +1,5 @@
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
+import { Link } from 'react-router-dom';
 
 function LoginStatus() {
   const authContext = AuthContextConsumer();
@@ -29,7 +30,14 @@ function LoginStatus() {
 
   return (
     <div className="flex items-center gap-3 text-sm font-medium">
-      <div>
+      <div className="flex">
+        <Link
+          to={'/bye'}
+          className="rounded-sm outline-2 outline-amber-300 outline-offset-2 transition duration-300
+          hover:opacity-70 focus:opacity-80 focus:outline"
+        >
+          アカウント削除
+        </Link>
         <button
           className="px-3 py-2 inline-flex items-center justify-center rounded-full
           outline-2 outline-amber-300 outline-offset-2 transition duration-300

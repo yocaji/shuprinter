@@ -30,9 +30,6 @@ export const deleteNote = async (id: string): Promise<Note[] | undefined> => {
   try {
     response = await fetch(`${import.meta.env.VITE_API_URL}/notes/${id}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
     if (response?.ok) {
       return await response.json();
@@ -53,9 +50,27 @@ export const readNotes = async (
       `${import.meta.env.VITE_API_URL}/users/${userId}/notes`,
       {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      },
+    );
+    if (response?.ok) {
+      return await response.json();
+    } else {
+      console.log(`HTTP Response Code: ${response?.status}`);
+    }
+  } catch (error) {
+    console.log('There was an error', error);
+  }
+};
+
+export const deleteNotes = async (
+  userId: string,
+): Promise<Note[] | undefined> => {
+  let response;
+  try {
+    response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users/${userId}/notes`,
+      {
+        method: 'DELETE',
       },
     );
     if (response?.ok) {
