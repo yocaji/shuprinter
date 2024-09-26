@@ -6,3 +6,7 @@ export type Note = {
   updatedAt: string;
   userId: string;
 };
+
+export type Count = {
+  count: number;
+};

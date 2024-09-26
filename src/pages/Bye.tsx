@@ -9,15 +9,15 @@ function Bye() {
     if (!authContext?.currentUser) return; // ProtectedRouteでログインユーザーであることは保証済み
     const user = authContext.currentUser;
     const result = await deleteNotes(user.uid);
-    // ノートの削除に失敗した場合はユーザーも削除しない処理を入れる
+    // ノートの削除に失敗した場合のフィードバックを入れる
     if (!result) return;
     await user.delete();
   };
 
   return (
     <>
-      <div className="flex flex-col justify-between min-h-screen">
-        <div className="px-4 pb-12 flex items-center mx-auto max-w-screen-md font-solid bg-stone-50 text-sky-800 grow">
+      <div className="flex flex-col justify-between min-h-screen bg-stone-50">
+        <div className="px-4 pb-12 flex items-center mx-auto max-w-screen-md font-solid text-sky-800 grow">
           <div className="px-6 md:px-9 py-9 bg-white rounded-lg border border-stone-200">
             <h2 className="pb-4 text-xl font-medium">アカウントの削除</h2>
             <p className="pb-5 leading-relaxed">
