@@ -78,9 +78,10 @@ function Navbar({
             to={'/'}
             onClick={handleReturnClick}
             className="h-10 w-10 rounded-full inline-flex items-center justify-center
-            border border-stone-200 text-xl
-            hover:bg-amber-50 hover:border-none hover:ring-2 ring-offset-2 ring-amber-200
-            focus:bg-amber-200 transition duration-300"
+            border border-stone-200 ring-offset-2 ring-amber-200
+            text-xl
+            hover:bg-amber-100 hover:ring-2 hover:border-none
+            focus:bg-amber-200 focus:ring-2 focus:border-none focus:outline-none transition duration-300"
           >
             <span className="i-ph-arrow-left-light" />
           </Link>
@@ -94,11 +95,11 @@ function Navbar({
                 saveStatus === 'saving'
               }
               className="h-10 w-32 ps-1 inline-flex justify-center items-center gap-2
-              rounded-s-full border border-stone-200
+              rounded-s-full border-l border-t border-b border-stone-200 ring-offset-2 ring-amber-200
               text-sm
-              hover:bg-amber-50 hover:border-none hover:ring-2 ring-offset-2 ring-amber-200
-              focus:bg-amber-200
-              disabled:opacity-40 disabled:pointer-events-none transition duration-300"
+              hover:bg-amber-100 hover:ring-2 hover:border-none
+              focus:bg-amber-200 focus:ring-2 focus:border-none focus:outline-none transition duration-300
+              disabled:opacity-40 disabled:pointer-events-none"
             >
               {saveStatus === 'unsaved' && (
                 <>
@@ -127,9 +128,9 @@ function Navbar({
               type={'button'}
               onClick={handleCopyClick}
               className="pe-1 h-10 w-10 inline-flex justify-center items-center
-              rounded-e-full border-t border-r border-b border-stone-200 trantiion duration-300
-              hover:bg-amber-50 hover:border-none hover:ring-2 ring-offset-2 ring-amber-200
-              focus:bg-amber-200"
+              rounded-e-full border border-stone-200 ring-offset-2 ring-amber-200
+              hover:bg-amber-100 hover:ring-2 hover:border-none
+              focus:bg-amber-200 focus:ring-2 focus:border-none focus:outline-none transition duration-300"
             >
               {isCopied ? (
                 <>

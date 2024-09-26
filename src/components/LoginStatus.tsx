@@ -12,12 +12,13 @@ function LoginStatus() {
 
   if (!currentUser) {
     return (
-      <div className="user_info">
+      <div>
         <button
           className="px-5 py-3 inline-flex items-center justify-center
           text-sm font-medium rounded-full bg-stone-100
-          hover:bg-amber-50 hover:ring-2 ring-offset-2 ring-amber-200
-          focus:bg-yellow-200 transition duration-300"
+          outline-2 outline-amber-300 outline-offset-2 transition duration-300
+          hover:bg-amber-100 hover:outline
+          focus:bg-amber-200 focus:outline"
           onClick={login}
         >
           ログイン
@@ -31,7 +32,8 @@ function LoginStatus() {
       <div>
         <button
           className="px-3 py-2 inline-flex items-center justify-center rounded-full
-          hover:bg-stone-100 focus:bg-stone-50 transition duration-300"
+          outline-2 outline-amber-300 outline-offset-2 transition duration-300
+          hover:bg-stone-100 focus:bg-stone-50 focus:outline"
           onClick={logout}
         >
           ログアウト

@@ -66,8 +66,8 @@ function Page() {
             onFocus={moveCaretAtEnd}
             autoFocus={true}
             placeholder="昔々あるところにおじいさんとおばあさんが住んでいました。"
-            className="w-full bg-transparent text-lg leading-8 placeholder-stone-300
-            focus:outline-none focus:placeholder-white"
+            className="w-full bg-transparent text-lg leading-loose placeholder-stone-300
+            focus:outline-none focus:placeholder-stone-50"
           ></textarea>
         </div>
       </div>
