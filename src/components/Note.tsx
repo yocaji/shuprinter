@@ -80,7 +80,9 @@ function NoteCard({
       state={{ id: id, subject: editableSubject, content: content }}
       onClick={handleCardClick}
       className="p-4 w-full bg-stone-50 border rounded-xl
-      hover:ring-2 ring-amber-200 ring-offset-2
+      ring-amber-200 ring-offset-2
+      hover:ring-2
+      focus:ring-2 focus:outline-none
       active:scale-[.98] transition duration-300"
       draggable={cardIsDraggable}
     >
@@ -99,6 +101,7 @@ function NoteCard({
               border-b border-stone-200 bg-transparent
               focus:outline-none"
               required={true}
+              autoFocus={true}
             />
           </form>
         ) : (
@@ -107,13 +110,14 @@ function NoteCard({
       </div>
       <div className="flex justify-between items-end">
         <p className="text-sm">{dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}</p>
-        <div className="-mb-2 -me-2">
+        <div className="-mb-2 -me-1">
           {subjectIsEditing ? (
             <button
               type={'button'}
               onClick={(e) => handleSubjectFixClick(e)}
               className="px-2 py-1 rounded-lg
-              hover:bg-stone-100 focus:bg-stone-200 transition duration-300"
+              hover:bg-stone-100
+              focus:bg-stone-200 transition duration-300"
             >
               <span className="i-ph-check-light" />
             </button>
@@ -121,8 +125,9 @@ function NoteCard({
             <button
               type={'button'}
               onClick={(e) => handleSubjectEditClick(e)}
-              className="px-2 py-1 rounded-lg
-              hover:bg-stone-100 focus:bg-stone-200 transition duration-300"
+              className="px-2 py-1 rounded-lg ring-amber-200 ring-offset-2
+              hover:bg-stone-100 hover:pointer-events-none
+              focus:bg-stone-200 focus:ring-2 focus:outline-none transition duration-300"
             >
               <span className="i-ph-pencil-simple-line-light" />
             </button>
@@ -130,8 +135,9 @@ function NoteCard({
           <button
             type={'button'}
             onClick={(e) => handleDeleteClick(e, id)}
-            className="px-2 py-1 rounded-lg
-            hover:bg-stone-100 focus:bg-stone-200 traisition duration-300"
+            className="px-2 py-1 rounded-lg ring-amber-200 ring-offset-2
+            hover:bg-stone-100
+            focus:bg-stone-200 focus:ring-2 focus:outline-none transition duration-300"
           >
             <span className="i-ph-trash-light" />
           </button>

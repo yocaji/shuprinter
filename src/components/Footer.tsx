@@ -11,7 +11,9 @@ function Footer() {
         <div className="flex-col">
           <div className="mb-6">
             <Link
-              className="text-2xl font-bold font-logo hover:opacity-70 focus:outline-none focus:opacity-70"
+              className="text-2xl font-bold font-logo rounded-sm
+              outline-2 outline-amber-300 outline-offset-2 transition duration-300
+              hover:opacity-70 focus:opacity-70 focus:outline"
               to={'/'}
             >
               Shuprinter
@@ -19,21 +21,18 @@ function Footer() {
           </div>
           <div className="flex items-center gap-5">
             <Link
-              to={'/'}
-              className="hover:opacity-70 focus:opacity-80 transition duration-300"
-            >
-              ホーム
-            </Link>
-            <Link
               to={'/terms'}
-              className="hover:opacity-70 focus:opacity-80 transition duration-300"
+              className="rounded-sm outline-2 outline-amber-300 outline-offset-2 transition duration-300
+              hover:opacity-70 focus:opacity-80 focus:outline"
             >
               規約とポリシー
             </Link>
             <a
               href="https://github.com/yocaji/sprintpost"
               target="_blank"
-              className="text-2xl hover:opacity-70 transition duration-300"
+              className="w-7 h-7 inline-flex items-center justify-center text-2xl
+              rounded-full outline-2 outline-amber-300 outline-offset-2 transition duration-300
+              hover:opacity-70 focus:opacity-80 focus:outline"
             >
               <span className="i-fa6-brands-github" />
             </a>

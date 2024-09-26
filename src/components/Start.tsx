@@ -31,20 +31,21 @@ function Start() {
               value={subject}
               onChange={handleSubjectChange}
               placeholder="Shuprinterの名前の由来について"
-              className="px-3 py-3 md:px-4 w-full rounded-s-lg
-              border border-stone-200 bg-white placeholder-stone-300
-              focus:outline-none focus:placeholder-white
-              transition duration-300"
+              className="px-3 py-3 md:px-4 w-full rounded-s-lg transition duration-300
+              border-s border-t border-b border-stone-200 bg-white placeholder-stone-300 ring-inset ring-amber-100
+              hover:ring
+              focus:ring focus:outline-none focus:placeholder-white"
               required={true}
               autoFocus={true}
             />
             <button
               type={'submit'}
               disabled={!subject}
-              className="py-3 px-4 rounded-e-lg -mx-px
-              border border-stone-200 bg-stone-200
-              hover:bg-amber-200 hover:border-amber-200 hover:ring-2 ring-offset-2 ring-amber-200 focus:outline-none
-              disabled:opacity-25 disabled:pointer-events-none transition duration-300"
+              className="py-3 px-4 rounded-e-lg transition duration-300
+              border border-amber-200 bg-amber-200 ring-offset-2 ring-amber-200
+              hover:bg-amber-200 hover:ring
+              focus:ring focus:outline-none
+              disabled:opacity-25 disabled:pointer-events-none"
             >
               <span className="i-ph-arrow-right-light" />
             </button>
