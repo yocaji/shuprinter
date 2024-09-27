@@ -68,7 +68,7 @@ function Page() {
         content={content}
         handleReturn={handleReturn}
       />
-      <div className="px-4 pb-12 grow bg-stone-50 text-sky-800">
+      <div className="grow px-4 pb-12 bg-stone-50 text-sky-800">
         <div className="mx-auto max-w-screen-md">
           <h2 className="pb-6 text-xl">{subjectRef.current}</h2>
           <textarea
