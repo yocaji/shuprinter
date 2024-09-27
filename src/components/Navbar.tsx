@@ -67,8 +67,9 @@ function Navbar({
 
   return (
     <header
-      className="sticky top-0 px-4 py-4 w-full text-sky-800 font-solid
-      bg-stone-50 border-amber-300 border-t-4"
+      className="fixed top-0 z-50 px-4 w-full h-16 md:h-20 flex items-center
+      text-sky-800 dark:text-stone-300 font-solid
+      bg-stone-100 dark:bg-slate-950 border-amber-300 border-t-4"
     >
       <div className="w-full max-w-screen-md mx-auto">
         {isGuest && !isDismissed && (
@@ -114,12 +115,14 @@ function Navbar({
             onClick={handleReturnClick}
             className="h-10 w-10 rounded-full flex items-center justify-center
             text-xl
-            border border-stone-200
-            outline-2 outline-offset-2 outline-amber-200 transition duration-300
-            hover:bg-amber-100 hover:outline hover:border-transparent
-            focus:bg-amber-200 focus:outline focus:border-transparent"
+            border border-stone-200 dark:border-slate-800
+            outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
+            transition duration-300
+            hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
+            focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent"
           >
             <span className="i-ph-arrow-left-light" />
+            <span className="sr-only">Back</span>
           </button>
           <div className="">
             <button
@@ -128,12 +131,13 @@ function Navbar({
               disabled={
                 isGuest || saveStatus === 'saved' || saveStatus === 'saving'
               }
-              className="pl-1 h-8 w-28 md:h-10 md:w-32 inline-flex justify-center items-center gap-2
-              rounded-s-full border-l border-t border-b border-stone-200
+              className="pl-1 h-8 md:h-10 w-28 md:w-32 inline-flex justify-center items-center gap-2
+              rounded-s-full border-l border-t border-b border-stone-200 dark:border-slate-800
               text-sm
-              outline-2 outline-offset-2 outline-amber-200 transition duration-300
-              hover:bg-amber-100 hover:outline hover:border-transparent
-              focus:bg-amber-200 focus:outline focus:border-transparent
+              outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
+              transition duration-300
+              hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
+              focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent
               disabled:opacity-40 disabled:pointer-events-none"
             >
               {saveStatus === 'unsaved' && (
@@ -163,18 +167,21 @@ function Navbar({
               type={'button'}
               onClick={handleCopyClick}
               className="pe-1 h-8 w-8 md:h-10 md:w-10 inline-flex justify-center items-center
-              rounded-e-full border border-stone-200
-              outline-2 outline-offset-2 outline-amber-200 transition duration-300
-              hover:bg-amber-100 hover:outline hover:border-transparent
-              focus:bg-amber-200 focus:outline focus:border-transparent"
+              rounded-e-full border border-stone-200 dark:border-slate-800
+              outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
+              transition duration-300
+              hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
+              focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent"
             >
               {isCopied ? (
                 <>
                   <span className="i-ph-check-light" />
+                  <span className="sr-only">Copied</span>
                 </>
               ) : (
                 <>
                   <span className="i-ph-clipboard-light" />
+                  <span className="sr-only">Copy</span>
                 </>
               )}
             </button>

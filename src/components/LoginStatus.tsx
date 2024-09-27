@@ -16,10 +16,11 @@ function LoginStatus() {
       <div>
         <button
           className="px-5 py-3 inline-flex items-center justify-center
-          text-sm font-medium rounded-full bg-stone-100
-          outline-2 outline-amber-300 outline-offset-2 transition duration-300
-          hover:bg-amber-100 hover:outline
-          focus:bg-amber-200 focus:outline"
+          text-sm font-medium rounded-full bg-stone-100 dark:bg-slate-900
+          outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
+          transition duration-300
+          hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline
+          focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline"
           onClick={login}
         >
           ログイン
@@ -37,8 +38,10 @@ function LoginStatus() {
       />
       <button
         className="px-3 py-1 rounded-full
-        outline-2 outline-amber-300 outline-offset-2 transition duration-300
-        hover:bg-stone-100 focus:bg-stone-50 focus:outline"
+        outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
+        transition duration-300
+        hover:bg-stone-100 dark:hover:bg-slate-900
+        focus:bg-stone-50 dark:focus:bg-sky-950 focus:outline"
         onClick={logout}
       >
         ログアウト
@@ -46,8 +49,10 @@ function LoginStatus() {
       <Link
         to={'/bye'}
         className="px-3 py-1 rounded-full
-        outline-2 outline-amber-300 outline-offset-2 transition duration-300
-        hover:bg-stone-100 focus:bg-stone-50 focus:outline"
+        outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
+        transition duration-300
+        hover:bg-stone-100 dark:hover:bg-slate-900
+        focus:bg-stone-50 dark:focus:bg-sky-950 focus:outline"
       >
         アカウント削除
       </Link>

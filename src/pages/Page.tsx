@@ -59,7 +59,7 @@ function Page() {
   };
 
   return (
-    <div className="flex flex-col justify-between min-h-screen">
+    <>
       <Navbar
         saveStatus={saveStatus}
         setSaveStatus={setSaveStatus}
@@ -68,28 +68,34 @@ function Page() {
         content={content}
         handleReturn={handleReturn}
       />
-      <div className="px-4 pb-12 grow bg-stone-50 text-sky-800">
-        <div className="mx-auto max-w-screen-md">
-          <h2 className="pb-6 text-lg md:text-xl leading-relaxed">
-            {subjectRef.current}
-          </h2>
-          <textarea
-            value={content}
-            rows={3}
-            onChange={handleContentChange}
-            onKeyDown={handleKeyDown}
-            onFocus={moveCaretAtEnd}
-            autoFocus={true}
-            placeholder="昔々あるところにおじいさんとおばあさんが住んでいました"
-            className="w-full bg-transparent placeholder-stone-300 border-amber-200
-            text-middle leading-loose md:text-lg md:leading-loose
-            hover:border-b
-            focus:outline-none focus:border-b focus:placeholder-stone-50"
-          ></textarea>
+      <div className="relative top-16 md:top-20 flex flex-col justify-between min-h-screen">
+        <div
+          className="px-4 pb-12 grow
+          bg-stone-100 dark:bg-slate-950 text-sky-800 dark:text-stone-300"
+        >
+          <div className="mx-auto max-w-screen-md">
+            <h2 className="pb-6 text-lg md:text-xl leading-relaxed">
+              {subjectRef.current}
+            </h2>
+            <textarea
+              value={content}
+              rows={3}
+              onChange={handleContentChange}
+              onKeyDown={handleKeyDown}
+              onFocus={moveCaretAtEnd}
+              autoFocus={true}
+              placeholder="昔々あるところにおじいさんとおばあさんが住んでいました"
+              className="w-full bg-transparent border-amber-200 overflow-hidden
+              placeholder-stone-300 dark:placeholder-slate-700
+              text-middle leading-loose md:text-lg md:leading-loose
+              hover:border-b transition duration-300
+              focus:outline-none focus:border-b focus:placeholder-transparent"
+            ></textarea>
+          </div>
         </div>
+        <Footer />;
       </div>
-      <Footer />;
-    </div>
+    </>
   );
 }
 
