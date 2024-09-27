@@ -112,11 +112,12 @@ function Navbar({
           <button
             type={'button'}
             onClick={handleReturnClick}
-            className="h-10 w-10 rounded-full inline-flex items-center justify-center
-            border border-stone-200 ring-offset-2 ring-amber-200
+            className="h-10 w-10 rounded-full flex items-center justify-center
             text-xl
-            hover:bg-amber-100 hover:ring-2 hover:border-none
-            focus:bg-amber-200 focus:ring-2 focus:border-none focus:outline-none transition duration-300"
+            border border-stone-200
+            outline-2 outline-offset-2 outline-amber-200 transition duration-300
+            hover:bg-amber-100 hover:outline hover:border-transparent
+            focus:bg-amber-200 focus:outline focus:border-transparent"
           >
             <span className="i-ph-arrow-left-light" />
           </button>
@@ -127,11 +128,12 @@ function Navbar({
               disabled={
                 isGuest || saveStatus === 'saved' || saveStatus === 'saving'
               }
-              className="h-10 w-32 ps-1 inline-flex justify-center items-center gap-2
-              rounded-s-full border-l border-t border-b border-stone-200 ring-offset-2 ring-amber-200
+              className="pl-1 h-8 w-28 md:h-10 md:w-32 inline-flex justify-center items-center gap-2
+              rounded-s-full border-l border-t border-b border-stone-200
               text-sm
-              hover:bg-amber-100 hover:ring-2 hover:border-none
-              focus:bg-amber-200 focus:ring-2 focus:border-none focus:outline-none transition duration-300
+              outline-2 outline-offset-2 outline-amber-200 transition duration-300
+              hover:bg-amber-100 hover:outline hover:border-transparent
+              focus:bg-amber-200 focus:outline focus:border-transparent
               disabled:opacity-40 disabled:pointer-events-none"
             >
               {saveStatus === 'unsaved' && (
@@ -160,10 +162,11 @@ function Navbar({
             <button
               type={'button'}
               onClick={handleCopyClick}
-              className="pe-1 h-10 w-10 inline-flex justify-center items-center
-              rounded-e-full border border-stone-200 ring-offset-2 ring-amber-200
-              hover:bg-amber-100 hover:ring-2 hover:border-none
-              focus:bg-amber-200 focus:ring-2 focus:border-none focus:outline-none transition duration-300"
+              className="pe-1 h-8 w-8 md:h-10 md:w-10 inline-flex justify-center items-center
+              rounded-e-full border border-stone-200
+              outline-2 outline-offset-2 outline-amber-200 transition duration-300
+              hover:bg-amber-100 hover:outline hover:border-transparent
+              focus:bg-amber-200 focus:outline focus:border-transparent"
             >
               {isCopied ? (
                 <>

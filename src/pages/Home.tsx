@@ -10,7 +10,7 @@ function Home() {
     <>
       <div className="flex flex-col justify-between min-h-screen">
         <Start />
-        <div className="bg-stone-100 grow">
+        <div className="grow bg-stone-100">
           {authContext?.currentUser ? <Notes /> : <div />}
         </div>
         <Footer />
