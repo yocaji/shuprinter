@@ -59,7 +59,7 @@ function Page() {
   };
 
   return (
-    <>
+    <div className="flex flex-col justify-between min-h-screen">
       <Navbar
         saveStatus={saveStatus}
         setSaveStatus={setSaveStatus}
@@ -68,24 +68,25 @@ function Page() {
         content={content}
         handleReturn={handleReturn}
       />
-      <div className="px-4 pb-12 bg-stone-50 text-sky-800">
-        <div className="pb-6 mx-auto max-w-screen-md">
+      <div className="px-4 pb-12 grow bg-stone-50 text-sky-800">
+        <div className="mx-auto max-w-screen-md">
           <h2 className="pb-6 text-xl">{subjectRef.current}</h2>
           <textarea
             value={content}
-            rows={18}
+            rows={6}
             onChange={handleContentChange}
             onKeyDown={handleKeyDown}
             onFocus={moveCaretAtEnd}
             autoFocus={true}
             placeholder="昔々あるところにおじいさんとおばあさんが住んでいました。"
-            className="w-full bg-transparent text-lg leading-loose placeholder-stone-300
+            className="w-full bg-transparent placeholder-stone-300 min-h-full
+            text-middle leading-loose md:text-lg md:leading-loose
             focus:outline-none focus:placeholder-stone-50"
           ></textarea>
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
