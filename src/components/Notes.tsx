@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { Note } from '../types';
 import { readNotes } from '../hooks/api.ts';
-import NoteCard from './Note.tsx';
-import LoadingNotes from './LoadingNotes.tsx';
+import NoteCard from './NoteCard.tsx';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 
 function Notes() {
@@ -10,17 +9,16 @@ function Notes() {
   const currentUser = authContext?.currentUser;
 
   const [notes, setNotes] = useState<Note[]>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
-      // ログインしていない場合の処理を入れる
       if (!currentUser) return;
       const notes = await readNotes(currentUser.uid);
       // メモがない場合の処理を入れる
       if (!notes) return;
       setNotes(notes);
-      setIsLoaded(true);
+      setIsLoading(false);
     })();
   }, [currentUser]);
 
@@ -30,9 +28,18 @@ function Notes() {
   };
 
   return (
-    <div className="px-4 py-12 bg-stone-100 text-sky-800">
-      {isLoaded ? (
-        <div className="my-6 mx-auto max-w-screen-md flex flex-col gap-3">
+    <>
+      {isLoading ? (
+        <div
+          className="animate-spin size-6 m-auto
+            border-4 border-current border-t-transparent rounded-full text-stone-300"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      ) : (
+        <div className="my-6 mx-auto w-full max-w-screen-md flex flex-col gap-3">
           {notes.map((note) => (
             <NoteCard
               key={note.id}
@@ -45,10 +52,8 @@ function Notes() {
             />
           ))}
         </div>
-      ) : (
-        <LoadingNotes />
       )}
-    </div>
+    </>
   );
 }
 
