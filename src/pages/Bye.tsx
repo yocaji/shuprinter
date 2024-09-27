@@ -36,8 +36,8 @@ function Bye() {
   return (
     <>
       <div className="flex flex-col justify-between min-h-screen">
-        <div className="grow flex items-center bg-stone-100 text-sky-800 font-solid">
-          <div className="px-4 pb-12 mx-auto max-w-screen-md">
+        <div className="px-4 pb-12 grow flex items-center bg-stone-100 text-sky-800 font-solid">
+          <div className="mx-auto w-full max-w-screen-md">
             <button
               onClick={() => navigate(-1)}
               className="h-10 w-10 mb-3 rounded-full flex items-center justify-center

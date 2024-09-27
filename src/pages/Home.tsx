@@ -8,9 +8,9 @@ function Home() {
 
   return (
     <>
-      <div className="flex flex-col justify-between min-h-screen">
+      <div className="flex flex-col justify-between min-h-screen text-sky-800">
         <Start />
-        <div className="grow bg-stone-100">
+        <div className="px-4 py-6 grow flex bg-stone-100">
           {authContext?.currentUser ? <Notes /> : <div />}
         </div>
         <Footer />

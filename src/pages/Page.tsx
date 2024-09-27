@@ -68,24 +68,27 @@ function Page() {
         content={content}
         handleReturn={handleReturn}
       />
-      <div className="grow px-4 pb-12 bg-stone-50 text-sky-800">
+      <div className="px-4 pb-12 grow bg-stone-50 text-sky-800">
         <div className="mx-auto max-w-screen-md">
-          <h2 className="pb-6 text-xl">{subjectRef.current}</h2>
+          <h2 className="pb-6 text-lg md:text-xl leading-relaxed">
+            {subjectRef.current}
+          </h2>
           <textarea
             value={content}
-            rows={6}
+            rows={3}
             onChange={handleContentChange}
             onKeyDown={handleKeyDown}
             onFocus={moveCaretAtEnd}
             autoFocus={true}
-            placeholder="昔々あるところにおじいさんとおばあさんが住んでいました。"
-            className="w-full bg-transparent placeholder-stone-300 min-h-full
+            placeholder="昔々あるところにおじいさんとおばあさんが住んでいました"
+            className="w-full bg-transparent placeholder-stone-300 border-amber-200
             text-middle leading-loose md:text-lg md:leading-loose
-            focus:outline-none focus:placeholder-stone-50"
+            hover:border-b
+            focus:outline-none focus:border-b focus:placeholder-stone-50"
           ></textarea>
         </div>
       </div>
-      <Footer />
+      <Footer />;
     </div>
   );
 }
