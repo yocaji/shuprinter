@@ -36,20 +36,29 @@ function Bye() {
   return (
     <>
       <div className="flex flex-col justify-between min-h-screen">
-        <div className="px-4 pb-12 grow flex items-center bg-stone-100 text-sky-800 font-solid">
+        <div
+          className="px-4 pb-12 grow flex items-center bg-stone-100 dark:bg-slate-950
+         text-sky-800 dark:text-stone-300 font-solid"
+        >
           <div className="mx-auto w-full max-w-screen-md">
             <button
               onClick={() => navigate(-1)}
-              className="h-10 w-10 mb-3 rounded-full flex items-center justify-center
+              className="h-10 w-10 rounded-full flex items-center justify-center
               text-xl
-              border border-stone-200
-              outline-2 outline-offset-2 outline-amber-200 transition duration-300
-              hover:bg-amber-100 hover:outline hover:border-transparent
-              focus:bg-amber-200 focus:outline focus:border-transparent"
+              border border-stone-200 dark:border-slate-800
+              outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
+              transition duration-300
+              hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
+              focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent"
             >
               <span className="i-ph-arrow-left-light" />
+              <span className="sr-only">Back</span>
             </button>
-            <div className="px-6 md:px-9 py-9 bg-white rounded-lg border border-stone-200">
+            <div
+              className="px-6 md:px-9 py-9 mt-3 rounded-lg
+              bg-white dark:bg-slate-900
+              border border-stone-200 dark:border-slate-800"
+            >
               <h2 className="pb-4 text-xl font-medium">アカウントの削除</h2>
               <div className="leading-relaxed">
                 <p className="pb-4">
@@ -59,11 +68,13 @@ function Bye() {
                   <button
                     onClick={() => handleDeleteClick()}
                     disabled={isDeleting}
-                    className="px-4 py-2 md:px-5 md:py-3 rounded-full bg-rose-50
-                    text-sm font-medium text-rose-600
-                    outline-2 outline-offset-2 outline-rose-300 transition duration-300
-                    hover:bg-rose-100 hover:outline
-                    focus:bg-rose-200 focus:outline
+                    className="px-4 py-2 md:px-5 md:py-3 rounded-full
+                    bg-rose-50 dark:bg-rose-950
+                    text-sm font-medium text-rose-600 dark:text-rose-300
+                    outline-2 outline-offset-2 outline-rose-300 dark:outline-rose-800
+                    transition duration-300
+                    hover:bg-rose-100 dark:hover:bg-rose-900 hover:outline
+                    focus:bg-rose-200 dark:focus:bg-rose-800 focus:outline
                     disabled:pointer-events-none"
                   >
                     {isDeleting ? (
@@ -81,7 +92,7 @@ function Bye() {
                   </button>
                 ) : (
                   <>
-                    <hr className="mb-5" />
+                    <hr className="mb-5 dark:border-slate-800" />
                     <p className="pb-4">
                       この操作を続けるには
                       <span className="px-1 font-medium">{user.email}</span>
@@ -91,10 +102,11 @@ function Bye() {
                       onClick={() => handleReAuthClick()}
                       className="px-4 py-2 md:px-5 md:py-3 rounded-full flex items-center gap-2
                       text-sm font-medium
-                      border border-stone-200
-                      outline-2 outline-offset-2 outline-amber-200 transition duration-300
-                      hover:bg-amber-100 hover:outline hover:border-transparent
-                      focus:bg-amber-200 focus:outline focus:border-transparent"
+                      border border-stone-200 dark:border-slate-800
+                      outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
+                      transition duration-300
+                      hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
+                      focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent"
                     >
                       <span className="i-fa6-brands-google" />
                       再ログイン

@@ -32,7 +32,8 @@ function Notes() {
       {isLoading ? (
         <div
           className="animate-spin size-6 m-auto
-            border-4 border-current border-t-transparent rounded-full text-stone-300"
+            text-stone-300 dark:text-slate-700
+            border-4 border-current border-t-transparent rounded-full"
           role="status"
           aria-label="loading"
         >
