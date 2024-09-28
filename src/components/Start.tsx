@@ -31,23 +31,23 @@ function Start() {
             onChange={handleSubjectChange}
             placeholder="Shuprinterの名前の由来について"
             className="px-3 py-3 md:px-4 w-full rounded-s-lg
-            border-s border-t border-b border-stone-200 dark:border-slate-800
-            bg-white dark:bg-transparent placeholder-stone-300 dark:placeholder-slate-700
-            ring-inset ring-amber-100 dark:ring-slate-900 transition duration-300
-            hover:ring
-            focus:ring focus:outline-none focus:placeholder-transparent"
+            border-s border-y border-stone-200 dark:border-slate-700
+            bg-white dark:bg-slate-950 placeholder-stone-300 dark:placeholder-slate-700
+            ring-inset ring-amber-200 dark:ring-sky-900 transition duration-300
+            hover:ring-4
+            focus:ring-4 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent"
             required={true}
           />
           <button
             type={'submit'}
             disabled={!subject}
             className="py-3 px-4 rounded-e-lg
-            border border-amber-200 dark:border-slate-900 bg-amber-200 dark:bg-slate-900
-            text-xl
-            outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
+            border border-amber-300 dark:border-amber-400 bg-amber-300 dark:bg-amber-400
+            text-xl dark:text-sky-800
+            outline-2 outline-offset-2 outline-amber-300 dark:outline-amber-400
             transition duration-300
-            hover:outline hover:border-transparent
-            focus:outline focus:border-transparent focus:bg-amber-100 dark:focus:bg-sky-950
+            hover:outline hover:border-transparent hover:bg-amber-200
+            focus:outline focus:border-transparent focus:bg-amber-300 dark:focus:bg-amber-300
             disabled:opacity-25 disabled:pointer-events-none"
           >
             <span className="i-ph-arrow-right" />

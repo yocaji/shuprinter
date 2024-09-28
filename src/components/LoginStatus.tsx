@@ -1,5 +1,6 @@
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 import { Link } from 'react-router-dom';
+import ThemeSwitcher from './ThemeSwitcher.tsx';
 
 function LoginStatus() {
   const authContext = AuthContextConsumer();
@@ -13,49 +14,32 @@ function LoginStatus() {
 
   if (!currentUser) {
     return (
-      <div>
+      <div className={'flex items-center gap-1 text-sm font-medium'}>
         <button
-          className="px-5 py-3 inline-flex items-center justify-center
-          text-sm font-medium rounded-full bg-stone-100 dark:bg-slate-900
-          outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
-          transition duration-300
-          hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline
-          focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline"
+          className={'px-5 py-3 bg-stone-50 dark:bg-slate-950 btn-secondary'}
           onClick={login}
         >
           ログイン
         </button>
+        <ThemeSwitcher />
       </div>
     );
   }
 
   return (
-    <div className="flex items-center gap-1 text-sm font-medium">
+    <div className={'flex items-center gap-1 text-sm font-medium'}>
       <img
-        className="me-2 size-[32px] rounded-full"
+        className={'me-2 size-[32px] rounded-full'}
         src={currentUser.photoURL ?? undefined}
         alt={currentUser.displayName ?? undefined}
       />
-      <button
-        className="px-3 py-1 rounded-full
-        outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
-        transition duration-300
-        hover:bg-stone-100 dark:hover:bg-slate-900
-        focus:bg-stone-50 dark:focus:bg-sky-950 focus:outline"
-        onClick={logout}
-      >
+      <button className={'px-3 py-1 link-footer'} onClick={logout}>
         ログアウト
       </button>
-      <Link
-        to={'/bye'}
-        className="px-3 py-1 rounded-full
-        outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
-        transition duration-300
-        hover:bg-stone-100 dark:hover:bg-slate-900
-        focus:bg-stone-50 dark:focus:bg-sky-950 focus:outline"
-      >
+      <Link to={'/bye'} className={'px-3 py-1 link-footer'}>
         アカウント削除
       </Link>
+      <ThemeSwitcher />
     </div>
   );
 }

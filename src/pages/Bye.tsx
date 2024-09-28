@@ -43,13 +43,7 @@ function Bye() {
           <div className="mx-auto w-full max-w-screen-md">
             <button
               onClick={() => navigate(-1)}
-              className="h-10 w-10 rounded-full flex items-center justify-center
-              text-xl
-              border border-stone-200 dark:border-slate-800
-              outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
-              transition duration-300
-              hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
-              focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent"
+              className={'h-10 w-10 rounded-full text-xl btn-secondary'}
             >
               <span className="i-ph-arrow-left-light" />
               <span className="sr-only">Back</span>
@@ -68,14 +62,9 @@ function Bye() {
                   <button
                     onClick={() => handleDeleteClick()}
                     disabled={isDeleting}
-                    className="px-4 py-2 md:px-5 md:py-3 rounded-full
-                    bg-rose-50 dark:bg-rose-950
-                    text-sm font-medium text-rose-600 dark:text-rose-300
-                    outline-2 outline-offset-2 outline-rose-300 dark:outline-rose-800
-                    transition duration-300
-                    hover:bg-rose-100 dark:hover:bg-rose-900 hover:outline
-                    focus:bg-rose-200 dark:focus:bg-rose-800 focus:outline
-                    disabled:pointer-events-none"
+                    className={
+                      'px-4 py-2 md:px-5 md:py-3 text-sm font-medium btn-danger'
+                    }
                   >
                     {isDeleting ? (
                       <div
@@ -100,13 +89,9 @@ function Bye() {
                     </p>
                     <button
                       onClick={() => handleReAuthClick()}
-                      className="px-4 py-2 md:px-5 md:py-3 rounded-full flex items-center gap-2
-                      text-sm font-medium
-                      border border-stone-200 dark:border-slate-800
-                      outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
-                      transition duration-300
-                      hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
-                      focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent"
+                      className={
+                        'px-4 py-2 md:px-5 md:py-3 text-sm font-medium gap-2 btn-secondary'
+                      }
                     >
                       <span className="i-fa6-brands-google" />
                       再ログイン
