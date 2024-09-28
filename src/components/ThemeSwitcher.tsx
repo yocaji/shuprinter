@@ -11,7 +11,7 @@ function ThemeSwitcher() {
     const isSystemDark = window.matchMedia(
       '(prefers-color-scheme: dark)',
     ).matches;
-    isSystemDark ? setTheme('dark') : setTheme('light');
+    setTheme(isSystemDark ? 'dark' : 'light');
   }, []);
 
   useEffect(() => {

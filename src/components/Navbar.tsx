@@ -113,32 +113,19 @@ function Navbar({
           <button
             type={'button'}
             onClick={handleReturnClick}
-            className="h-10 w-10 rounded-full flex items-center justify-center
-            text-xl
-            border border-stone-200 dark:border-slate-800
-            outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
-            transition duration-300
-            hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
-            focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent"
+            className={'h-10 w-10 rounded-full text-xl btn-secondary'}
           >
             <span className="i-ph-arrow-left-light" />
             <span className="sr-only">Back</span>
           </button>
-          <div className="">
+          <div className={'flex gap-3'}>
             <button
               type={'button'}
               onClick={handleSaveClick}
               disabled={
                 isGuest || saveStatus === 'saved' || saveStatus === 'saving'
               }
-              className="pl-1 h-8 md:h-10 w-28 md:w-32 inline-flex justify-center items-center gap-2
-              rounded-s-full border-l border-t border-b border-stone-200 dark:border-slate-800
-              text-sm
-              outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
-              transition duration-300
-              hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
-              focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent
-              disabled:opacity-40 disabled:pointer-events-none"
+              className="h-10 w-32 text-sm gap-2 btn-secondary"
             >
               {saveStatus === 'unsaved' && (
                 <>
@@ -166,12 +153,7 @@ function Navbar({
             <button
               type={'button'}
               onClick={handleCopyClick}
-              className="pe-1 h-8 w-8 md:h-10 md:w-10 inline-flex justify-center items-center
-              rounded-e-full border border-stone-200 dark:border-slate-800
-              outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
-              transition duration-300
-              hover:bg-amber-100 dark:hover:bg-slate-900 hover:outline hover:border-transparent
-              focus:bg-amber-200 dark:focus:bg-sky-950 focus:outline focus:border-transparent"
+              className="h-10 w-10 btn-secondary"
             >
               {isCopied ? (
                 <>
