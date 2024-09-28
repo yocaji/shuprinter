@@ -32,10 +32,10 @@ function Start() {
             placeholder="Shuprinterの名前の由来について"
             className="px-3 py-3 md:px-4 w-full rounded-s-lg
             border-s border-y border-stone-200 dark:border-slate-700
-            bg-white dark:bg-slate-950 placeholder-stone-300 dark:placeholder-slate-700
+            bg-white dark:bg-slate-900 placeholder-stone-300 dark:placeholder-slate-700
             ring-inset ring-amber-200 dark:ring-sky-900 transition duration-300
-            hover:ring-4
-            focus:ring-4 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent"
+            hover:ring-2
+            focus:ring-2 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent"
             required={true}
           />
           <button

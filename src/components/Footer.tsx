@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer
       className="px-4 py-12 w-full
-      bg-stone-200 dark:bg-slate-900 dark:border-t dark:border-stone-900
+      bg-stone-200 dark:bg-sky-950 dark:border-t dark:border-stone-900
       font-solid text-sm text-sky-800 dark:text-stone-300 font-medium"
     >
       <div className="mx-auto max-w-screen-md flex flex-col gap-12">

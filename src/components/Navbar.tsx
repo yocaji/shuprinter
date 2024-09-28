@@ -69,7 +69,7 @@ function Navbar({
     <header
       className="fixed top-0 z-50 px-4 w-full h-16 md:h-20 flex items-center
       text-sky-800 dark:text-stone-300 font-solid
-      bg-stone-100 dark:bg-slate-950 border-amber-300 border-t-4"
+      bg-stone-100 dark:bg-slate-900 border-amber-300 border-t-4"
     >
       <div className="w-full max-w-screen-md mx-auto">
         {isGuest && !isDismissed && (

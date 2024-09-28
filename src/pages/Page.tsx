@@ -71,7 +71,7 @@ function Page() {
       <div className="relative top-16 md:top-20 flex flex-col justify-between min-h-screen">
         <div
           className="px-4 pb-12 grow
-          bg-stone-100 dark:bg-slate-950 text-sky-800 dark:text-stone-300"
+          bg-stone-100 dark:bg-slate-900 text-sky-800 dark:text-stone-300"
         >
           <div className="mx-auto max-w-screen-md">
             <h2 className="pb-6 text-lg md:text-xl leading-relaxed">
