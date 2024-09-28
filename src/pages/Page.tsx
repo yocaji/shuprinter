@@ -93,7 +93,7 @@ function Page() {
             ></textarea>
           </div>
         </div>
-        <Footer />;
+        <Footer />
       </div>
     </>
   );
