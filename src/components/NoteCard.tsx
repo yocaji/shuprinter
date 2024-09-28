@@ -80,10 +80,11 @@ function NoteCard({
       state={{ id: id, subject: editableSubject, content: content }}
       onClick={handleCardClick}
       className="p-4 w-full rounded-xl
-      border border-stone-200 dark:border-slate-800
-      bg-stone-50 dark:bg-slate-900
-      outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
+      border border-stone-200 dark:border-slate-700
+      bg-stone-50 dark:bg-slate-800
+      outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-800
       transition duration-300
+      hover:outline
       focus:outline
       active:scale-[.99]"
       draggable={isDraggable}
