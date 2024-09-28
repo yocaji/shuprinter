@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import LoginStatus from './LoginStatus.tsx';
+import ThemeSwitcher from './ThemeSwitcher.tsx';
 
 function Footer() {
   return (
@@ -41,6 +42,7 @@ function Footer() {
             <span className="i-fa6-brands-github" />
             <span className="sr-only">GitHub</span>
           </a>
+          <ThemeSwitcher />
         </div>
       </div>
     </footer>
