@@ -23,13 +23,13 @@ function NoteCard({
   const [subjectIsEditing, setSubjectIsEditing] =
     React.useState<boolean>(false);
   const [editableSubject, setEditableSubject] = React.useState<string>(subject);
-  const [cardIsDraggable, setCardIsDraggable] = React.useState<boolean>(true);
+  const [isDraggable, setIsDraggable] = React.useState<boolean>(true);
 
   const handleSubjectEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
     setSubjectIsEditing(true);
-    setCardIsDraggable(false);
+    setIsDraggable(false);
     e.currentTarget.blur();
   };
 
@@ -40,7 +40,7 @@ function NoteCard({
     e.currentTarget.blur();
     await upsertNote(id, editableSubject, content, userId);
     setSubjectIsEditing(false);
-    setCardIsDraggable(true);
+    setIsDraggable(true);
     e.stopPropagation();
   };
 
@@ -48,7 +48,7 @@ function NoteCard({
     e.preventDefault();
     await upsertNote(id, editableSubject, content, userId);
     setSubjectIsEditing(false);
-    setCardIsDraggable(true);
+    setIsDraggable(true);
     e.stopPropagation();
   };
 
@@ -86,7 +86,7 @@ function NoteCard({
       transition duration-300
       focus:outline
       active:scale-[.99]"
-      draggable={cardIsDraggable}
+      draggable={isDraggable}
     >
       <div className="mb-2">
         {subjectIsEditing ? (
