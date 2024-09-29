@@ -37,8 +37,8 @@ function Bye() {
     <>
       <div className="flex flex-col justify-between min-h-screen">
         <div
-          className="px-4 pb-12 grow flex items-center bg-stone-100 dark:bg-slate-950
-         text-sky-800 dark:text-stone-300 font-solid"
+          className="px-4 pb-12 grow flex items-center bg-stone-100 dark:bg-slate-900
+          text-sky-800 dark:text-stone-300 font-solid"
         >
           <div className="mx-auto w-full max-w-screen-md">
             <button
@@ -50,8 +50,8 @@ function Bye() {
             </button>
             <div
               className="px-6 md:px-9 py-9 mt-3 rounded-lg
-              bg-white dark:bg-slate-900
-              border border-stone-200 dark:border-slate-800"
+              bg-white dark:bg-slate-800
+              border border-stone-200 dark:border-slate-700"
             >
               <h2 className="pb-4 text-xl font-medium">アカウントの削除</h2>
               <div className="leading-relaxed">

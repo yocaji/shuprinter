@@ -35,11 +35,7 @@ function ThemeSwitcher() {
     <>
       {theme === 'light' ? (
         <button
-          className="w-8 h-8 rounded-full inline-flex items-center justify-center text-xl
-          outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
-          transition duration-300
-          hover:bg-stone-100 dark:hover:bg-slate-900
-          focus:bg-stone-50 dark:focus:bg-sky-950 focus:outline"
+          className={'w-8 h-8 text-xl link-footer'}
           onClick={(e) => handleToggleTheme(e, 'dark')}
         >
           <span className="i-ph-moon" />
@@ -47,11 +43,7 @@ function ThemeSwitcher() {
         </button>
       ) : (
         <button
-          className="w-8 h-8 rounded-full inline-flex items-center justify-center text-xl
-          outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
-          transition duration-300
-          hover:bg-stone-100 dark:hover:bg-slate-900
-          focus:bg-stone-50 dark:focus:bg-sky-950 focus:outline"
+          className={'w-8 h-8 text-xl link-footer'}
           onClick={(e) => handleToggleTheme(e, 'light')}
         >
           <span className="i-ph-sun" />

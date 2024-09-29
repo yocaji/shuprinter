@@ -16,7 +16,6 @@ export default {
     },
   },
   plugins: [
-    require('preline/plugin'),
     iconsPlugin({
       collections: getIconCollections(['ph', 'fa6-brands']),
     }),
