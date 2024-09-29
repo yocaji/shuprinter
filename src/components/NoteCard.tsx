@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
-import React from 'react';
+import { Link } from 'react-router-dom';
+import { FormEvent, MouseEvent, useState } from 'react';
 import { deleteNote, upsertNote } from '../hooks/api.ts';
+import SubjectEditorDialogButton from './SubjectEditorDialogButton.tsx';
 
 interface NoteCardProps {
   id: string;
@@ -20,40 +21,20 @@ function NoteCard({
   userId,
   onDelete,
 }: NoteCardProps) {
-  const [subjectIsEditing, setSubjectIsEditing] =
-    React.useState<boolean>(false);
-  const [editableSubject, setEditableSubject] = React.useState<string>(subject);
-  const [isDraggable, setIsDraggable] = React.useState<boolean>(true);
+  const [cardSubject, setCardSubject] = useState<string>(subject);
 
-  const handleSubjectEditClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setSubjectIsEditing(true);
-    setIsDraggable(false);
-    e.currentTarget.blur();
-  };
-
-  const handleSubjectFixClick = async (
-    e: React.MouseEvent<HTMLButtonElement>,
+  const handleSubjectSubmit = async (
+    e: FormEvent<HTMLFormElement>,
+    editableSubject: string,
   ) => {
-    // 0文字の場合の処理を入れる
-    e.currentTarget.blur();
-    await upsertNote(id, editableSubject, content, userId);
-    setSubjectIsEditing(false);
-    setIsDraggable(true);
-    e.stopPropagation();
-  };
-
-  const handleSubjectSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // 0文字の場合の処理を入れる
     await upsertNote(id, editableSubject, content, userId);
-    setSubjectIsEditing(false);
-    setIsDraggable(true);
     e.stopPropagation();
   };
 
   const handleDeleteClick = async (
-    e: React.MouseEvent<HTMLButtonElement>,
+    e: MouseEvent<HTMLButtonElement>,
     id: string,
   ) => {
     e.stopPropagation();
@@ -69,75 +50,28 @@ function NoteCard({
     onDelete(id);
   };
 
-  const handleCardClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!subjectIsEditing) return;
-    e.preventDefault();
-  };
-
   return (
     <Link
       to={'/page'}
-      state={{ id: id, subject: editableSubject, content: content }}
-      onClick={handleCardClick}
+      state={{ id: id, subject: cardSubject, content: content }}
       className="p-4 w-full
       outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-800
       transition duration-300
       hover:outline
       focus:outline
       active:scale-[.99] card"
-      draggable={isDraggable}
     >
       <div className="mb-2">
-        {subjectIsEditing ? (
-          <form
-            name={'subject'}
-            className="flex mx-auto max-w-screen-md"
-            onSubmit={(e) => handleSubjectSubmit(e)}
-          >
-            <input
-              type={'text'}
-              value={editableSubject}
-              onChange={(e) => setEditableSubject(e.target.value)}
-              className="px-2 py-1 w-full
-              border-b border-stone-200 bg-transparent
-              hover:border-amber-100
-              focus:border-amber-200 focus:outline-none"
-              required={true}
-              autoFocus={true}
-            />
-          </form>
-        ) : (
-          <h3 className={'text-lg font-hand truncate'}>{editableSubject}</h3>
-        )}
+        <h3 className={'text-lg font-hand truncate'}>{cardSubject}</h3>
       </div>
       <div className="flex justify-between items-end">
         <p className="text-sm">{dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}</p>
         <div className="-mb-2 -me-1">
-          {subjectIsEditing ? (
-            <button
-              type={'button'}
-              onClick={(e) => handleSubjectFixClick(e)}
-              className="px-2 py-1 rounded-lg
-              outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
-              transition duration-300
-              hover:bg-stone-100 dark:hover:bg-slate-800
-              focus:bg-stone-200 dark:focus:bg-sky-950 focus:outline"
-            >
-              <span className="i-ph-check-light" />
-            </button>
-          ) : (
-            <button
-              type={'button'}
-              onClick={(e) => handleSubjectEditClick(e)}
-              className="px-2 py-1 rounded-lg
-              outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
-              transition duration-300
-              hover:bg-stone-100 dark:hover:bg-slate-800
-              focus:bg-stone-200 dark:focus:bg-sky-950 focus:outline"
-            >
-              <span className="i-ph-pencil-simple-line-light" />
-            </button>
-          )}
+          <SubjectEditorDialogButton
+            cardSubject={cardSubject}
+            setCardSubject={setCardSubject}
+            handleSubjectSubmit={handleSubjectSubmit}
+          />
           <button
             type={'button'}
             onClick={(e) => handleDeleteClick(e, id)}

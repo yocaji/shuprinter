@@ -19,36 +19,32 @@ function Start() {
 
   return (
     <>
-      <h2 className="mb-8 flex justify-center items-end gap-3 text-2xl md:text-3xl">
-        <span className="i-ph-feather-thin text-3xl md:text-4xl" />
+      <h2
+        className={
+          'mb-8 flex justify-center items-end gap-3 text-2xl md:text-3xl'
+        }
+      >
+        <span className={'i-ph-feather-thin text-3xl md:text-4xl'} />
         何について書きますか？
       </h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-6 mx-auto max-w-screen-md flex items-center text-lg">
+        <div
+          className={
+            'mb-6 mx-auto max-w-screen-md flex items-center gap-2 text-lg'
+          }
+        >
           <input
-            type="text"
+            type={'text'}
             value={subject}
             onChange={handleSubjectChange}
-            placeholder="Shuprinterの名前の由来について"
-            className="px-3 py-3 md:px-4 w-full rounded-s-lg
-            border-s border-y border-stone-200 dark:border-slate-700
-            bg-white dark:bg-slate-900 placeholder-stone-300 dark:placeholder-slate-700
-            ring-inset ring-amber-200 dark:ring-sky-900 transition duration-300
-            hover:ring-2
-            focus:ring-2 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent"
+            placeholder={'Shuprinterの名前の由来について'}
+            className={'input px-5 h-12'}
             required={true}
           />
           <button
             type={'submit'}
             disabled={!subject}
-            className="py-3 px-4 rounded-e-lg
-            border border-amber-300 dark:border-amber-400 bg-amber-300 dark:bg-amber-400
-            text-xl dark:text-sky-800
-            outline-2 outline-offset-2 outline-amber-300 dark:outline-amber-400
-            transition duration-300
-            hover:outline hover:border-transparent hover:bg-amber-200
-            focus:outline focus:border-transparent focus:bg-amber-300 dark:focus:bg-amber-300
-            disabled:opacity-25 disabled:pointer-events-none"
+            className={'btn btn-primary h-12 w-12'}
           >
             <span className="i-ph-arrow-right" />
             <span className="sr-only">Start</span>
