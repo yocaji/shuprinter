@@ -4,7 +4,7 @@ import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 import SignUpDialogButton from './SignUpDialogButton.tsx';
 import { SaveStatus } from '../types.ts';
 
-interface NavbarGoProps {
+interface NavbarProps {
   saveStatus: string;
   setSaveStatus: (saveStatus: SaveStatus) => void;
   noteId: string;
@@ -20,7 +20,7 @@ function Navbar({
   subject,
   content,
   handleReturn,
-}: NavbarGoProps) {
+}: NavbarProps) {
   const authContext = AuthContextConsumer();
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
   const [isGuest, setIsGuest] = React.useState<boolean>(false);
@@ -71,7 +71,7 @@ function Navbar({
           <button
             type={'button'}
             onClick={handleReturnClick}
-            className={'h-10 w-10 rounded-full text-xl btn-secondary'}
+            className={'btn btn-secondary h-10 w-10 rounded-full text-xl'}
           >
             <span className="i-ph-arrow-left-light" />
             <span className="sr-only">Back</span>
@@ -112,7 +112,7 @@ function Navbar({
             <button
               type={'button'}
               onClick={handleCopyClick}
-              className="h-10 w-10 btn-secondary"
+              className="btn btn-secondary h-10 w-10"
             >
               {isCopied ? (
                 <>

@@ -11,39 +11,45 @@
   .btn {
     @apply
     font-medium
+    inline-flex items-center justify-center
+    rounded-full
+    outline-2 outline-offset-2
+    transition duration-300
+    disabled:pointer-events-none
+  }
+
+  .btn-primary {
+    @apply
+    border border-amber-300 dark:border-amber-400 bg-amber-300 dark:bg-amber-400
+    text-xl dark:text-sky-800
+    outline-2 outline-offset-2 outline-amber-300 dark:outline-amber-400
+    transition duration-300
+    hover:outline hover:border-transparent hover:bg-amber-200
+    focus:outline focus:border-transparent focus:bg-amber-300 dark:focus:bg-amber-300
+    disabled:opacity-25 disabled:pointer-events-none
   }
 
   .btn-secondary {
     @apply
-    inline-flex items-center justify-center
-    rounded-full
     border border-stone-200 dark:border-slate-700
-    outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-900
-    transition duration-300
+    outline-amber-300 dark:outline-sky-900
     hover:bg-amber-200 dark:hover:bg-sky-950 hover:outline hover:border-transparent dark:hover:border-transparent
     focus:bg-amber-300 dark:focus:bg-sky-900 focus:outline focus:border-transparent dark:focus:border-transparent
-    disabled:opacity-40 disabled:pointer-events-none
+    disabled:opacity-40
   }
 
   .btn-danger {
     @apply
-    inline-flex items-center justify-center
-    rounded-full
-    outline-2 outline-offset-2 outline-rose-300 dark:outline-rose-700
-    transition duration-300
+    outline-rose-300 dark:outline-rose-700
     bg-rose-50 dark:bg-rose-900
     text-rose-600 dark:text-white
     hover:bg-rose-100 dark:hover:bg-rose-800 hover:outline
     focus:bg-rose-200 dark:focus:bg-rose-700 focus:outline
-    disabled:pointer-events-none
   }
 
   .btn-footer {
     @apply
-    inline-flex items-center justify-center
-    rounded-full
-    outline-2 outline-offset-2 outline-amber-300
-    transition duration-300
+    outline-amber-300
     hover:bg-stone-100 dark:hover:bg-slate-900
     focus:bg-stone-50 dark:focus:bg-slate-950 focus:outline
   }
@@ -54,5 +60,17 @@
     text-sky-800 dark:text-stone-300
     border border-stone-200 dark:border-slate-700
     bg-stone-50 dark:bg-slate-800
+  }
+
+  .input {
+    @apply
+    w-full rounded-full
+    border border-stone-200 dark:border-slate-700
+    bg-white dark:bg-slate-900
+    placeholder-stone-300 dark:placeholder-slate-700
+    ring-inset ring-amber-200 dark:ring-sky-900
+    transition duration-300
+    hover:ring-2
+    focus:ring-2 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent
   }
 }

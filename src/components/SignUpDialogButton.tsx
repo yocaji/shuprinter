@@ -14,7 +14,7 @@ function SignUpDialogButton() {
   return (
     <>
       <button
-        className={'btn-secondary h-6 w-6 text-lg'}
+        className={'btn btn-secondary h-6 w-6 text-lg'}
         onClick={() => setIsOpen(true)}
       >
         <span className={'i-ph-info-light'} />
