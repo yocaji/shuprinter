@@ -35,27 +35,27 @@ function Bye() {
 
   return (
     <>
-      <div className="flex flex-col justify-between min-h-screen">
+      <div className={'flex flex-col justify-between min-h-screen'}>
         <div
           className="px-4 pb-12 grow flex items-center bg-stone-100 dark:bg-slate-900
-          text-sky-800 dark:text-stone-300 font-solid"
+          text-sky-800 dark:text-stone-300"
         >
-          <div className="mx-auto w-full max-w-screen-md">
+          <div className={'mx-auto w-full max-w-screen-md'}>
             <button
               onClick={() => navigate(-1)}
               className={'h-10 w-10 rounded-full text-xl btn-secondary'}
             >
-              <span className="i-ph-arrow-left-light" />
-              <span className="sr-only">Back</span>
+              <span className={'i-ph-arrow-left-light'} />
+              <span className={'sr-only'}>Back</span>
             </button>
             <div
               className="px-6 md:px-9 py-9 mt-3 rounded-lg
               bg-white dark:bg-slate-800
               border border-stone-200 dark:border-slate-700"
             >
-              <h2 className="pb-4 text-xl font-medium">アカウントの削除</h2>
-              <div className="leading-relaxed">
-                <p className="pb-4">
+              <h2 className={'pb-4 text-xl font-medium'}>アカウントの削除</h2>
+              <div className={'leading-relaxed'}>
+                <p className={'pb-4'}>
                   アカウントを削除すると、Shuprinterに保存済みのノートはすべて削除されます
                 </p>
                 {isReAuthed ? (
@@ -63,7 +63,7 @@ function Bye() {
                     onClick={() => handleDeleteClick()}
                     disabled={isDeleting}
                     className={
-                      'px-4 py-2 md:px-5 md:py-3 text-sm font-medium btn-danger'
+                      'btn btn-danger px-4 py-2 md:px-5 md:py-3 text-sm'
                     }
                   >
                     {isDeleting ? (
@@ -73,7 +73,7 @@ function Bye() {
                         role="status"
                         aria-label="loading"
                       >
-                        <span className="sr-only">Loading...</span>
+                        <span className={'sr-only'}>Loading...</span>
                       </div>
                     ) : (
                       'アカウントを削除する'
@@ -81,19 +81,19 @@ function Bye() {
                   </button>
                 ) : (
                   <>
-                    <hr className="mb-5 dark:border-slate-800" />
-                    <p className="pb-4">
+                    <hr className={'mb-5 dark:border-slate-800'} />
+                    <p className={'pb-4'}>
                       この操作を続けるには
-                      <span className="px-1 font-medium">{user.email}</span>
+                      <span className={'px-1 font-medium'}>{user.email}</span>
                       で再ログインしてください
                     </p>
                     <button
                       onClick={() => handleReAuthClick()}
                       className={
-                        'px-4 py-2 md:px-5 md:py-3 text-sm font-medium gap-2 btn-secondary'
+                        'btn btn-secondary px-4 py-2 md:px-5 md:py-3 text-sm gap-2'
                       }
                     >
-                      <span className="i-fa6-brands-google" />
+                      <span className={'i-fa6-brands-google'} />
                       再ログイン
                     </button>
                   </>

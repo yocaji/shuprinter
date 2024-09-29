@@ -79,14 +79,12 @@ function NoteCard({
       to={'/page'}
       state={{ id: id, subject: editableSubject, content: content }}
       onClick={handleCardClick}
-      className="p-4 w-full rounded-xl
-      border border-stone-200 dark:border-slate-700
-      bg-stone-50 dark:bg-slate-800
+      className="p-4 w-full
       outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-800
       transition duration-300
       hover:outline
       focus:outline
-      active:scale-[.99]"
+      active:scale-[.99] card"
       draggable={isDraggable}
     >
       <div className="mb-2">
@@ -109,7 +107,7 @@ function NoteCard({
             />
           </form>
         ) : (
-          <h3 className="text-lg truncate">{editableSubject}</h3>
+          <h3 className={'text-lg font-hand truncate'}>{editableSubject}</h3>
         )}
       </div>
       <div className="flex justify-between items-end">

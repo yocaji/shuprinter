@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar.tsx';
 import Footer from '../components/Footer.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 import { upsertNote } from '../hooks/api.ts';
+import { SaveStatus } from '../types.ts';
 
 function Page() {
   const location = useLocation();
@@ -13,9 +14,9 @@ function Page() {
   const noteIdRef = useRef<string>(location.state.id);
   const subjectRef = useRef<string>(location.state.subject);
   const [content, setContent] = useState<string>(location.state.content || '');
-  const [saveStatus, setSaveStatus] = useState<string>(
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>(
     location.state.content === undefined ? 'unsaved' : 'saved',
-  ); // unsaved, saving, saved
+  );
 
   useEffect(() => {
     saveNoteLocal(noteIdRef.current, subjectRef.current, content);
@@ -73,8 +74,8 @@ function Page() {
           className="px-4 pb-12 grow
           bg-stone-100 dark:bg-slate-900 text-sky-800 dark:text-stone-300"
         >
-          <div className="mx-auto max-w-screen-md">
-            <h2 className="pb-6 text-lg md:text-xl leading-relaxed">
+          <div className={'mx-auto max-w-screen-md font-hand'}>
+            <h2 className={'pb-6 text-lg md:text-xl leading-relaxed'}>
               {subjectRef.current}
             </h2>
             <textarea

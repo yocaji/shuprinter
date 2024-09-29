@@ -6,7 +6,7 @@ function Footer() {
     <footer
       className="px-4 py-12 w-full
       bg-stone-200 dark:bg-sky-950 dark:border-t dark:border-stone-900
-      font-solid text-sm text-sky-800 dark:text-stone-300 font-medium"
+      text-sm text-sky-800 dark:text-stone-300"
     >
       <div className="mx-auto max-w-screen-md flex flex-col gap-12">
         <LoginStatus />
@@ -19,13 +19,13 @@ function Footer() {
           >
             Shuprinter
           </Link>
-          <Link to={'/terms'} className={'px-3 py-1 link-footer'}>
+          <Link to={'/terms'} className={'btn btn-footer px-3 py-1'}>
             規約とポリシー
           </Link>
           <a
             href="https://github.com/yocaji/shuprinter"
             target="_blank"
-            className={'w-8 h-8 text-2xl link-footer'}
+            className={'btn btn-footer w-8 h-8 text-2xl'}
           >
             <span className="i-fa6-brands-github" />
             <span className="sr-only">GitHub</span>

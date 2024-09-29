@@ -8,10 +8,10 @@ export default {
     fontFamily: {},
     extend: {
       fontFamily: {
-        sans: ['Zen Kurenaido', 'sans-serif'],
+        sans: ['Zen Maru Gothic', 'sans-serif'],
+        hand: ['Zen Kurenaido', 'sans-serif'],
         logo: ['Oooh Baby', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
-        solid: ['Zen Maru Gothic', 'sans-serif'],
       },
     },
   },

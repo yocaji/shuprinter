@@ -1,6 +1,5 @@
 import { useEffect, useState, MouseEvent } from 'react';
-
-type Theme = 'system' | 'light' | 'dark';
+import { Theme } from '../types';
 
 function ThemeSwitcher() {
   const [theme, setTheme] = useState<Theme>(localStorage.theme || 'system');
@@ -35,7 +34,7 @@ function ThemeSwitcher() {
     <>
       {theme === 'light' ? (
         <button
-          className={'w-8 h-8 text-xl link-footer'}
+          className={'w-8 h-8 text-xl btn-footer'}
           onClick={(e) => handleToggleTheme(e, 'dark')}
         >
           <span className="i-ph-moon" />
@@ -43,7 +42,7 @@ function ThemeSwitcher() {
         </button>
       ) : (
         <button
-          className={'w-8 h-8 text-xl link-footer'}
+          className={'w-8 h-8 text-xl btn-footer'}
           onClick={(e) => handleToggleTheme(e, 'light')}
         >
           <span className="i-ph-sun" />

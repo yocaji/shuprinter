@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { upsertNote } from '../hooks/api.ts';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
+import SignUpDialogButton from './SignUpDialogButton.tsx';
+import { SaveStatus } from '../types.ts';
 
 interface NavbarGoProps {
   saveStatus: string;
-  setSaveStatus: (saveStatus: string) => void;
+  setSaveStatus: (saveStatus: SaveStatus) => void;
   noteId: string;
   subject: string;
   content: string;
@@ -20,7 +22,6 @@ function Navbar({
   handleReturn,
 }: NavbarGoProps) {
   const authContext = AuthContextConsumer();
-  const login = authContext?.login;
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
   const [isGuest, setIsGuest] = React.useState<boolean>(false);
 
@@ -62,20 +63,10 @@ function Navbar({
   return (
     <header
       className="fixed top-0 z-50 px-4 w-full h-16 md:h-20 flex items-center
-      text-sky-800 dark:text-stone-300 font-solid
+      text-sky-800 dark:text-stone-300
       bg-stone-100 dark:bg-slate-900 border-amber-300 border-t-4"
     >
       <div className="w-full max-w-screen-md mx-auto">
-        {/*<p className="w-full text-xs leading-relaxed">*/}
-        {/*  Googleアカウントで*/}
-        {/*  <button*/}
-        {/*    onClick={login}*/}
-        {/*    className="border-b border-stone-300 hover:opacity-50 focus:opacity-50"*/}
-        {/*  >*/}
-        {/*    ログイン*/}
-        {/*  </button>*/}
-        {/*  すると、メモを保存することができます*/}
-        {/*</p>*/}
         <div className="flex items-center justify-between">
           <button
             type={'button'}
@@ -85,14 +76,15 @@ function Navbar({
             <span className="i-ph-arrow-left-light" />
             <span className="sr-only">Back</span>
           </button>
-          <div className={'flex gap-3'}>
+          <div className={'flex items-center gap-3'}>
+            {isGuest && <SignUpDialogButton />}
             <button
               type={'button'}
               onClick={handleSaveClick}
               disabled={
                 isGuest || saveStatus === 'saved' || saveStatus === 'saving'
               }
-              className="h-10 w-32 text-sm gap-2 btn-secondary"
+              className="btn btn-secondary h-10 w-32 text-sm gap-2"
             >
               {saveStatus === 'unsaved' && (
                 <>

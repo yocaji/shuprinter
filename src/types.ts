@@ -10,3 +10,7 @@ export type Note = {
 export type Count = {
   count: number;
 };
+
+export type Theme = 'system' | 'light' | 'dark';
+
+export type SaveStatus = 'unsaved' | 'saving' | 'saved';

@@ -14,9 +14,11 @@ function LoginStatus() {
 
   if (!currentUser) {
     return (
-      <div className={'flex items-center gap-1 text-sm font-medium'}>
+      <div className={'flex items-center gap-1 text-sm'}>
         <button
-          className={'px-5 py-3 bg-stone-50 dark:bg-slate-900/50 link-footer'}
+          className={
+            'btn btn-footer px-5 py-3 bg-stone-50 dark:bg-slate-900/50'
+          }
           onClick={login}
         >
           ログイン
@@ -27,16 +29,16 @@ function LoginStatus() {
   }
 
   return (
-    <div className={'flex items-center gap-1 text-sm font-medium'}>
+    <div className={'flex items-center gap-1 text-sm'}>
       <img
         className={'me-2 size-[32px] rounded-full'}
         src={currentUser.photoURL ?? undefined}
         alt={currentUser.displayName ?? undefined}
       />
-      <button className={'px-3 py-1 link-footer'} onClick={logout}>
+      <button className={'btn btn-footer px-3 py-1'} onClick={logout}>
         ログアウト
       </button>
-      <Link to={'/bye'} className={'px-3 py-1 link-footer'}>
+      <Link to={'/bye'} className={'btn btn-footer px-3 py-1'}>
         アカウント削除
       </Link>
       <ThemeSwitcher />
