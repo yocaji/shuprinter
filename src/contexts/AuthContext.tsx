@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  reauthenticateWithPopup,
 } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { createContext, useContext } from 'react';
@@ -18,6 +19,7 @@ const AuthContext = createContext<{
   currentUser: User | null;
   login: () => Promise<void>;
   logout: () => Promise<void>;
+  reAuth: (user: User) => Promise<void>;
 } | null>(null);
 
 const firebaseConfig = {
@@ -49,8 +51,14 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     setCurrentUser(null);
   };
 
+  const reAuth = async (user: User) => {
+    await reauthenticateWithPopup(user, provider);
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser: currentUser, login, logout }}>
+    <AuthContext.Provider
+      value={{ currentUser: currentUser, login, logout, reAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );
