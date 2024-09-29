@@ -8,28 +8,21 @@ function Bye() {
   const authContext = AuthContextConsumer();
   const navigate = useNavigate();
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  const [isReAuthed, setIsReAuthed] = useState<boolean>(false);
 
-  const user = authContext?.currentUser;
-  if (!user) return <Navigate to={'/'} />;
-
-  const handleReAuthClick = async () => {
-    try {
-      await authContext.login();
-      setIsReAuthed(true);
-    } catch (error) {
-      console.error('Reauthentication failed: ', error);
-    }
-  };
+  if (!authContext?.currentUser) return <Navigate to={'/'} />;
+  const { currentUser, reAuth } = authContext;
 
   const handleDeleteClick = async () => {
-    const isConfirmed = window.confirm(`${user.email} を削除しますか？`);
+    const isConfirmed = window.confirm(`${currentUser.email} を削除しますか？`);
     if (!isConfirmed) return;
     setIsDeleting(true);
-    const result = await deleteNotes(user.uid);
+    const result = await deleteNotes(currentUser.uid);
     // ノートの削除に失敗した場合のフィードバックを入れる
     if (!result) return;
-    await user.delete();
+
+    await reAuth(currentUser)
+      .then(() => currentUser.delete())
+      .catch((e) => console.error(e));
     setIsDeleting(false);
   };
 
@@ -58,46 +51,24 @@ function Bye() {
                 <p className={'pb-4'}>
                   アカウントを削除すると、Shuprinterに保存済みのノートはすべて削除されます
                 </p>
-                {isReAuthed ? (
-                  <button
-                    onClick={() => handleDeleteClick()}
-                    disabled={isDeleting}
-                    className={
-                      'btn btn-danger px-4 py-2 md:px-5 md:py-3 text-sm'
-                    }
-                  >
-                    {isDeleting ? (
-                      <div
-                        className="animate-spin size-4
+                <button
+                  onClick={() => handleDeleteClick()}
+                  disabled={isDeleting}
+                  className={'btn btn-danger px-4 py-2 md:px-5 md:py-3 text-sm'}
+                >
+                  {isDeleting ? (
+                    <div
+                      className="animate-spin size-4
                         border-[2px] border-current border-t-transparent rounded-full text-rose-300"
-                        role="status"
-                        aria-label="loading"
-                      >
-                        <span className={'sr-only'}>Loading...</span>
-                      </div>
-                    ) : (
-                      'アカウントを削除する'
-                    )}
-                  </button>
-                ) : (
-                  <>
-                    <hr className={'mb-5 dark:border-slate-800'} />
-                    <p className={'pb-4'}>
-                      この操作を続けるには
-                      <span className={'px-1 font-medium'}>{user.email}</span>
-                      で再ログインしてください
-                    </p>
-                    <button
-                      onClick={() => handleReAuthClick()}
-                      className={
-                        'btn btn-secondary px-4 py-2 md:px-5 md:py-3 text-sm gap-2'
-                      }
+                      role="status"
+                      aria-label="loading"
                     >
-                      <span className={'i-fa6-brands-google'} />
-                      再ログイン
-                    </button>
-                  </>
-                )}
+                      <span className={'sr-only'}>Loading...</span>
+                    </div>
+                  ) : (
+                    'アカウントを削除する'
+                  )}
+                </button>
               </div>
             </div>
           </div>
