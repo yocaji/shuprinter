@@ -12,11 +12,11 @@
     @apply
     inline-flex items-center justify-center
     rounded-full
-    border border-stone-200 dark:border-slate-800
-    outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
+    border border-stone-200 dark:border-slate-700
+    outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-900
     transition duration-300
-    hover:bg-amber-200 dark:hover:bg-slate-900 hover:outline hover:border-transparent
-    focus:bg-amber-300 dark:focus:bg-sky-950 focus:outline focus:border-transparent
+    hover:bg-amber-200 dark:hover:bg-sky-950 hover:outline hover:border-transparent dark:hover:border-transparent
+    focus:bg-amber-300 dark:focus:bg-sky-900 focus:outline focus:border-transparent dark:focus:border-transparent
     disabled:opacity-40 disabled:pointer-events-none
   }
 
@@ -24,12 +24,12 @@
     @apply
     inline-flex items-center justify-center
     rounded-full
-    outline-2 outline-offset-2 outline-rose-300 dark:outline-rose-800
+    outline-2 outline-offset-2 outline-rose-300 dark:outline-rose-700
     transition duration-300
-    bg-rose-50 dark:bg-rose-950
-    text-rose-600 dark:text-rose-300
-    hover:bg-rose-100 dark:hover:bg-rose-900 hover:outline
-    focus:bg-rose-200 dark:focus:bg-rose-800 focus:outline
+    bg-rose-50 dark:bg-rose-900
+    text-rose-600 dark:text-white
+    hover:bg-rose-100 dark:hover:bg-rose-800 hover:outline
+    focus:bg-rose-200 dark:focus:bg-rose-700 focus:outline
     disabled:pointer-events-none
   }
 
@@ -37,9 +37,9 @@
     @apply
     inline-flex items-center justify-center
     rounded-full
-    outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-950
+    outline-2 outline-offset-2 outline-amber-300
     transition duration-300
     hover:bg-stone-100 dark:hover:bg-slate-900
-    focus:bg-stone-50 dark:focus:bg-sky-950 focus:outline
+    focus:bg-stone-50 dark:focus:bg-slate-950 focus:outline
   }
 }

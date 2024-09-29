@@ -16,7 +16,7 @@ function LoginStatus() {
     return (
       <div className={'flex items-center gap-1 text-sm font-medium'}>
         <button
-          className={'px-5 py-3 bg-stone-50 dark:bg-slate-950 btn-secondary'}
+          className={'px-5 py-3 bg-stone-50 dark:bg-slate-900/50 link-footer'}
           onClick={login}
         >
           ログイン
