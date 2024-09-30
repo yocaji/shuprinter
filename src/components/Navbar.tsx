@@ -66,15 +66,15 @@ function Navbar({
       text-sky-800 dark:text-stone-300
       bg-stone-100 dark:bg-slate-900 border-amber-300 border-t-4"
     >
-      <div className="w-full max-w-screen-md mx-auto">
-        <div className="flex items-center justify-between">
+      <div className={'w-full max-w-screen-md mx-auto'}>
+        <div className={'flex items-center justify-between'}>
           <button
             type={'button'}
             onClick={handleReturnClick}
-            className={'btn btn-secondary h-10 w-10 rounded-full text-xl'}
+            className={'btn btn-secondary h-10 w-10'}
           >
-            <span className="i-ph-arrow-left-light" />
-            <span className="sr-only">Back</span>
+            <span className={'i-ph-arrow-left text-lg'} />
+            <span className={'sr-only'}>Back</span>
           </button>
           <div className={'flex items-center gap-3'}>
             {isGuest && <SignUpDialogButton />}
@@ -84,11 +84,11 @@ function Navbar({
               disabled={
                 isGuest || saveStatus === 'saved' || saveStatus === 'saving'
               }
-              className="btn btn-secondary h-10 w-32 text-sm gap-2"
+              className={'btn btn-secondary h-10 w-32 text-sm gap-2'}
             >
               {saveStatus === 'unsaved' && (
                 <>
-                  <span className="i-ph-cloud-arrow-up-light text-base" />
+                  <span className={'i-ph-cloud-arrow-up text-base'} />
                   保存する
                 </>
               )}
@@ -96,15 +96,15 @@ function Navbar({
                 <div
                   className="animate-spin size-4
                   border-[2px] border-current border-t-transparent rounded-full text-stone-300"
-                  role="status"
-                  aria-label="loading"
+                  role={'status'}
+                  aria-label={'loading'}
                 >
-                  <span className="sr-only">Loading...</span>
+                  <span className={'sr-only'}>Loading...</span>
                 </div>
               )}
               {saveStatus === 'saved' && (
                 <>
-                  <span className="i-ph-check-light text-base" />
+                  <span className={'i-ph-check text-base'} />
                   保存済み
                 </>
               )}
@@ -112,17 +112,17 @@ function Navbar({
             <button
               type={'button'}
               onClick={handleCopyClick}
-              className="btn btn-secondary h-10 w-10"
+              className={'btn btn-secondary h-10 w-10'}
             >
               {isCopied ? (
                 <>
-                  <span className="i-ph-check-light" />
-                  <span className="sr-only">Copied</span>
+                  <span className={'i-ph-check text-lg'} />
+                  <span className={'sr-only'}>Copied</span>
                 </>
               ) : (
                 <>
-                  <span className="i-ph-clipboard-light" />
-                  <span className="sr-only">Copy</span>
+                  <span className={'i-ph-clipboard text-lg'} />
+                  <span className={'sr-only'}>Copy</span>
                 </>
               )}
             </button>

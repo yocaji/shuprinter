@@ -25,13 +25,15 @@ function SignUpDialogButton() {
         onClose={() => setIsOpen(false)}
         className={'relative z-50'}
       >
-        <DialogBackdrop className="fixed inset-0 bg-black/30" />
+        <DialogBackdrop
+          className={'fixed inset-0 bg-black/30 dark:bg-white/20'}
+        />
         <div
           className={
             'fixed inset-0 flex w-screen items-center justify-center p-4'
           }
         >
-          <DialogPanel className={'p-8 max-w-md space-y-4 text-sm card'}>
+          <DialogPanel className={'p-8 max-w-md space-y-4 text-sm dialog'}>
             <p className={'leading-loose'}>
               Googleアカウントで
               <button

@@ -14,11 +14,9 @@ function LoginStatus() {
 
   if (!currentUser) {
     return (
-      <div className={'flex items-center gap-1 text-sm'}>
+      <div className={'flex items-center gap-1'}>
         <button
-          className={
-            'btn btn-footer px-5 py-3 bg-stone-50 dark:bg-slate-900/50'
-          }
+          className={'btn btn-md btn-footer bg-stone-50 dark:bg-slate-900/50'}
           onClick={login}
         >
           ログイン

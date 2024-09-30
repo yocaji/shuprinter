@@ -36,9 +36,9 @@ function Bye() {
           <div className={'mx-auto w-full max-w-screen-md'}>
             <button
               onClick={() => navigate(-1)}
-              className={'h-10 w-10 rounded-full text-xl btn-secondary'}
+              className={'btn btn-secondary h-10 w-10'}
             >
-              <span className={'i-ph-arrow-left-light'} />
+              <span className={'i-ph-arrow-left text-lg'} />
               <span className={'sr-only'}>Back</span>
             </button>
             <div
@@ -54,14 +54,14 @@ function Bye() {
                 <button
                   onClick={() => handleDeleteClick()}
                   disabled={isDeleting}
-                  className={'btn btn-danger px-4 py-2 md:px-5 md:py-3 text-sm'}
+                  className={'btn btn-md btn-danger'}
                 >
                   {isDeleting ? (
                     <div
                       className="animate-spin size-4
                         border-[2px] border-current border-t-transparent rounded-full text-rose-300"
-                      role="status"
-                      aria-label="loading"
+                      role={'status'}
+                      aria-label={'loading'}
                     >
                       <span className={'sr-only'}>Loading...</span>
                     </div>
