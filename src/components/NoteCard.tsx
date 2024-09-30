@@ -56,12 +56,14 @@ function NoteCard({
       state={{ id: id, subject: cardSubject, content: content }}
       className={'p-4 w-full active:scale-[.99] card'}
     >
-      <div className="mb-2">
+      <div className={'mb-2'}>
         <h3 className={'text-lg font-hand truncate'}>{cardSubject}</h3>
       </div>
-      <div className="flex justify-between items-end">
-        <p className="text-sm">{dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}</p>
-        <div className="-mb-2 -me-1">
+      <div className={'flex justify-between items-end'}>
+        <p className={'text-sm'}>
+          {dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}
+        </p>
+        <div className={'-mb-2 -me-1'}>
           <SubjectEditorDialogButton
             cardSubject={cardSubject}
             setCardSubject={setCardSubject}
@@ -76,7 +78,7 @@ function NoteCard({
             hover:bg-stone-100 dark:hover:bg-slate-800
             focus:bg-stone-200 dark:focus:bg-sky-950 focus:outline"
           >
-            <span className="i-ph-trash-light" />
+            <span className={'i-ph-trash-light'} />
           </button>
         </div>
       </div>
