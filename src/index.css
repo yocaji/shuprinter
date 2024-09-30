@@ -62,9 +62,13 @@
   .card {
     @apply
     rounded-xl
-    text-sky-800 dark:text-stone-300
-    border border-stone-200 dark:border-slate-700
+    outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-800
     bg-stone-50 dark:bg-slate-800
+    text-sky-800 dark:text-stone-300
+    transition duration-300
+    border border-stone-200 dark:border-slate-700
+    hover:outline
+    focus:outline
   }
 
   .dialog {
@@ -79,9 +83,22 @@
     w-full rounded-full
     border border-stone-200 dark:border-slate-700
     bg-white dark:bg-slate-900
+    font-hand
     placeholder-stone-300 dark:placeholder-slate-700
     ring-inset ring-amber-200 dark:ring-sky-900
     transition duration-300
+    hover:ring-2
+    focus:ring-2 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent
+  }
+
+  .textarea {
+    @apply
+    h-full p-4 bg-transparent
+    placeholder-stone-300 dark:placeholder-slate-700
+    ring-inset ring-amber-200 dark:ring-sky-900
+    transition duration-300
+    text-sky-800 dark:text-stone-300
+    leading-loose md:leading-loose
     hover:ring-2
     focus:ring-2 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent
   }
