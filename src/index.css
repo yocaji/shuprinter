@@ -8,6 +8,12 @@
 @tailwind utilities;
 
 @layer components {
+  .text {
+    @apply
+    leading-relaxed
+    text-sky-800 dark:text-stone-300
+  }
+
   .btn {
     @apply
     font-medium

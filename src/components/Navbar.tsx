@@ -62,11 +62,11 @@ function Navbar({
 
   return (
     <header
-      className="sticky top-0 z-50 px-4 w-full h-16 md:h-20 flex items-center
+      className="w-full h-16 md:h-20 flex items-center
       text-sky-800 dark:text-stone-300
       bg-stone-100 dark:bg-slate-900 border-amber-300 border-t-4"
     >
-      <div className={'w-full max-w-screen-md mx-auto'}>
+      <div className={'px-4 w-full max-w-screen-md mx-auto'}>
         <div className={'flex items-center justify-between'}>
           <button
             type={'button'}
