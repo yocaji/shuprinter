@@ -13,7 +13,6 @@ function SubjectEditorDialogButton({
   handleSubjectSubmit,
 }: SubjectEditorDialogButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [subject, setSubject] = useState(cardSubject);
 
   const handleEditButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -22,9 +21,9 @@ function SubjectEditorDialogButton({
     setIsOpen(true);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    handleSubjectSubmit(e, subject);
-    setCardSubject(subject);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>, newSubject: string) => {
+    handleSubjectSubmit(e, newSubject);
+    setCardSubject(newSubject);
     setIsOpen(false);
   };
 
@@ -42,20 +41,23 @@ function SubjectEditorDialogButton({
         onClose={() => setIsOpen(false)}
         className={'relative z-50'}
       >
-        <DialogBackdrop className="fixed inset-0 bg-black/30" />
+        <DialogBackdrop className={'fixed inset-0 bg-black/30'} />
         <div
           className={
             'fixed inset-0 flex w-screen items-center justify-center p-4'
           }
         >
-          <DialogPanel className={'px-6 py-8 text-sm card w-full max-w-lg'}>
-            <form name={'subject'} onSubmit={(e) => handleSubmit(e)}>
+          <DialogPanel className={'px-6 py-8 text-sm w-full max-w-lg dialog'}>
+            <form
+              name={'subject'}
+              onSubmit={(e) => handleSubmit(e, e.currentTarget.subject.value)}
+            >
               <div className={'flex flex-col gap-6 w-full'}>
                 <input
                   type={'text'}
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                  className={'input px-4 py-2 text-base'}
+                  name={'subject'}
+                  defaultValue={cardSubject}
+                  className={'px-4 py-2 text-base input'}
                   required={true}
                   data-autoFocus={true}
                 />

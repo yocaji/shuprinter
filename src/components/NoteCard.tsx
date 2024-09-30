@@ -54,12 +54,7 @@ function NoteCard({
     <Link
       to={'/track'}
       state={{ id: id, subject: cardSubject, content: content }}
-      className="p-4 w-full
-      outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-800
-      transition duration-300
-      hover:outline
-      focus:outline
-      active:scale-[.99] card"
+      className={'p-4 w-full active:scale-[.99] card'}
     >
       <div className="mb-2">
         <h3 className={'text-lg font-hand truncate'}>{cardSubject}</h3>
