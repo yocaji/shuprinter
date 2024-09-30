@@ -52,7 +52,7 @@ function NoteCard({
 
   return (
     <Link
-      to={'/page'}
+      to={'/track'}
       state={{ id: id, subject: cardSubject, content: content }}
       className="p-4 w-full
       outline-2 outline-offset-2 outline-amber-300 dark:outline-sky-800

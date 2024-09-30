@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.tsx';
-import Page from './pages/Page.tsx';
+import Track from './pages/Track.tsx';
 import News from './pages/News.tsx';
 import Bye from './pages/Bye.tsx';
 import NotFound from './pages/NotFound.tsx';
@@ -15,7 +15,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/page" element={<Page />} />
+        <Route path="/track" element={<Track />} />
         <Route path="/news" element={<News />} />
         <Route element={<ProtectedRoute isUser={isUser} />}>
           <Route path="/bye" element={<Bye />} />

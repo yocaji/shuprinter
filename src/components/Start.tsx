@@ -14,7 +14,7 @@ function Start() {
     e.preventDefault();
     const id = crypto.randomUUID();
     saveNoteLocal(id, subject, '');
-    navigate('/page', { state: { id, subject } });
+    navigate('/track', { state: { id, subject } });
   };
 
   return (

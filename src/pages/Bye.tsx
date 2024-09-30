@@ -16,15 +16,18 @@ function Bye() {
     const isConfirmed = window.confirm(`${currentUser.email} を削除しますか？`);
     if (!isConfirmed) return;
 
-    // TODO: ノートの削除に失敗した場合を考慮すること
-    await reAuth(currentUser)
-      .then(() => currentUser.delete())
-      .then(() => {
-        setIsDeleting(true);
-        deleteNotes(currentUser.uid);
-      })
-      .then(() => setIsDeleting(false))
-      .catch((e) => console.error(e));
+    try {
+      await reAuth(currentUser)
+        .then(() => currentUser.delete())
+        .then(() => {
+          setIsDeleting(true);
+          deleteNotes(currentUser.uid);
+        })
+        .then(() => setIsDeleting(false))
+        .catch((e) => console.error(e));
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
