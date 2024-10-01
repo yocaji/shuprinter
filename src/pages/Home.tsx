@@ -8,7 +8,11 @@ function Home() {
 
   return (
     <>
-      <div className="flex flex-col justify-between min-h-screen text-sky-800 dark:text-stone-300">
+      <div
+        className={
+          'flex flex-col justify-between min-h-svh text-sky-800 dark:text-stone-300'
+        }
+      >
         <div
           className={
             'px-4 py-12 bg-stone-50 dark:bg-slate-800 border-t-4 border-amber-300 font-hand'
@@ -16,7 +20,7 @@ function Home() {
         >
           <Start />
         </div>
-        <div className="px-4 py-6 grow flex bg-stone-100 dark:bg-slate-900">
+        <div className={'px-4 py-6 grow flex bg-stone-100 dark:bg-slate-900'}>
           {authContext?.currentUser ? <Notes /> : <div />}
         </div>
         <Footer />

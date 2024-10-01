@@ -41,7 +41,9 @@ function SubjectEditorDialogButton({
         onClose={() => setIsOpen(false)}
         className={'relative z-50'}
       >
-        <DialogBackdrop className={'fixed inset-0 bg-black/30'} />
+        <DialogBackdrop
+          className={'fixed inset-0 bg-black/30 dark:bg-white/20'}
+        />
         <div
           className={
             'fixed inset-0 flex w-screen items-center justify-center p-4'
