@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Oooh+Baby&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
@@ -10,7 +11,6 @@
 @layer components {
   .text {
     @apply
-    leading-relaxed
     text-sky-800 dark:text-stone-300
   }
 
@@ -100,10 +100,10 @@
   .textarea {
     @apply
     h-full px-4 py-2 bg-transparent
-    caret-amber-300 placeholder-stone-300 dark:placeholder-slate-700
+    caret-amber-400 dark:caret-amber-300 placeholder-stone-300 dark:placeholder-slate-700
     transition duration-300
     text-sky-800 dark:text-stone-300
-    text-base leading-loose md:text-lg md:leading-loose
+    text-lg leading-loose
     focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent
   }
 }

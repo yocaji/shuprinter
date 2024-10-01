@@ -9,7 +9,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Zen Maru Gothic', 'sans-serif'],
-        hand: ['Zen Kurenaido', 'sans-serif'],
+        hand: ['Klee One', 'Zen Kurenaido', 'sans-serif'],
         logo: ['Oooh Baby', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
