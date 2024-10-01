@@ -1,17 +1,11 @@
-import {
-  useState,
-  useRef,
-  useEffect,
-  KeyboardEvent,
-  FocusEvent,
-  ChangeEvent,
-} from 'react';
+import { useState, useRef, useEffect, ChangeEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 import Navbar from '../components/Navbar.tsx';
 import { saveNoteLocal } from '../hooks/localStorage.ts';
 import { upsertNote } from '../hooks/api.ts';
 import { SaveStatus } from '../types.ts';
+import InterruptedTextarea from '../components/InterruptedTextarea.tsx';
 
 function Track() {
   const location = useLocation();
@@ -33,38 +27,16 @@ function Track() {
     setSaveStatus('unsaved');
   };
 
-  const handleKeyDown = async (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Backspace' || e.key === 'Delete') {
-      e.preventDefault();
-      setContent(`${content}🐾`);
-      setSaveStatus('unsaved');
-    } else if (e.key === 'b' && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      handleReturn();
-    } else if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      setContent(`${content}🐾`);
-      setSaveStatus('unsaved');
-    } else if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
-      if (!authContext?.currentUser) return;
-      e.preventDefault();
-      setSaveStatus('saving');
-      const userId = authContext.currentUser.uid;
-      await upsertNote(noteIdRef.current, subjectRef.current, content, userId);
-      setSaveStatus('saved');
-    }
+  const handleUpsertNote = async () => {
+    if (!authContext?.currentUser) return;
+    const userId = authContext.currentUser.uid;
+    await upsertNote(noteIdRef.current, subjectRef.current, content, userId);
   };
 
   const handleReturn = () => {
     if (saveStatus === 'saved') return navigate('/');
     const isConfirmed = window.confirm('変更を保存せずに戻りますか？');
     if (isConfirmed) return navigate('/');
-  };
-
-  const moveCaretAtEnd = (e: FocusEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    e.target.value = '';
-    e.target.value = value;
   };
 
   return (
@@ -84,15 +56,16 @@ function Track() {
       >
         {subjectRef.current}
       </h2>
-      <textarea
-        value={content}
+      <InterruptedTextarea
+        content={content}
+        setContent={setContent}
+        setSaveStatus={setSaveStatus}
         onChange={handleContentChange}
-        onKeyDown={handleKeyDown}
-        onFocus={moveCaretAtEnd}
-        autoFocus={true}
-        placeholder="昔々あるところにおじいさんとおばあさんが住んでいました"
+        handleReturn={handleReturn}
+        handleUpsertNote={handleUpsertNote}
         className={'textarea font-hand grow w-full mx-auto max-w-screen-md'}
-      ></textarea>
+        placeholder="昔々あるところにおじいさんとおばあさんが住んでいました"
+      />
     </div>
   );
 }
