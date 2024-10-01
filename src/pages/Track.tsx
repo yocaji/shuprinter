@@ -40,7 +40,7 @@ function Track() {
   };
 
   return (
-    <div className={'flex flex-col h-svh bg-stone-100 dark:bg-slate-900'}>
+    <div className={'flex flex-col h-svh gap-2 bg-stone-100 dark:bg-slate-900'}>
       <Navbar
         saveStatus={saveStatus}
         setSaveStatus={setSaveStatus}
@@ -51,7 +51,7 @@ function Track() {
       />
       <h2
         className={
-          'text px-4 pb-3 mx-auto w-full max-w-screen-md text-lg md:text-xl font-hand'
+          'text px-4 mx-auto w-full max-w-screen-md text-xl leading-relaxed font-hand'
         }
       >
         {subjectRef.current}
@@ -63,7 +63,7 @@ function Track() {
         onChange={handleContentChange}
         handleReturn={handleReturn}
         handleUpsertNote={handleUpsertNote}
-        className={'textarea font-hand grow w-full mx-auto max-w-screen-md'}
+        className={'textarea grow w-full mx-auto max-w-screen-md font-hand'}
         placeholder="昔々あるところにおじいさんとおばあさんが住んでいました"
       />
     </div>
