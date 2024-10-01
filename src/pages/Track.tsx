@@ -1,4 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  KeyboardEvent,
+  FocusEvent,
+  ChangeEvent,
+} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 import Navbar from '../components/Navbar.tsx';
@@ -21,19 +28,23 @@ function Track() {
     saveNoteLocal(noteIdRef.current, subjectRef.current, content);
   }, [content]);
 
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
     setSaveStatus('unsaved');
   };
 
-  const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = async (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Backspace' || e.key === 'Delete') {
       e.preventDefault();
+      setContent(`${content}🐾`);
+      setSaveStatus('unsaved');
     } else if (e.key === 'b' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
       handleReturn();
     } else if (e.key === 'z' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
+      setContent(`${content}🐾`);
+      setSaveStatus('unsaved');
     } else if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
       if (!authContext?.currentUser) return;
       e.preventDefault();
@@ -50,7 +61,7 @@ function Track() {
     if (isConfirmed) return navigate('/');
   };
 
-  const moveCaretAtEnd = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+  const moveCaretAtEnd = (e: FocusEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     e.target.value = '';
     e.target.value = value;
@@ -80,9 +91,7 @@ function Track() {
         onFocus={moveCaretAtEnd}
         autoFocus={true}
         placeholder="昔々あるところにおじいさんとおばあさんが住んでいました"
-        className={
-          'textarea text-md md:text-lg font-hand grow w-full mx-auto max-w-screen-md'
-        }
+        className={'textarea font-hand grow w-full mx-auto max-w-screen-md'}
       ></textarea>
     </div>
   );
