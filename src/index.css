@@ -99,13 +99,11 @@
 
   .textarea {
     @apply
-    h-full p-4 bg-transparent
-    placeholder-stone-300 dark:placeholder-slate-700
-    ring-inset ring-amber-200 dark:ring-sky-900
+    h-full px-4 py-2 bg-transparent
+    caret-amber-300 placeholder-stone-300 dark:placeholder-slate-700
     transition duration-300
     text-sky-800 dark:text-stone-300
-    leading-loose md:leading-loose
-    hover:ring-2
-    focus:ring-2 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent
+    text-base leading-loose md:text-lg md:leading-loose
+    focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent
   }
 }
