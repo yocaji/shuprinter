@@ -44,7 +44,7 @@ function Start() {
           <button
             type={'submit'}
             disabled={!subject}
-            className={'btn btn-primary h-12 w-12 shrink-0'}
+            className={'btn btn-primary btn-lg h-12 w-12 shrink-0'}
           >
             <span className="i-ph-arrow-right" />
             <span className="sr-only">Start</span>

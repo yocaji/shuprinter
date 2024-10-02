@@ -66,16 +66,16 @@ function SubjectEditorDialogButton({
                 <div className={'flex justify-center gap-3'}>
                   <button
                     type={'button'}
-                    className={'btn btn-secondary px-3 py-1'}
+                    className={'btn btn-sm btn-secondary min-w-24'}
                     onClick={() => setIsOpen(false)}
                   >
-                    Close
+                    閉じる
                   </button>
                   <button
                     type={'submit'}
-                    className={'btn btn-secondary px-3 py-1'}
+                    className={'btn btn-sm btn-primary min-w-24'}
                   >
-                    Submit
+                    保存
                   </button>
                 </div>
               </div>
