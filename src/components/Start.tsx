@@ -21,7 +21,7 @@ function Start() {
     <>
       <h2
         className={
-          'mb-8 flex justify-center items-end gap-3 text-2xl md:text-3xl'
+          'mb-8 flex justify-center gap-2 md:gap-3 text-2xl md:text-3xl'
         }
       >
         <span className={'i-ph-feather-thin text-3xl md:text-4xl'} />
@@ -44,7 +44,7 @@ function Start() {
           <button
             type={'submit'}
             disabled={!subject}
-            className={'btn btn-primary btn-lg h-12 w-12 shrink-0'}
+            className={'btn btn-primary btn-lg w-12 shrink-0'}
           >
             <span className="i-ph-arrow-right" />
             <span className="sr-only">Start</span>

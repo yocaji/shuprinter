@@ -30,7 +30,7 @@ function SubjectEditorDialogButton({
   return (
     <>
       <button
-        className={'btn btn-secondary h-6 w-6 text-lg'}
+        className={'btn btn-on-card'}
         onClick={(e) => handleEditButtonClick(e)}
       >
         <span className={'i-ph-pencil-simple-line-light'} />
@@ -61,20 +61,18 @@ function SubjectEditorDialogButton({
                   defaultValue={cardSubject}
                   className={'px-4 py-2 text-base input'}
                   required={true}
+                  autoFocus={true}
                   data-autoFocus={true}
                 />
                 <div className={'flex justify-center gap-3'}>
                   <button
                     type={'button'}
-                    className={'btn btn-sm btn-secondary min-w-24'}
+                    className={'btn btn-secondary btn-sm'}
                     onClick={() => setIsOpen(false)}
                   >
                     閉じる
                   </button>
-                  <button
-                    type={'submit'}
-                    className={'btn btn-sm btn-primary min-w-24'}
-                  >
+                  <button type={'submit'} className={'btn btn-primary btn-sm'}>
                     保存
                   </button>
                 </div>

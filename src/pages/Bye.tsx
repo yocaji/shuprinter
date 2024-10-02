@@ -32,24 +32,17 @@ function Bye() {
 
   return (
     <>
-      <div className={'flex flex-col justify-between min-h-svh'}>
-        <div
-          className="p-4 grow bg-stone-100 dark:bg-slate-900
-          text-sky-800 dark:text-stone-300"
-        >
-          <div className={'mx-auto w-full max-w-screen-md'}>
+      <div className={'page'}>
+        <div className={'p-4 grow'}>
+          <div className={'mx-auto w-full max-w-screen-md space-y-4'}>
             <button
               onClick={() => navigate(-1)}
-              className={'btn btn-secondary h-10 w-10'}
+              className={'btn btn-secondary btn-md w-10'}
             >
               <span className={'i-ph-arrow-left text-lg'} />
               <span className={'sr-only'}>Back</span>
             </button>
-            <div
-              className="mt-4 px-6 md:px-9 py-9 rounded-lg
-              bg-white dark:bg-slate-800
-              border border-stone-200 dark:border-slate-700"
-            >
+            <div className={'sheet'}>
               <h2 className={'pb-4 text-xl font-medium'}>アカウントの削除</h2>
               <div className={'leading-relaxed'}>
                 <p className={'pb-4'}>
@@ -58,12 +51,13 @@ function Bye() {
                 <button
                   onClick={() => handleDeleteClick()}
                   disabled={isDeleting}
-                  className={'btn btn-md btn-danger'}
+                  className={'btn btn-md px-4 btn-danger'}
                 >
                   {isDeleting ? (
                     <div
-                      className="animate-spin size-4
-                        border-[2px] border-current border-t-transparent rounded-full text-rose-300"
+                      className={
+                        'spinner size-4 border-rose-300 border-t-transparent'
+                      }
                       role={'status'}
                       aria-label={'loading'}
                     >

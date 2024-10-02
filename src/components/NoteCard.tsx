@@ -54,16 +54,16 @@ function NoteCard({
     <Link
       to={'/track'}
       state={{ id: id, subject: cardSubject, content: content }}
-      className={'p-4 w-full active:scale-[.99] card'}
+      className={'card p-4 w-full active:scale-[.99] font-hand'}
     >
       <div className={'mb-2'}>
-        <h3 className={'text-lg font-hand truncate'}>{cardSubject}</h3>
+        <h3 className={'text-lg truncate'}>{cardSubject}</h3>
       </div>
       <div className={'flex justify-between items-end'}>
         <p className={'text-sm'}>
           {dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}
         </p>
-        <div className={'-mb-2 -me-1'}>
+        <div className={'-mb-2 -me-1 space-x-2'}>
           <SubjectEditorDialogButton
             cardSubject={cardSubject}
             setCardSubject={setCardSubject}
@@ -72,11 +72,7 @@ function NoteCard({
           <button
             type={'button'}
             onClick={(e) => handleDeleteClick(e, id)}
-            className="px-2 py-1 rounded-lg
-            outline-2 outline-offset-2 outline-amber-200 dark:outline-sky-950
-            transition duration-300
-            hover:bg-stone-100 dark:hover:bg-slate-800
-            focus:bg-stone-200 dark:focus:bg-sky-950 focus:outline"
+            className={'btn btn-on-card'}
           >
             <span className={'i-ph-trash-light'} />
           </button>

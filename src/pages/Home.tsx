@@ -8,16 +8,8 @@ function Home() {
 
   return (
     <>
-      <div
-        className={
-          'flex flex-col justify-between min-h-svh text-sky-800 dark:text-stone-300'
-        }
-      >
-        <div
-          className={
-            'px-4 py-12 bg-stone-50 dark:bg-slate-800 border-t-4 border-amber-300 font-hand'
-          }
-        >
+      <div className={'page'}>
+        <div className={'px-4 py-12 bg-stone-50 dark:bg-slate-800 font-hand'}>
           <Start />
         </div>
         <div className={'px-4 py-6 grow flex bg-stone-100 dark:bg-slate-900'}>

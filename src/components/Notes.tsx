@@ -31,16 +31,16 @@ function Notes() {
     <>
       {isLoading ? (
         <div
-          className="animate-spin size-6 m-auto
-            text-stone-300 dark:text-slate-700
-            border-4 border-current border-t-transparent rounded-full"
-          role="status"
-          aria-label="loading"
+          className={'spinner size-8'}
+          role={'status'}
+          aria-label={'loading'}
         >
-          <span className="sr-only">Loading...</span>
+          <span className={'sr-only'}>Loading...</span>
         </div>
       ) : (
-        <div className="my-6 mx-auto w-full max-w-screen-md flex flex-col gap-3">
+        <div
+          className={'my-6 mx-auto w-full max-w-screen-md flex flex-col gap-3'}
+        >
           {notes.map((note) => (
             <NoteCard
               key={note.id}
