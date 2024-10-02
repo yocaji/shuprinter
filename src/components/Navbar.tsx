@@ -65,7 +65,7 @@ function Navbar({
   };
 
   return (
-    <header className={'h-16 p-4 w-full max-w-screen-md mx-auto'}>
+    <header className={'p-4 w-full max-w-screen-md mx-auto'}>
       <div className={'flex justify-between gap-3'}>
         <button
           type={'button'}
