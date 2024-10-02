@@ -65,80 +65,73 @@ function Navbar({
   };
 
   return (
-    <header
-      className="w-full h-20 flex items-center
-      text-sky-800 dark:text-stone-300
-      bg-stone-100 dark:bg-slate-900 border-amber-300 border-t-4"
-    >
-      <div className={'px-4 w-full max-w-screen-md mx-auto'}>
-        <div className={'flex items-center justify-between gap-3'}>
-          <button
-            type={'button'}
-            onClick={handleReturnClick}
-            className={'btn btn-secondary h-10 w-10 shrink-0'}
-          >
-            <span className={'i-ph-arrow-left text-lg'} />
-            <span className={'sr-only'}>Back</span>
-          </button>
-          <div className={'flex items-center gap-3'}>
-            {isGuest ? (
-              <button
-                type={'button'}
-                onClick={handleLoginClick}
-                className={'btn btn-secondary px-3 h-10 text-sm font-normal'}
-              >
-                <span className={'i-ph-user-plus text-base'} />
-                ログインして保存する
-              </button>
-            ) : (
-              <button
-                type={'button'}
-                onClick={handleSaveClick}
-                disabled={saveStatus === 'saved' || saveStatus === 'saving'}
-                className={'btn btn-secondary px-3 h-10 text-sm font-normal'}
-              >
-                {saveStatus === 'unsaved' && (
-                  <>
-                    <span className={'i-ph-cloud-arrow-up text-base'} />
-                    保存する
-                  </>
-                )}
-                {saveStatus === 'saving' && (
-                  <div
-                    className="animate-spin size-4
-                  border-[2px] border-current border-t-transparent rounded-full text-stone-300"
-                    role={'status'}
-                    aria-label={'loading'}
-                  >
-                    <span className={'sr-only'}>Loading...</span>
-                  </div>
-                )}
-                {saveStatus === 'saved' && (
-                  <>
-                    <span className={'i-ph-check text-base'} />
-                    保存済み
-                  </>
-                )}
-              </button>
-            )}
+    <header className={'h-16 p-4 w-full max-w-screen-md mx-auto'}>
+      <div className={'flex justify-between gap-3'}>
+        <button
+          type={'button'}
+          onClick={handleReturnClick}
+          className={'btn btn-secondary btn-md w-10 shrink-0'}
+        >
+          <span className={'i-ph-arrow-left text-lg'} />
+          <span className={'sr-only'}>Back</span>
+        </button>
+        <div className={'space-x-3'}>
+          {isGuest ? (
             <button
               type={'button'}
-              onClick={handleCopyClick}
-              className={'btn btn-secondary h-10 w-10 shrink-0'}
+              onClick={handleLoginClick}
+              className={'btn btn-secondary btn-md px-4'}
             >
-              {isCopied ? (
+              <span className={'i-ph-user-plus text-lg'} />
+              ログインして保存する
+            </button>
+          ) : (
+            <button
+              type={'button'}
+              onClick={handleSaveClick}
+              disabled={saveStatus === 'saved' || saveStatus === 'saving'}
+              className={'btn btn-secondary btn-md w-32'}
+            >
+              {saveStatus === 'unsaved' && (
+                <>
+                  <span className={'i-ph-cloud-arrow-up text-lg'} />
+                  保存する
+                </>
+              )}
+              {saveStatus === 'saving' && (
+                <div
+                  className={'spinner size-4'}
+                  role={'status'}
+                  aria-label={'loading'}
+                >
+                  <span className={'sr-only'}>Loading...</span>
+                </div>
+              )}
+              {saveStatus === 'saved' && (
                 <>
                   <span className={'i-ph-check text-lg'} />
-                  <span className={'sr-only'}>Copied</span>
-                </>
-              ) : (
-                <>
-                  <span className={'i-ph-clipboard text-lg'} />
-                  <span className={'sr-only'}>Copy</span>
+                  保存済み
                 </>
               )}
             </button>
-          </div>
+          )}
+          <button
+            type={'button'}
+            onClick={handleCopyClick}
+            className={'btn btn-secondary btn-md w-10 shrink-0'}
+          >
+            {isCopied ? (
+              <>
+                <span className={'i-ph-check text-lg'} />
+                <span className={'sr-only'}>Copied</span>
+              </>
+            ) : (
+              <>
+                <span className={'i-ph-clipboard text-lg'} />
+                <span className={'sr-only'}>Copy</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
     </header>

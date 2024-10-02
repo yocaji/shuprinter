@@ -9,6 +9,13 @@
 @tailwind utilities;
 
 @layer components {
+  .page {
+    @apply
+    flex flex-col justify-between min-h-svh
+    bg-stone-100 dark:bg-slate-900 text-sky-800 dark:text-stone-300
+    border-t-4 border-amber-300
+  }
+
   .text {
     @apply
     text-sky-800 dark:text-stone-300
@@ -27,17 +34,17 @@
 
   .btn-lg {
     @apply
-    text-xl
+    h-12 text-xl
   }
 
   .btn-md {
     @apply
-    px-5 py-3 text-sm
+    h-10 text-sm
   }
 
   .btn-sm {
     @apply
-    px-3 py-2 text-sm
+    h-8 px-4 min-w-24 text-sm
   }
 
   .btn-primary {
@@ -67,7 +74,16 @@
     focus:bg-rose-200 dark:focus:bg-rose-800
   }
 
-  .btn-footer {
+  .btn-on-card {
+    @apply
+    rounded-lg w-8 h-8 shrink-0 text-xl
+    outline-amber-300 outline-offset-0
+    bg-stone-100 dark:bg-slate-900
+    hover:bg-amber-200 dark:hover:bg-amber-400 dark:hover:text-sky-800 hover:outline-none dark:hover:outline-none
+    focus:bg-amber-300 dark:focus:bg-amber-300 dark:focus:text-sky-800 focus:outline-none dark:focus:outline-none
+  }
+
+  .btn-on-footer {
     @apply
     outline-amber-300
     hover:bg-stone-100 dark:hover:bg-slate-900 hover:outline-none
@@ -93,14 +109,21 @@
     bg-stone-50 dark:bg-slate-800
   }
 
+  .sheet {
+    @apply
+    px-6 md:px-9 py-9 rounded-lg
+    bg-white dark:bg-slate-800
+    border border-stone-200 dark:border-slate-700
+  }
+
   .input {
     @apply
     w-full rounded-full
     border border-stone-200 dark:border-slate-700
     bg-white dark:bg-slate-900
     font-hand
-    placeholder-stone-300 dark:placeholder-slate-700
-    ring-inset ring-yellow-400/50
+    caret-amber-400 dark:caret-amber-300 placeholder-stone-300 dark:placeholder-slate-700
+    ring-inset ring-yellow-400
     transition duration-300
     hover:ring-2
     focus:ring-2 focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent
@@ -114,5 +137,11 @@
     text-sky-800 dark:text-stone-300
     text-lg leading-loose
     focus:outline-none focus:placeholder-transparent dark:focus:placeholder-transparent
+  }
+
+  .spinner {
+    @apply
+    animate-spin m-auto rounded-full
+    border-2 border-stone-300 dark:border-slate-700 border-t-transparent dark:border-t-transparent
   }
 }

@@ -34,7 +34,7 @@ function ThemeSwitcher() {
     <>
       {theme === 'light' ? (
         <button
-          className={'btn btn-footer w-8 h-8 text-xl'}
+          className={'btn btn-on-footer w-8 h-8 text-xl'}
           onClick={(e) => handleToggleTheme(e, 'dark')}
         >
           <span className="i-ph-moon" />
@@ -42,7 +42,7 @@ function ThemeSwitcher() {
         </button>
       ) : (
         <button
-          className={'btn btn-footer w-8 h-8 text-xl'}
+          className={'btn btn-on-footer w-8 h-8 text-xl'}
           onClick={(e) => handleToggleTheme(e, 'light')}
         >
           <span className="i-ph-sun" />

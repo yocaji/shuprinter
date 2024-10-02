@@ -16,7 +16,9 @@ function LoginStatus() {
     return (
       <div className={'flex items-center gap-1'}>
         <button
-          className={'btn btn-md btn-footer bg-stone-50 dark:bg-slate-900/50'}
+          className={
+            'btn btn-md btn-on-footer px-4 bg-stone-50 dark:bg-slate-900/50'
+          }
           onClick={login}
         >
           ログイン
@@ -33,10 +35,10 @@ function LoginStatus() {
         src={currentUser.photoURL ?? undefined}
         alt={currentUser.displayName ?? undefined}
       />
-      <button className={'btn btn-footer px-3 py-1'} onClick={logout}>
+      <button className={'btn btn-on-footer px-3 py-1'} onClick={logout}>
         ログアウト
       </button>
-      <Link to={'/bye'} className={'btn btn-footer px-3 py-1'}>
+      <Link to={'/bye'} className={'btn btn-on-footer px-3 py-1'}>
         アカウント削除
       </Link>
       <ThemeSwitcher />

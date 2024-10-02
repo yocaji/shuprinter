@@ -40,7 +40,7 @@ function Track() {
   };
 
   return (
-    <div className={'flex flex-col h-svh gap-2 bg-stone-100 dark:bg-slate-900'}>
+    <div className={'page'}>
       <Navbar
         saveStatus={saveStatus}
         setSaveStatus={setSaveStatus}
