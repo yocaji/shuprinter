@@ -39,7 +39,9 @@ function Notes() {
         </div>
       ) : (
         <div
-          className={'my-6 mx-auto w-full max-w-screen-md flex flex-col gap-3'}
+          className={
+            'mx-auto md:py-4 w-full max-w-screen-md flex flex-col gap-4'
+          }
         >
           {notes.map((note) => (
             <NoteCard
