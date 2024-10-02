@@ -32,9 +32,9 @@ function Bye() {
 
   return (
     <>
-      <div className={'flex flex-col justify-between min-h-screen'}>
+      <div className={'flex flex-col justify-between min-h-svh'}>
         <div
-          className="px-4 pb-12 grow flex items-center bg-stone-100 dark:bg-slate-900
+          className="p-4 grow bg-stone-100 dark:bg-slate-900
           text-sky-800 dark:text-stone-300"
         >
           <div className={'mx-auto w-full max-w-screen-md'}>
@@ -46,7 +46,7 @@ function Bye() {
               <span className={'sr-only'}>Back</span>
             </button>
             <div
-              className="px-6 md:px-9 py-9 mt-3 rounded-lg
+              className="mt-4 px-6 md:px-9 py-9 rounded-lg
               bg-white dark:bg-slate-800
               border border-stone-200 dark:border-slate-700"
             >
