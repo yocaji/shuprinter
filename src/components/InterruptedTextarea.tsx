@@ -1,7 +1,7 @@
 import {
   useEffect,
-  useRef,
   useState,
+  useRef,
   ChangeEvent,
   KeyboardEvent,
   ComponentProps,
@@ -10,6 +10,7 @@ import {
 import { SaveStatus } from '../types';
 
 type TextareaProps = ComponentProps<'textarea'> & {
+  content: string;
   setContent: (content: string) => void;
   setSaveStatus: (status: SaveStatus) => void;
   handleReturn: () => void;
@@ -20,36 +21,38 @@ const InterruptedTextarea: FC<TextareaProps> = (props) => {
     content,
     setContent,
     setSaveStatus,
-    onChange,
     handleReturn,
     handleUpsertNote,
     ...rest
   } = props;
+
   const [cursor, setCursor] = useState<number>(0);
-  const ref = useRef<HTMLTextAreaElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const isComposingRef = useRef<boolean>(false);
 
   useEffect(() => {
-    ref.current?.setSelectionRange(cursor, cursor);
-  }, [ref, cursor, content]);
+    if (isComposingRef.current) return;
+    textAreaRef.current?.setSelectionRange(cursor, cursor);
+  }, [textAreaRef, cursor]);
 
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+    setSaveStatus('unsaved');
     setCursor(e.target.selectionEnd);
-    onChange?.(e);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (isComposingRef.current) return;
     if (
       e.key === 'Backspace' ||
       e.key === 'Delete' ||
       (e.key === 'z' && (e.metaKey || e.ctrlKey))
     ) {
       e.preventDefault();
-      const caretPosition = ref.current?.selectionEnd || 0;
-      const currentValue = e.currentTarget.value;
-      const before = currentValue.slice(0, caretPosition);
-      const after = currentValue.slice(caretPosition);
+      const caretPosition = e.currentTarget.selectionEnd || 0;
+      const before = content?.slice(0, caretPosition);
+      const after = content?.slice(caretPosition);
       const newValue = `${before}🐾${after}`;
-      e.currentTarget.value = newValue;
       setContent(newValue);
       setCursor(caretPosition + 2);
       setSaveStatus('unsaved');
@@ -66,10 +69,12 @@ const InterruptedTextarea: FC<TextareaProps> = (props) => {
 
   return (
     <textarea
-      ref={ref}
-      defaultValue={content}
-      onChange={(e) => handleChange(e)}
+      ref={textAreaRef}
+      value={content}
+      onChange={(e) => handleContentChange(e)}
       onKeyDown={(e) => handleKeyDown(e)}
+      onCompositionStart={() => (isComposingRef.current = true)}
+      onCompositionEnd={() => (isComposingRef.current = false)}
       onFocus={() => setCursor(-1)}
       autoFocus={true}
       {...rest}

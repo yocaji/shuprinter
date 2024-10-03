@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, ChangeEvent } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContextConsumer } from '../contexts/AuthContext.tsx';
 import Navbar from '../components/Navbar.tsx';
@@ -21,11 +21,6 @@ function Track() {
   useEffect(() => {
     saveNoteLocal(noteIdRef.current, subjectRef.current, content);
   }, [content]);
-
-  const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
-    setSaveStatus('unsaved');
-  };
 
   const handleUpsertNote = async () => {
     if (!authContext?.currentUser) return;
@@ -60,7 +55,6 @@ function Track() {
         content={content}
         setContent={setContent}
         setSaveStatus={setSaveStatus}
-        onChange={handleContentChange}
         handleReturn={handleReturn}
         handleUpsertNote={handleUpsertNote}
         className={'textarea grow w-full mx-auto max-w-screen-md font-hand'}
