@@ -1,4 +1,4 @@
-import { useState, MouseEvent, FormEvent } from 'react';
+import { useState, MouseEvent, FormEvent, useEffect, useRef } from 'react';
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
 
 interface SubjectEditorDialogButtonProps {
@@ -13,6 +13,11 @@ function SubjectEditorDialogButton({
   handleSubjectSubmit,
 }: SubjectEditorDialogButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [isOpen]);
 
   const handleEditButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -56,12 +61,12 @@ function SubjectEditorDialogButton({
             >
               <div className={'flex flex-col gap-6 w-full'}>
                 <input
+                  ref={inputRef}
                   type={'text'}
                   name={'subject'}
                   defaultValue={cardSubject}
                   className={'px-4 py-2 text-base input'}
                   required={true}
-                  data-autofocus={true}
                 />
                 <div className={'flex justify-center gap-3'}>
                   <button
