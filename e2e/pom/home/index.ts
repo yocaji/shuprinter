@@ -51,6 +51,10 @@ export class Footer {
     this.githubLink = page.getByRole('link', { name: 'GitHub' });
   }
 
+  async clickLoginButton(page: Page): Promise<Page> {
+    await this.loginButton.click();
+    return page.waitForEvent('popup');
+  }
   async clickDarkModeButton() {
     await this.darkModeButton.click();
   }
@@ -63,7 +67,8 @@ export class Footer {
   async clickTermsLink() {
     await this.termsLink.click();
   }
-  async clickGitHubLink() {
+  async clickGitHubLink(page: Page): Promise<Page> {
     await this.githubLink.click();
+    return page.waitForEvent('popup');
   }
 }

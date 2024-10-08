@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../home';
+import { HomePage } from '../pom/home';
 
 let homePage: HomePage;
 
@@ -72,6 +72,11 @@ test.describe('フッター', () => {
   });
 
   test.describe('機能と遷移', () => {
+    test('ログインボタンをクリックするとGoogleログインのポップアップウィンドウが表示されること', async () => {
+      const popup = await homePage.footer.clickLoginButton(homePage.page);
+      await expect(popup).toHaveURL(/accounts.google.com/);
+    });
+
     test('ダークモードへの切り替えボタンをクリックするとダークモードになること', async () => {
       await homePage.footer.clickDarkModeButton();
       // 何をもってダークモードになったと判定するか要検討
@@ -95,9 +100,8 @@ test.describe('フッター', () => {
     });
 
     test('GitHubへのリンクをクリックするとGitHubページに遷移すること', async () => {
-      await homePage.footer.clickGitHubLink();
-      // prettier-ignore
-      await expect(homePage.page).toHaveURL('https://github.com/yocaji/shuprinter');
+      const newPage = await homePage.footer.clickGitHubLink(homePage.page);
+      await expect(newPage).toHaveURL('https://github.com/yocaji/shuprinter');
     });
   });
 });
