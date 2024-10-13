@@ -64,22 +64,6 @@ export class Footer {
     return page.waitForEvent('popup');
   }
 
-  async clickDarkModeButton() {
-    await this.darkModeButton.click();
-  }
-
-  async clickLightModeButton() {
-    await this.lightModeButton.click();
-  }
-
-  async clickLogoLink() {
-    await this.logoLink.click();
-  }
-
-  async clickTermsLink() {
-    await this.termsLink.click();
-  }
-
   async clickGitHubLink(page: Page): Promise<Page> {
     await this.githubLink.click();
     return page.waitForEvent('popup');

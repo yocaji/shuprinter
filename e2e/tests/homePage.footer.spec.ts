@@ -39,7 +39,7 @@ test.describe('初期表示', () => {
 });
 
 test.describe('機能と遷移', () => {
-  test('ログインボタンをクリックするとGoogleログインのポップアップウィンドウが表示されること', async ({
+  test('ログインボタンをクリックするとGoogleログインのポップアップが表示されること', async ({
     homePage,
   }) => {
     const popup = await homePage.footer.clickLoginButton(homePage.page);
@@ -51,7 +51,7 @@ test.describe('機能と遷移', () => {
   test('ダークモードへの切り替えボタンをクリックするとダークモードになること', async ({
     homePage,
   }) => {
-    await homePage.footer.clickDarkModeButton();
+    await homePage.footer.darkModeButton.click();
     // 何をもってダークモードになったと判定するか要検討
     await expect(homePage.htmlTag).toHaveClass('dark');
   });
@@ -59,22 +59,22 @@ test.describe('機能と遷移', () => {
   test('ライトモードへの切り替えボタンをクリックするとライトモードになること', async ({
     homePage,
   }) => {
-    await homePage.footer.clickDarkModeButton();
-    await homePage.footer.clickLightModeButton();
+    await homePage.footer.darkModeButton.click();
+    await homePage.footer.lightModeButton.click();
     await expect(homePage.htmlTag).not.toHaveClass('dark');
   });
 
   test('ロゴをクリックするとトップページに遷移すること', async ({
     homePage,
   }) => {
-    await homePage.footer.clickLogoLink();
+    await homePage.footer.logoLink.click();
     await expect(homePage.page).toHaveURL('/');
   });
 
   test('規約とポリシーへのリンクをクリックすると規約とポリシーページに遷移すること', async ({
     homePage,
   }) => {
-    await homePage.footer.clickTermsLink();
+    await homePage.footer.termsLink.click();
     await expect(homePage.page).toHaveURL('/terms');
   });
 
