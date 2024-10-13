@@ -36,6 +36,9 @@ export class Main {
 
 export class Footer {
   readonly loginButton: Locator;
+  readonly logoutButton: Locator;
+  readonly userIcon: Locator;
+  readonly deleteAccountLink: Locator;
   readonly darkModeButton: Locator;
   readonly lightModeButton: Locator;
   readonly logoLink: Locator;
@@ -44,6 +47,11 @@ export class Footer {
 
   constructor(page: Page) {
     this.loginButton = page.getByRole('button', { name: 'ログイン' });
+    this.logoutButton = page.getByRole('button', { name: 'ログアウト' });
+    this.userIcon = page.getByTestId('user-icon');
+    this.deleteAccountLink = page.getByRole('link', {
+      name: 'アカウント削除',
+    });
     this.darkModeButton = page.getByRole('button', { name: 'Dark mode' });
     this.lightModeButton = page.getByRole('button', { name: 'Light mode' });
     this.logoLink = page.getByText('Shuprinter');
@@ -55,18 +63,23 @@ export class Footer {
     await this.loginButton.click();
     return page.waitForEvent('popup');
   }
+
   async clickDarkModeButton() {
     await this.darkModeButton.click();
   }
+
   async clickLightModeButton() {
     await this.lightModeButton.click();
   }
+
   async clickLogoLink() {
     await this.logoLink.click();
   }
+
   async clickTermsLink() {
     await this.termsLink.click();
   }
+
   async clickGitHubLink(page: Page): Promise<Page> {
     await this.githubLink.click();
     return page.waitForEvent('popup');

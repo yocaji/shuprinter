@@ -34,6 +34,7 @@ function LoginStatus() {
         className={'me-2 size-[32px] rounded-full'}
         src={currentUser.photoURL ?? undefined}
         alt={currentUser.displayName ?? undefined}
+        data-testid={'user-icon'}
       />
       <button className={'btn btn-on-footer px-3 py-1'} onClick={logout}>
         ログアウト
