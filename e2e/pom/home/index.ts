@@ -23,16 +23,16 @@ export class HomePage {
 }
 
 export class Starting {
-  readonly self: Locator;
+  readonly area: Locator;
   readonly prompt: Locator;
   readonly textbox: Locator;
   readonly startButton: Locator;
 
   constructor(page: Page) {
-    this.self = page.locator('main');
-    this.prompt = this.self.getByTestId('prompt');
-    this.textbox = this.self.getByRole('textbox');
-    this.startButton = this.self.getByRole('button', { name: 'Start' });
+    this.area = page.locator('main');
+    this.prompt = this.area.getByTestId('prompt');
+    this.textbox = this.area.getByRole('textbox');
+    this.startButton = this.area.getByRole('button', { name: 'Start' });
   }
 
   async inputSubject(subject: string) {
@@ -41,12 +41,12 @@ export class Starting {
 }
 
 export class Notes {
-  readonly self: Locator;
+  readonly area: Locator;
   readonly notes: Locator;
 
   constructor(page: Page) {
-    this.self = page.getByTestId('notes');
-    this.notes = this.self.getByRole('listitem');
+    this.area = page.getByTestId('notes');
+    this.notes = this.area.getByRole('listitem');
   }
 
   async getNotesCount(): Promise<number> {
@@ -75,21 +75,21 @@ export class Notes {
 }
 
 export class EditSubjectDialog {
-  readonly self: Locator;
-  readonly input: Locator;
+  readonly area: Locator;
+  readonly textbox: Locator;
   readonly cancelButton: Locator;
   readonly saveButton: Locator;
 
   constructor(page: Page) {
-    this.self = page.locator('[id^=headlessui-dialog-panel-]');
-    this.input = this.self.getByRole('textbox');
-    this.cancelButton = this.self.getByRole('button', { name: '閉じる' });
-    this.saveButton = this.self.getByRole('button', { name: '保存' });
+    this.area = page.locator('[id^=headlessui-dialog-panel-]');
+    this.textbox = this.area.getByRole('textbox');
+    this.cancelButton = this.area.getByRole('button', { name: '閉じる' });
+    this.saveButton = this.area.getByRole('button', { name: '保存' });
   }
 }
 
 export class Footer {
-  readonly self: Locator;
+  readonly area: Locator;
   readonly loginButton: Locator;
   readonly logoutButton: Locator;
   readonly userIcon: Locator;
@@ -101,20 +101,20 @@ export class Footer {
   readonly githubLink: Locator;
 
   constructor(page: Page) {
-    this.self = page.locator('footer');
-    this.loginButton = this.self.getByRole('button', { name: 'ログイン' });
-    this.logoutButton = this.self.getByRole('button', { name: 'ログアウト' });
-    this.userIcon = this.self.getByTestId('user-icon');
-    this.deleteAccountLink = this.self.getByRole('link', {
+    this.area = page.locator('footer');
+    this.loginButton = this.area.getByRole('button', { name: 'ログイン' });
+    this.logoutButton = this.area.getByRole('button', { name: 'ログアウト' });
+    this.userIcon = this.area.getByTestId('user-icon');
+    this.deleteAccountLink = this.area.getByRole('link', {
       name: 'アカウント削除',
     });
-    this.darkModeButton = this.self.getByRole('button', { name: 'Dark mode' });
-    this.lightModeButton = this.self.getByRole('button', {
+    this.darkModeButton = this.area.getByRole('button', { name: 'Dark mode' });
+    this.lightModeButton = this.area.getByRole('button', {
       name: 'Light mode',
     });
-    this.logoLink = this.self.getByText('Shuprinter');
-    this.termsLink = this.self.getByRole('link', { name: '規約とポリシー' });
-    this.githubLink = this.self.getByRole('link', { name: 'GitHub' });
+    this.logoLink = this.area.getByText('Shuprinter');
+    this.termsLink = this.area.getByRole('link', { name: '規約とポリシー' });
+    this.githubLink = this.area.getByRole('link', { name: 'GitHub' });
   }
 
   async clickLoginButton(page: Page): Promise<Page> {

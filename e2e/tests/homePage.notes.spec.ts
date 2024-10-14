@@ -3,10 +3,10 @@ import { test, expect } from '../extendedTest';
 test.describe('表示', async () => {
   test.beforeEach(async ({ homePage, auth }) => {
     await auth.login(homePage.page);
-    await homePage.notes.self.waitFor();
+    await homePage.notes.area.waitFor();
   });
 
-  test('メモが3件表示されること', async ({ homePage, auth }) => {
+  test('メモが3件表示されること', async ({ homePage }) => {
     expect(await homePage.notes.getNotesCount()).toBe(3);
   });
 
@@ -38,12 +38,10 @@ test.describe('表示', async () => {
 test.describe('機能と遷移', () => {
   test.beforeEach(async ({ homePage, auth }) => {
     await auth.login(homePage.page);
-    await homePage.notes.self.waitFor();
+    await homePage.notes.area.waitFor();
   });
 
-  test('メモをクリックするとメモ編集ページに遷移すること', async ({
-    homePage,
-  }) => {
+  test('メモをクリックするとTrack画面に遷移すること', async ({ homePage }) => {
     await homePage.notes.note(1).click();
     await expect(homePage.page).toHaveURL('/track');
   });
@@ -52,7 +50,7 @@ test.describe('機能と遷移', () => {
     homePage,
   }) => {
     await homePage.notes.editSubjectButton(0).click();
-    await expect(homePage.editSubjectDialog.self).toBeVisible();
+    await expect(homePage.editSubjectDialog.area).toBeVisible();
   });
 
   test('メモの削除ボタンをクリックするとメモ削除確認ダイアログが表示されること', async ({

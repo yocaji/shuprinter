@@ -22,10 +22,10 @@ export class ByePage {
 }
 
 export class Header {
-  readonly returnButton: Locator;
+  readonly backButton: Locator;
 
   constructor(page: Page) {
-    this.returnButton = page.getByRole('button', { name: 'Back' });
+    this.backButton = page.getByRole('button', { name: 'Back' });
   }
 }
 

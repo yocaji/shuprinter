@@ -2,7 +2,7 @@ import { test, expect } from '../extendedTest';
 
 test.beforeEach(async ({ homePage, auth }) => {
   await auth.login(homePage.page);
-  await homePage.notes.self.waitFor();
+  await homePage.notes.area.waitFor();
   await homePage.notes.editSubjectButton(0).click();
 });
 
@@ -25,7 +25,7 @@ test.describe('機能と遷移', () => {
     homePage,
   }) => {
     await homePage.editSubjectDialog.cancelButton.click();
-    await expect(homePage.editSubjectDialog.self).not.toBeVisible();
+    await expect(homePage.editSubjectDialog.area).not.toBeVisible();
   });
 
   test('Subject編集後に閉じるボタンをクリックすると編集前のSubjectが表示されること', async ({

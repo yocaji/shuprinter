@@ -7,7 +7,7 @@ test.describe('初期表示', async () => {
   });
 
   test('戻るボタンが表示されていること', async ({ byePage }) => {
-    await expect(byePage.header.returnButton).toBeVisible();
+    await expect(byePage.header.backButton).toBeVisible();
   });
 
   test('見出しが表示されていること', async ({ byePage, auth }) => {
@@ -36,7 +36,7 @@ test.describe('機能と遷移', () => {
   test('戻るボタンをクリックするとトップページに遷移すること', async ({
     byePage,
   }) => {
-    await byePage.header.returnButton.click();
+    await byePage.header.backButton.click();
     await expect(byePage.page).toHaveURL('/');
   });
 
@@ -44,9 +44,8 @@ test.describe('機能と遷移', () => {
     byePage,
   }) => {
     byePage.page.on('dialog', async (dialog) => {
-      expect(dialog.message()).toBe(
-        'yocaji@stone.sakura.ne.jp を削除しますか？',
-      );
+      expect(dialog.message()).toBe('shuprinter.qa@gmail.com を削除しますか？');
+      await dialog.dismiss();
     });
     await byePage.main.deleteButton.click();
   });
