@@ -3,13 +3,17 @@ import { type Page, type Locator } from '@playwright/test';
 export class HomePage {
   readonly page: Page;
   readonly htmlTag: Locator;
-  readonly main: Main;
+  readonly starting: Starting;
+  readonly notes: Notes;
+  readonly editSubjectDialog: EditSubjectDialog;
   readonly footer: Footer;
 
   constructor(page: Page) {
     this.page = page;
     this.htmlTag = page.locator('html');
-    this.main = new Main(page);
+    this.starting = new Starting(page);
+    this.notes = new Notes(page);
+    this.editSubjectDialog = new EditSubjectDialog(page);
     this.footer = new Footer(page);
   }
 
@@ -18,15 +22,17 @@ export class HomePage {
   }
 }
 
-export class Main {
+export class Starting {
+  readonly self: Locator;
   readonly prompt: Locator;
   readonly textbox: Locator;
   readonly startButton: Locator;
 
   constructor(page: Page) {
-    this.prompt = page.getByTestId('prompt');
-    this.textbox = page.getByRole('textbox');
-    this.startButton = page.getByRole('button', { name: 'Start' });
+    this.self = page.locator('main');
+    this.prompt = this.self.getByTestId('prompt');
+    this.textbox = this.self.getByRole('textbox');
+    this.startButton = this.self.getByRole('button', { name: 'Start' });
   }
 
   async inputSubject(subject: string) {
@@ -34,7 +40,56 @@ export class Main {
   }
 }
 
+export class Notes {
+  readonly self: Locator;
+  readonly notes: Locator;
+
+  constructor(page: Page) {
+    this.self = page.getByTestId('notes');
+    this.notes = this.self.getByRole('listitem');
+  }
+
+  async getNotesCount(): Promise<number> {
+    return await this.notes.count();
+  }
+
+  note(i: number): Locator {
+    return this.notes.nth(i);
+  }
+
+  subject(i: number): Locator {
+    return this.notes.nth(i).getByRole('heading');
+  }
+
+  updatedAt(i: number): Locator {
+    return this.notes.nth(i).getByTestId('updated-at');
+  }
+
+  editSubjectButton(i: number): Locator {
+    return this.notes.nth(i).getByRole('button', { name: 'Edit title' });
+  }
+
+  deleteNoteButton(i: number): Locator {
+    return this.notes.nth(i).getByRole('button', { name: 'Delete this note' });
+  }
+}
+
+export class EditSubjectDialog {
+  readonly self: Locator;
+  readonly input: Locator;
+  readonly cancelButton: Locator;
+  readonly saveButton: Locator;
+
+  constructor(page: Page) {
+    this.self = page.locator('[id^=headlessui-dialog-panel-]');
+    this.input = this.self.getByRole('textbox');
+    this.cancelButton = this.self.getByRole('button', { name: '閉じる' });
+    this.saveButton = this.self.getByRole('button', { name: '保存' });
+  }
+}
+
 export class Footer {
+  readonly self: Locator;
   readonly loginButton: Locator;
   readonly logoutButton: Locator;
   readonly userIcon: Locator;
@@ -46,17 +101,20 @@ export class Footer {
   readonly githubLink: Locator;
 
   constructor(page: Page) {
-    this.loginButton = page.getByRole('button', { name: 'ログイン' });
-    this.logoutButton = page.getByRole('button', { name: 'ログアウト' });
-    this.userIcon = page.getByTestId('user-icon');
-    this.deleteAccountLink = page.getByRole('link', {
+    this.self = page.locator('footer');
+    this.loginButton = this.self.getByRole('button', { name: 'ログイン' });
+    this.logoutButton = this.self.getByRole('button', { name: 'ログアウト' });
+    this.userIcon = this.self.getByTestId('user-icon');
+    this.deleteAccountLink = this.self.getByRole('link', {
       name: 'アカウント削除',
     });
-    this.darkModeButton = page.getByRole('button', { name: 'Dark mode' });
-    this.lightModeButton = page.getByRole('button', { name: 'Light mode' });
-    this.logoLink = page.getByText('Shuprinter');
-    this.termsLink = page.getByRole('link', { name: '規約とポリシー' });
-    this.githubLink = page.getByRole('link', { name: 'GitHub' });
+    this.darkModeButton = this.self.getByRole('button', { name: 'Dark mode' });
+    this.lightModeButton = this.self.getByRole('button', {
+      name: 'Light mode',
+    });
+    this.logoLink = this.self.getByText('Shuprinter');
+    this.termsLink = this.self.getByRole('link', { name: '規約とポリシー' });
+    this.githubLink = this.self.getByRole('link', { name: 'GitHub' });
   }
 
   async clickLoginButton(page: Page): Promise<Page> {
