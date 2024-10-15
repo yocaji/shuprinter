@@ -1,21 +1,16 @@
 import { test, expect } from '../extendedTest';
 
-test.beforeEach(async ({ homePage, auth }) => {
-  await auth.login(homePage.page);
-  await homePage.starting.textbox.fill('星めぐりの歌');
-  await homePage.starting.startButton.click();
-});
-
 test.describe('表示', () => {
+  test.beforeEach(async ({ homePageAuthed }) => {
+    await homePageAuthed.notes.note(0).click();
+  });
+
   test('戻るボタンが表示されること', async ({ trackPage }) => {
     await expect(trackPage.header.backButton).toBeVisible();
   });
 
-  test('保存ボタンが 1) 表示されること 2) ラベルが「保存する」であること', async ({
-    trackPage,
-  }) => {
+  test('保存ボタンが表示されること', async ({ trackPage }) => {
     await expect(trackPage.header.saveButton).toBeVisible();
-    await expect(trackPage.header.saveButton).toHaveText('保存する');
   });
 
   test('ログインボタンが表示されないこと', async ({ trackPage }) => {
@@ -28,13 +23,16 @@ test.describe('表示', () => {
 });
 
 test.describe('機能と遷移', () => {
+  test.beforeEach(async ({ homePageAuthed }) => {
+    await homePageAuthed.notes.area
+      .getByText('Loading...')
+      .waitFor({ state: 'hidden' });
+    await homePageAuthed.notes.note(0).click();
+  });
+
   test('保存済みの状態で戻るボタンをクリックすると、Home画面に遷移すること', async ({
     trackPage,
   }) => {
-    await trackPage.header.saveButton.click();
-    await trackPage.header.saveButton
-      .getByText('保存済み')
-      .waitFor({ timeout: 20000 });
     await trackPage.header.backButton.click();
     await expect(trackPage.page).toHaveURL('/');
   });
@@ -46,6 +44,8 @@ test.describe('機能と遷移', () => {
       expect(dialog.message()).toBe('変更を保存せずに戻りますか？');
       await dialog.dismiss();
     });
+    await trackPage.editor.textarea.fill('星めぐりの歌');
+    await trackPage.header.saveButton.getByText('保存する').waitFor();
     await trackPage.header.backButton.click();
   });
 
@@ -53,6 +53,8 @@ test.describe('機能と遷移', () => {
     trackPage,
   }) => {
     trackPage.page.on('dialog', (dialog) => dialog.dismiss());
+    await trackPage.editor.textarea.press('@');
+    await trackPage.header.saveButton.getByText('保存する').waitFor();
     await trackPage.header.backButton.click();
     await expect(trackPage.page).toHaveURL('/track');
   });
@@ -61,6 +63,8 @@ test.describe('機能と遷移', () => {
     trackPage,
   }) => {
     trackPage.page.on('dialog', (dialog) => dialog.accept());
+    await trackPage.editor.textarea.press('@');
+    await trackPage.header.saveButton.getByText('保存する').waitFor();
     await trackPage.header.backButton.click();
     await expect(trackPage.page).toHaveURL('/');
   });
@@ -68,6 +72,8 @@ test.describe('機能と遷移', () => {
   test('保存ボタンをクリックすると 1) 保存ボタンのラベルが「Loading...」となること 2) 非活性となること', async ({
     trackPage,
   }) => {
+    await trackPage.editor.textarea.press('@');
+    await trackPage.header.saveButton.getByText('保存する').waitFor();
     await trackPage.header.saveButton.click();
     expect(await trackPage.header.saveButton.textContent()).toBe('Loading...');
     await expect(trackPage.header.saveButton).toBeDisabled();
@@ -76,6 +82,8 @@ test.describe('機能と遷移', () => {
   test('保存ボタンをクリック後、Loadingが完了すると 1) 保存ボタンのラベルが「保存済み」となること 2) 非活性であること', async ({
     trackPage,
   }) => {
+    await trackPage.editor.textarea.press('@');
+    await trackPage.header.saveButton.getByText('保存する').waitFor();
     await trackPage.header.saveButton.click();
     await trackPage.header.saveButton
       .getByText('Loading...')

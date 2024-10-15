@@ -8,7 +8,7 @@ const serviceAccount: ServiceAccount = {
   privateKey: process.env.VITE_FIREBASE_SA_PRIVATE_KEY,
   clientEmail: process.env.VITE_FIREBASE_SA_CLIENT_EMAIL,
 };
-const uid: string = process.env.VITE_FIREBASE_USER_ID;
+const uid: string = process.env.VITE_FIREBASE_USER_ID || '👻';
 const options: FirebaseOptions = {
   apiKey: process.env.VITE_FIREBASE_API_KEY,
   authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,

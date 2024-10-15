@@ -1,8 +1,8 @@
 import { test, expect } from '../extendedTest';
 
-test.beforeEach(async ({ homePage }) => {
-  await homePage.starting.textbox.fill('星めぐりの歌');
-  await homePage.starting.startButton.click();
+test.beforeEach(async ({ homePageAuthed }) => {
+  await homePageAuthed.starting.textbox.fill('星めぐりの歌');
+  await homePageAuthed.starting.startButton.click();
 });
 
 test.describe('表示', () => {

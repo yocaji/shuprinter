@@ -1,11 +1,11 @@
 import { test, expect } from '../extendedTest';
 
-test.beforeEach(async ({ homePage }) => {
-  await homePage.starting.textbox.fill('星めぐりの歌');
-  await homePage.starting.startButton.click();
-});
-
 test.describe('表示', () => {
+  test.beforeEach(async ({ homePage }) => {
+    await homePage.starting.textbox.fill('星めぐりの歌');
+    await homePage.starting.startButton.click();
+  });
+
   test('戻るボタンが表示されること', async ({ trackPage }) => {
     await expect(trackPage.header.backButton).toBeVisible();
   });
@@ -29,6 +29,11 @@ test.describe('表示', () => {
 });
 
 test.describe('機能と遷移', () => {
+  test.beforeEach(async ({ homePage }) => {
+    await homePage.starting.textbox.fill('星めぐりの歌');
+    await homePage.starting.startButton.click();
+  });
+
   test('ログインボタンをクリックするとGoogleログインのポップアップが表示されること', async ({
     trackPage,
   }) => {
@@ -51,22 +56,22 @@ test.describe('機能と遷移', () => {
     trackPage,
     auth,
   }) => {
-    await trackPage.editor.textarea.fill('あかいめだまの　さそり');
+    await trackPage.editor.textarea.fill('あかいめだまのさそり');
     await auth.login(trackPage.page);
     expect(await trackPage.editor.subject.textContent()).toBe('星めぐりの歌');
     expect(await trackPage.editor.textarea.inputValue()).toBe(
-      'あかいめだまの　さそり',
+      'あかいめだまのさそり',
     );
   });
 
   test('コピーボタンをクリックすると、件名と本文を結合した文字列がクリップボードにコピーされること', async ({
     trackPage,
   }) => {
-    await trackPage.editor.textarea.fill('あかいめだまの　さそり');
+    await trackPage.editor.textarea.fill('あかいめだまのさそり');
     await trackPage.header.copyButton.click();
     const clipboard = await trackPage.page.evaluate(async () => {
       return navigator.clipboard.readText();
     });
-    expect(clipboard).toBe(`星めぐりの歌\n\nあかいめだまの　さそり`);
+    expect(clipboard).toBe(`星めぐりの歌\n\nあかいめだまのさそり`);
   });
 });

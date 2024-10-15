@@ -6,6 +6,7 @@ function Start() {
   const navigate = useNavigate();
   const [subject, setSubject] = useState<string>('');
 
+  // 削除してe.target.valueに置き換えること
   const handleSubjectChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSubject(e.target.value);
   };

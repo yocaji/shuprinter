@@ -1,50 +1,52 @@
 import { test, expect } from '../extendedTest';
 
-test.beforeEach(async ({ homePage, auth }) => {
-  await auth.login(homePage.page);
-  await homePage.notes.area.waitFor();
-  await homePage.notes.editSubjectButton(0).click();
-});
-
 test.describe('表示', () => {
-  test('Subject編集欄が表示されること', async ({ homePage }) => {
-    await expect(homePage.editSubjectDialog.textbox).toBeVisible();
+  test.beforeEach(async ({ homePageAuthed }) => {
+    await homePageAuthed.notes.editSubjectButton(0).click();
   });
 
-  test('閉じるボタンが表示されること', async ({ homePage }) => {
-    await expect(homePage.editSubjectDialog.cancelButton).toBeVisible();
+  test('Subject編集欄が表示されること', async ({ homePageAuthed }) => {
+    await expect(homePageAuthed.editSubjectDialog.textbox).toBeVisible();
   });
 
-  test('保存ボタンが表示されること', async ({ homePage }) => {
-    await expect(homePage.editSubjectDialog.saveButton).toBeVisible();
+  test('閉じるボタンが表示されること', async ({ homePageAuthed }) => {
+    await expect(homePageAuthed.editSubjectDialog.cancelButton).toBeVisible();
+  });
+
+  test('保存ボタンが表示されること', async ({ homePageAuthed }) => {
+    await expect(homePageAuthed.editSubjectDialog.saveButton).toBeVisible();
   });
 });
 
 test.describe('機能と遷移', () => {
   test('閉じるボタンをクリックするとダイアログが非表示となること', async ({
-    homePage,
+    homePageAuthed,
   }) => {
-    await homePage.editSubjectDialog.cancelButton.click();
-    await expect(homePage.editSubjectDialog.area).not.toBeVisible();
+    await homePageAuthed.notes.editSubjectButton(0).click();
+    await homePageAuthed.editSubjectDialog.cancelButton.click();
+    await expect(homePageAuthed.editSubjectDialog.area).not.toBeVisible();
   });
 
   test('Subject編集後に閉じるボタンをクリックすると編集前のSubjectが表示されること', async ({
-    homePage,
+    homePageAuthed,
   }) => {
-    await homePage.editSubjectDialog.textbox.fill('春と修羅　宮沢賢治');
-    await homePage.editSubjectDialog.cancelButton.click();
-    expect(await homePage.notes.subject(0).textContent()).toBe(
-      '『黒影集』の序詞',
+    const currentSubject = await homePageAuthed.notes.subject(0).textContent();
+    await homePageAuthed.notes.editSubjectButton(0).click();
+    await homePageAuthed.editSubjectDialog.textbox.fill('星めぐりの歌');
+    await homePageAuthed.editSubjectDialog.cancelButton.click();
+    expect(await homePageAuthed.notes.subject(0).textContent()).toBe(
+      currentSubject,
     );
   });
 
   test('Subject編集後に保存ボタンをクリックすると編集前のSubjectが表示されること', async ({
-    homePage,
+    homePageAuthed,
   }) => {
-    await homePage.editSubjectDialog.textbox.fill('春と修羅　宮沢賢治');
-    await homePage.editSubjectDialog.saveButton.click();
-    expect(await homePage.notes.subject(0).textContent()).toBe(
-      '春と修羅　宮沢賢治',
+    await homePageAuthed.notes.editSubjectButton(0).click();
+    await homePageAuthed.editSubjectDialog.textbox.fill('よだかの星');
+    await homePageAuthed.editSubjectDialog.saveButton.click();
+    expect(await homePageAuthed.notes.subject(0).textContent()).toBe(
+      'よだかの星',
     );
   });
 });

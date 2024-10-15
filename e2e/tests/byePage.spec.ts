@@ -1,16 +1,16 @@
 import { test, expect } from '../extendedTest';
 
 test.describe('初期表示', async () => {
-  test.beforeEach(async ({ homePage, auth }) => {
-    await auth.login(homePage.page);
-    await homePage.footer.deleteAccountLink.click();
+  test.beforeEach(async ({ homePageAuthed, auth }) => {
+    await auth.login(homePageAuthed.page);
+    await homePageAuthed.footer.deleteAccountLink.click();
   });
 
   test('戻るボタンが表示されていること', async ({ byePage }) => {
     await expect(byePage.header.backButton).toBeVisible();
   });
 
-  test('見出しが表示されていること', async ({ byePage, auth }) => {
+  test('見出しが表示されていること', async ({ byePage }) => {
     await expect(byePage.main.heading).toHaveText('アカウントの削除');
   });
 
@@ -28,9 +28,9 @@ test.describe('初期表示', async () => {
 });
 
 test.describe('機能と遷移', () => {
-  test.beforeEach(async ({ homePage, auth }) => {
-    await auth.login(homePage.page);
-    await homePage.footer.deleteAccountLink.click();
+  test.beforeEach(async ({ homePageAuthed, auth }) => {
+    await auth.login(homePageAuthed.page);
+    await homePageAuthed.footer.deleteAccountLink.click();
   });
 
   test('戻るボタンをクリックするとトップページに遷移すること', async ({

@@ -2,47 +2,47 @@ import { test, expect } from '../extendedTest';
 
 test.describe('初期表示', () => {
   test('Subjectの入力を促すメッセージが表示されていること', async ({
-    homePage,
+    homePageAuthed,
   }) => {
-    await expect(homePage.starting.prompt).toBeVisible();
+    await expect(homePageAuthed.starting.prompt).toBeVisible();
   });
 
-  test('Subjectの入力欄が表示されていること', async ({ homePage }) => {
-    await expect(homePage.starting.textbox).toBeVisible();
+  test('Subjectの入力欄が表示されていること', async ({ homePageAuthed }) => {
+    await expect(homePageAuthed.starting.textbox).toBeVisible();
   });
 
-  test('送信ボタンが表示されていること', async ({ homePage }) => {
-    await expect(homePage.starting.startButton).toBeVisible();
+  test('送信ボタンが表示されていること', async ({ homePageAuthed }) => {
+    await expect(homePageAuthed.starting.startButton).toBeVisible();
   });
 
   test('Subjectが未入力の場合、送信ボタンが非活性となっていること', async ({
-    homePage,
+    homePageAuthed,
   }) => {
-    await expect(homePage.starting.startButton).toBeDisabled();
+    await expect(homePageAuthed.starting.startButton).toBeDisabled();
   });
 });
 
 test.describe('機能と遷移', () => {
   test('Subjectにテキストを入力すると送信ボタンが活性となること', async ({
-    homePage,
+    homePageAuthed,
   }) => {
-    await homePage.starting.inputSubject('テスト');
-    await expect(homePage.starting.startButton).toBeEnabled();
+    await homePageAuthed.starting.inputSubject('テスト');
+    await expect(homePageAuthed.starting.startButton).toBeEnabled();
   });
 
   test('Subjectにテキストを入力した後に削除すると送信ボタンが非活性となること', async ({
-    homePage,
+    homePageAuthed,
   }) => {
-    await homePage.starting.inputSubject('テスト');
-    await homePage.starting.inputSubject('');
-    await expect(homePage.starting.startButton).toBeDisabled();
+    await homePageAuthed.starting.inputSubject('テスト');
+    await homePageAuthed.starting.inputSubject('');
+    await expect(homePageAuthed.starting.startButton).toBeDisabled();
   });
 
   test('送信ボタンをクリックするとメモの入力画面に遷移すること', async ({
-    homePage,
+    homePageAuthed,
   }) => {
-    await homePage.starting.inputSubject('テスト');
-    await homePage.starting.startButton.click();
-    await expect(homePage.page).toHaveURL('/track');
+    await homePageAuthed.starting.inputSubject('テスト');
+    await homePageAuthed.starting.startButton.click();
+    await expect(homePageAuthed.page).toHaveURL('/track');
   });
 });

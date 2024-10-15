@@ -5,8 +5,10 @@ dotenv.config({ path: '.env.local' });
 
 export default defineConfig({
   testDir: './e2e/tests',
-  timeout: 30000,
-  retries: 2,
+  timeout: 10000,
+  retries: 1,
+  globalSetup: './e2e/global-setup',
+  globalTeardown: './e2e/global-teardown',
   use: {
     baseURL: 'http://localhost:3000',
     headless: true,

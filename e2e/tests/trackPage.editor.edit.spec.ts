@@ -1,31 +1,37 @@
 import { test, expect } from '../extendedTest';
 
-test.beforeEach(async ({ homePage, auth }) => {
-  await auth.login(homePage.page);
-  await homePage.notes.note(0).click();
-});
-
 test.describe('表示', () => {
-  test('クリックしたメモの件名が表示されること', async ({ trackPage }) => {
-    expect(await trackPage.editor.subject.textContent()).toBe('星めぐりの歌');
+  test('クリックしたメモの件名が表示されること', async ({
+    homePageAuthed,
+    trackPage,
+  }) => {
+    const clickedSubject = await homePageAuthed.notes.subject(1).textContent();
+    await homePageAuthed.notes.note(1).click();
+    expect(await trackPage.editor.subject.textContent()).toBe(clickedSubject);
   });
 
   test('クリックしたメモの本文が本文入力欄に表示されること', async ({
+    homePageAuthed,
     trackPage,
   }) => {
+    const clickedSubject = await homePageAuthed.notes.subject(1).textContent();
+    await homePageAuthed.notes.note(1).click();
     expect(await trackPage.editor.textarea.textContent()).toBe(
-      'あかいめだまの　さそり',
+      `${clickedSubject}の本文`,
     );
   });
 });
 
 test.describe('機能と遷移', () => {
   test('本文入力欄に入力すると、入力内容が反映されること', async ({
+    homePageAuthed,
     trackPage,
   }) => {
+    const clickedSubject = await homePageAuthed.notes.subject(1).textContent();
+    await homePageAuthed.notes.note(1).click();
     await trackPage.editor.textarea.press('@');
     expect(await trackPage.editor.textarea.inputValue()).toBe(
-      `あかいめだまの　さそり@`,
+      `${clickedSubject}の本文@`,
     );
   });
 });

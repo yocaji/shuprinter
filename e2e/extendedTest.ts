@@ -5,7 +5,9 @@ import { ByePage } from './pom/bye';
 
 type Fixtures = {
   homePage: HomePage;
+  homePageAuthed: HomePage;
   trackPage: TrackPage;
+  trackPageAuthed: TrackPage;
   byePage: ByePage;
 };
 
@@ -13,6 +15,14 @@ export const test = base.extend<Fixtures>({
   homePage: async ({ page }, use) => {
     const homePage = new HomePage(page);
     await homePage.goto();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    await use(homePage);
+  },
+  homePageAuthed: async ({ page, auth }, use) => {
+    const homePage = new HomePage(page);
+    await homePage.goto();
+    await auth.login(homePage.page);
+    await homePage.notes.note(0).waitFor();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     await use(homePage);
   },
