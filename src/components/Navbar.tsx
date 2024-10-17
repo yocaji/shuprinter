@@ -81,6 +81,7 @@ function Navbar({
               type={'button'}
               onClick={handleLoginClick}
               className={'btn btn-secondary btn-md px-4'}
+              data-testid={'login-button'}
             >
               <span className={'i-ph-user-plus text-lg'} />
               ログインして保存する
@@ -91,6 +92,7 @@ function Navbar({
               onClick={handleSaveClick}
               disabled={saveStatus === 'saved' || saveStatus === 'saving'}
               className={'btn btn-secondary btn-md w-32'}
+              data-testid={'save-button'}
             >
               {saveStatus === 'unsaved' && (
                 <>

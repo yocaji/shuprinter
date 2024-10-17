@@ -51,34 +51,34 @@ function NoteCard({
   };
 
   return (
-    <Link
-      to={'/track'}
-      state={{ id: id, subject: cardSubject, content: content }}
-      className={'card p-4 w-full active:scale-[.99] font-hand'}
-    >
-      <div className={'mb-2'}>
-        <h3 className={'text-lg truncate'}>{cardSubject}</h3>
-      </div>
-      <div className={'flex justify-between items-end'}>
-        <p className={'text-sm'}>
-          {dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}
-        </p>
-        <div className={'-mb-2 -me-1 space-x-2'}>
-          <SubjectEditorDialogButton
-            cardSubject={cardSubject}
-            setCardSubject={setCardSubject}
-            handleSubjectSubmit={handleSubjectSubmit}
-          />
-          <button
-            type={'button'}
-            onClick={(e) => handleDeleteClick(e, id)}
-            className={'btn btn-on-card'}
-          >
-            <span className={'i-ph-trash-light'} />
-          </button>
+    <li className={'card p-4 w-full active:scale-[.99] font-hand'}>
+      <Link
+        to={'/track'}
+        state={{ id: id, subject: cardSubject, content: content }}
+      >
+        <h3 className={'mb-2 text-lg truncate'}>{cardSubject}</h3>
+        <div className={'flex justify-between items-end'}>
+          <p className={'text-sm'} data-testid={'updated-at'}>
+            {dayjs(updatedAt).format('YYYY-MM-DD HH:mm')}
+          </p>
+          <div className={'-mb-2 -me-1 space-x-2'}>
+            <SubjectEditorDialogButton
+              cardSubject={cardSubject}
+              setCardSubject={setCardSubject}
+              handleSubjectSubmit={handleSubjectSubmit}
+            />
+            <button
+              type={'button'}
+              onClick={(e) => handleDeleteClick(e, id)}
+              className={'btn btn-on-card'}
+            >
+              <span className={'i-ph-trash-light'} />
+              <span className={'sr-only'}>Delete this note</span>
+            </button>
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </li>
   );
 }
 

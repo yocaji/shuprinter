@@ -45,7 +45,7 @@ function Bye() {
             <div className={'sheet'}>
               <h2 className={'pb-4 text-xl font-medium'}>アカウントの削除</h2>
               <div className={'leading-relaxed'}>
-                <p className={'pb-4'}>
+                <p className={'pb-4'} data-testid={'explanation'}>
                   アカウントを削除すると、Shuprinterに保存済みのノートはすべて削除されます
                 </p>
                 <button

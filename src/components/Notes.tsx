@@ -38,10 +38,11 @@ function Notes() {
           <span className={'sr-only'}>Loading...</span>
         </div>
       ) : (
-        <div
+        <ul
           className={
             'mx-auto md:py-4 w-full max-w-screen-md flex flex-col gap-4'
           }
+          data-testid={'notes'}
         >
           {notes.map((note) => (
             <NoteCard
@@ -54,7 +55,7 @@ function Notes() {
               onDelete={handleDelete}
             />
           ))}
-        </div>
+        </ul>
       )}
     </>
   );

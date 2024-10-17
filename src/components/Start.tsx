@@ -6,6 +6,7 @@ function Start() {
   const navigate = useNavigate();
   const [subject, setSubject] = useState<string>('');
 
+  // 削除してe.target.valueに置き換えること
   const handleSubjectChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSubject(e.target.value);
   };
@@ -18,8 +19,9 @@ function Start() {
   };
 
   return (
-    <>
+    <main className={'mx-auto max-w-screen-md'}>
       <h2
+        data-testid={'prompt'}
         className={
           'mb-8 flex justify-center gap-2 md:gap-3 text-2xl md:text-3xl'
         }
@@ -28,11 +30,7 @@ function Start() {
         何について書きますか？
       </h2>
       <form onSubmit={handleSubmit}>
-        <div
-          className={
-            'mb-6 mx-auto max-w-screen-md flex items-center gap-2 text-lg'
-          }
-        >
+        <div className={'mb-6 flex items-center gap-2 text-lg'}>
           <input
             type={'text'}
             value={subject}
@@ -51,7 +49,7 @@ function Start() {
           </button>
         </div>
       </form>
-    </>
+    </main>
   );
 }
 
